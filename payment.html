@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pilih Metode Pembayaran - LabMart Indonesia</title>
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            teal: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              200: '#99f6e4',
+              300: '#5eead4',
+              400: '#2dd4bf',
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+              800: '#115e59',
+              900: '#134e4a',
+            },
+            accent: '#f59e0b',
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="css/custom.css" />
+</head>
+
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
+
+  <!-- Header Pembayaran -->
+  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <div class="flex items-center gap-2 sm:gap-3">
+          <a href="checkout.html" class="p-2 rounded-xl text-slate-600 hover:text-teal-700 hover:bg-slate-100 transition-colors flex items-center gap-1 text-xs font-bold">
+            <span class="material-symbols-outlined text-lg">arrow_back</span>
+            <span class="hidden sm:inline">Ubah Pengiriman</span>
+            <span class="sm:hidden">Kembali</span>
+          </a>
+
+          <div class="h-6 w-px bg-slate-200"></div>
+
+          <a href="index.html" class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-teal-700 to-teal-500 text-white flex items-center justify-center shadow-sm">
+              <span class="material-symbols-outlined text-lg">science</span>
+            </div>
+            <span class="text-lg font-black tracking-tight text-slate-900 hidden sm:inline">Lab<span class="text-teal-600">Mart</span>.id</span>
+          </a>
+        </div>
+
+        <!-- Security Badge -->
+        <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full shrink-0">
+          <span class="material-symbols-outlined text-sm text-emerald-600">lock</span>
+          <span class="hidden sm:inline">Gateway Terenkripsi 256-bit</span>
+          <span class="sm:hidden">256-bit SSL</span>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Payment Content -->
+  <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex-1 pb-20 sm:pb-8">
+    <div class="max-w-4xl mx-auto space-y-6">
+
+      <!-- Total Tagihan & Timer Countdown Card -->
+      <div class="bg-gradient-to-r from-teal-900 via-teal-800 to-slate-900 text-white rounded-3xl p-5 sm:p-8 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <span class="text-xs text-teal-300 font-bold uppercase tracking-wider block">Total Tagihan Pembayaran:</span>
+          <div id="payment-grand-total" class="text-3xl sm:text-4xl font-black text-amber-400 font-mono-code mt-1">
+            Rp 123.000
+          </div>
+          <div class="text-xs text-slate-300 mt-1 flex items-center gap-2">
+            <span>No. Tagihan: <strong id="payment-invoice-id" class="font-mono-code text-white">INV/LAB/2026/677717</strong></span>
+          </div>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl text-right sm:text-right w-full sm:w-auto">
+          <span class="text-[11px] text-slate-300 block">Selesaikan Pembayaran Sebelum:</span>
+          <div class="flex items-center justify-end gap-1.5 text-lg font-black text-white font-mono-code mt-1">
+            <span class="material-symbols-outlined text-amber-400 text-base">timer</span>
+            <span id="pay-countdown-timer">23:59:45</span>
+          </div>
+          <span class="text-[10px] text-teal-200">Verifikasi sistem otomatis 24 Jam</span>
+        </div>
+      </div>
+
+      <!-- Quick Pitch Button (Untuk Demo ke Klien) -->
+      <div class="p-4 rounded-2xl bg-amber-50 border border-amber-300 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-sm">
+        <div class="flex items-center gap-2.5 text-xs text-amber-900">
+          <span class="material-symbols-outlined text-amber-600 text-xl shrink-0">info</span>
+          <div>
+            <strong>Mode Presentasi Klien:</strong> Ingin menguji alur tanpa transfer uang nyata? Klik tombol simulasi di samping.
+          </div>
+        </div>
+        <button 
+          type="button"
+          onclick="executeSimulatedPaymentSuccess()"
+          class="shrink-0 px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs flex items-center gap-2 shadow-md transition-all active:scale-95"
+        >
+          <span class="material-symbols-outlined text-base">verified</span>
+          Simulasikan Pembayaran Berhasil (Demo)
+        </button>
+      </div>
+
+      <!-- VIEW 1: PILIH KANAL PEMBAYARAN (SELECTION STEP) -->
+      <section id="view-payment-selection" class="space-y-6">
+
+        <!-- Header Info Tahap 1 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-100">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="px-2.5 py-0.5 rounded-md bg-teal-100 text-teal-800 text-[11px] font-extrabold tracking-wide uppercase">Langkah 1 dari 2</span>
+                <span class="text-xs text-slate-400">• Pemilihan Metode</span>
+              </div>
+              <h2 class="text-lg font-black text-slate-900 tracking-tight">Pilih Kanal Pembayaran</h2>
+              <p class="text-xs text-slate-500 mt-0.5">Pilih salah satu metode yang Anda kehendaki. Kode bayar / QR Code resmi akan diterbitkan setelah Anda menekan tombol konfirmasi di bawah.</p>
+            </div>
+            <div class="text-right hidden sm:block">
+              <span class="text-xs text-slate-400">Total Tagihan:</span>
+              <div class="text-lg font-black text-teal-800 font-mono-code" id="select-grand-total">Rp 123.000</div>
+            </div>
+          </div>
+
+          <!-- Daftar Pilihan Metode Pembayaran (Accordion Bersih Tanpa QR/Kode) -->
+          <div class="space-y-3.5">
+
+            <!-- 1. QRIS (INSTAN SELURUH BANK & E-WALLET) -->
+            <div class="rounded-2xl border-2 border-teal-500 bg-teal-50/20 overflow-hidden transition-all payment-channel-card" id="card-channel-qris">
+              <label class="w-full p-4 flex items-center justify-between cursor-pointer">
+                <div class="flex items-center gap-3">
+                  <input type="radio" name="payment_channel" value="qris" checked onchange="handleChannelChange('qris')" class="w-4 h-4 text-teal-600 focus:ring-teal-500" />
+                  <div class="w-10 h-10 rounded-xl bg-teal-100 text-teal-800 flex items-center justify-center font-bold shrink-0">
+                    <span class="material-symbols-outlined text-xl">qr_code_scanner</span>
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-2">
+                      <span class="font-extrabold text-sm text-slate-900">QRIS (Seluruh Bank & E-Wallet)</span>
+                      <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-extrabold">INSTAN 24 JAM</span>
+                    </div>
+                    <div class="text-xs text-slate-500">BCA, Mandiri, BRI, BNI, GoPay, OVO, DANA, ShopeePay & LinkAja</div>
+                  </div>
+                </div>
+                <span class="text-xs font-bold text-teal-700 bg-teal-100/70 px-2.5 py-1 rounded-lg shrink-0">Bebas Biaya Admin</span>
+              </label>
+
+              <div class="px-5 pb-4 text-xs text-slate-600 border-t border-teal-200/50 pt-3 bg-white/70">
+                <div class="flex items-center gap-2 text-slate-700">
+                  <span class="material-symbols-outlined text-teal-600 text-base">info</span>
+                  <span>Kode QRIS resmi Bank Indonesia akan diterbitkan secara dinamis di layar berikutnya setelah Anda menekan tombol konfirmasi di bawah.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. VIRTUAL ACCOUNT (BANK TRANSFER) -->
+            <div class="rounded-2xl border border-slate-200 hover:border-slate-300 overflow-hidden transition-all payment-channel-card" id="card-channel-va">
+              <label class="w-full p-4 flex items-center justify-between cursor-pointer">
+                <div class="flex items-center gap-3">
+                  <input type="radio" name="payment_channel" value="va" onchange="handleChannelChange('va')" class="w-4 h-4 text-teal-600 focus:ring-teal-500" />
+                  <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center font-bold shrink-0">
+                    <span class="material-symbols-outlined text-xl">account_balance</span>
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-2">
+                      <span class="font-extrabold text-sm text-slate-900">Transfer Virtual Account (Bank)</span>
+                      <span class="px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[10px] font-extrabold">VERIFIKASI OTOMATIS</span>
+                    </div>
+                    <div class="text-xs text-slate-500">BCA, Mandiri Livin, BRI (BRIVA), BNI, BSI Syariah</div>
+                  </div>
+                </div>
+                <span class="text-xs font-semibold text-slate-500 shrink-0">Otomatis 1-2 Menit</span>
+              </label>
+
+              <!-- Sub Pilihan Bank VA -->
+              <div id="sub-options-va" class="p-5 border-t border-slate-200 space-y-3 bg-slate-50/80 hidden">
+                <div class="text-xs font-bold text-slate-700">Pilih Rekening Bank:</div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+                  <label class="p-3 rounded-xl border border-teal-500 bg-white flex items-center justify-between cursor-pointer">
+                    <div class="flex items-center gap-2.5">
+                      <input type="radio" name="va_bank" value="BCA" checked onchange="handleVaBankChange('BCA', '8801 2938 1029 4819')" class="w-4 h-4 text-teal-600" />
+                      <span class="font-bold text-slate-900">BCA Virtual Account</span>
+                    </div>
+                    <span class="font-mono-code font-bold text-slate-500 text-[11px]">BCA</span>
+                  </label>
+
+                  <label class="p-3 rounded-xl border border-slate-200 bg-white hover:border-slate-300 flex items-center justify-between cursor-pointer">
+                    <div class="flex items-center gap-2.5">
+                      <input type="radio" name="va_bank" value="Mandiri" onchange="handleVaBankChange('Mandiri', '8910 4429 8812 0031')" class="w-4 h-4 text-teal-600" />
+                      <span class="font-bold text-slate-900">Mandiri Virtual Account</span>
+                    </div>
+                    <span class="font-mono-code font-bold text-slate-500 text-[11px]">LIVIN</span>
+                  </label>
+
+                  <label class="p-3 rounded-xl border border-slate-200 bg-white hover:border-slate-300 flex items-center justify-between cursor-pointer">
+                    <div class="flex items-center gap-2.5">
+                      <input type="radio" name="va_bank" value="BRI" onchange="handleVaBankChange('BRI', '8029 1102 9948 1120')" class="w-4 h-4 text-teal-600" />
+                      <span class="font-bold text-slate-900">BRI (BRIVA)</span>
+                    </div>
+                    <span class="font-mono-code font-bold text-slate-500 text-[11px]">BRIVA</span>
+                  </label>
+
+                  <label class="p-3 rounded-xl border border-slate-200 bg-white hover:border-slate-300 flex items-center justify-between cursor-pointer">
+                    <div class="flex items-center gap-2.5">
+                      <input type="radio" name="va_bank" value="BNI" onchange="handleVaBankChange('BNI', '8219 0048 7721 9901')" class="w-4 h-4 text-teal-600" />
+                      <span class="font-bold text-slate-900">BNI Virtual Account</span>
+                    </div>
+                    <span class="font-mono-code font-bold text-slate-500 text-[11px]">BNI</span>
+                  </label>
+                </div>
+                <div class="text-[11px] text-slate-500 flex items-center gap-1.5 pt-1">
+                  <span class="material-symbols-outlined text-sm text-teal-600">check_circle</span>
+                  Nomor Virtual Account 16 digit akan diterbitkan di halaman berikutnya untuk ditransfer via ATM/m-Banking.
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. GERAI RITEL (INDOMARET & ALFAMART) -->
+            <div class="rounded-2xl border border-slate-200 hover:border-slate-300 overflow-hidden transition-all payment-channel-card" id="card-channel-retail">
+              <label class="w-full p-4 flex items-center justify-between cursor-pointer">
+                <div class="flex items-center gap-3">
+                  <input type="radio" name="payment_channel" value="retail" onchange="handleChannelChange('retail')" class="w-4 h-4 text-teal-600 focus:ring-teal-500" />
+                  <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-700 flex items-center justify-center font-bold shrink-0">
+                    <span class="material-symbols-outlined text-xl">storefront</span>
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-2">
+                      <span class="font-extrabold text-sm text-slate-900">Gerai Minimarket (Indomaret & Alfamart)</span>
+                      <span class="px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 text-[10px] font-extrabold">BAYAR DI KASIR</span>
+                    </div>
+                    <div class="text-xs text-slate-500">Indomaret, Alfamart, Alfamidi, Ceriamart, Dan+Dan</div>
+                  </div>
+                </div>
+                <span class="text-xs font-semibold text-slate-500 shrink-0">Biaya: Rp 2.500</span>
+              </label>
+
+              <!-- Sub Pilihan Gerai Minimarket -->
+              <div id="sub-options-retail" class="p-5 border-t border-slate-200 space-y-3 bg-slate-50/80 hidden">
+                <div class="text-xs font-bold text-slate-700">Pilih Gerai Minimarket:</div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                  <label class="p-3.5 rounded-xl border border-teal-500 bg-white flex items-center justify-between cursor-pointer">
+                    <div class="flex items-center gap-3">
+                      <input type="radio" name="retail_store" value="Indomaret" checked onchange="handleRetailStoreChange('Indomaret', 'IND-LAB-8910283')" class="w-4 h-4 text-teal-600" />
+                      <div>
+                        <div class="font-bold text-slate-900 text-sm">Indomaret / Ceriamart</div>
+                        <div class="text-[11px] text-slate-500">Biaya admin: Rp 2.500</div>
+                      </div>
+                    </div>
+                    <span class="px-2 py-0.5 rounded bg-blue-600 text-white font-extrabold text-[10px]">INDOMARET</span>
+                  </label>
+
+                  <label class="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-slate-300 flex items-center justify-between cursor-pointer">
+                    <div class="flex items-center gap-3">
+                      <input type="radio" name="retail_store" value="Alfamart" onchange="handleRetailStoreChange('Alfamart', 'ALF-LAB-8910283')" class="w-4 h-4 text-teal-600" />
+                      <div>
+                        <div class="font-bold text-slate-900 text-sm">Alfamart / Alfamidi</div>
+                        <div class="text-[11px] text-slate-500">Biaya admin: Rp 2.500</div>
+                      </div>
+                    </div>
+                    <span class="px-2 py-0.5 rounded bg-red-600 text-white font-extrabold text-[10px]">ALFAMART</span>
+                  </label>
+                </div>
+                <div class="text-[11px] text-slate-500 flex items-center gap-1.5 pt-1">
+                  <span class="material-symbols-outlined text-sm text-teal-600">barcode_scanner</span>
+                  <span><strong>Barcode kasir & Kode Pembayaran</strong> akan otomatis diterbitkan di layar berikutnya setelah Anda menekan tombol konfirmasi.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. DOMPET DIGITAL (E-WALLET) -->
+            <div class="rounded-2xl border border-slate-200 hover:border-slate-300 overflow-hidden transition-all payment-channel-card" id="card-channel-ewallet">
+              <label class="w-full p-4 flex items-center justify-between cursor-pointer">
+                <div class="flex items-center gap-3">
+                  <input type="radio" name="payment_channel" value="ewallet" onchange="handleChannelChange('ewallet')" class="w-4 h-4 text-teal-600 focus:ring-teal-500" />
+                  <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center font-bold shrink-0">
+                    <span class="material-symbols-outlined text-xl">account_balance_wallet</span>
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-2">
+                      <span class="font-extrabold text-sm text-slate-900">Dompet Digital (E-Wallet)</span>
+                      <span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-extrabold">LANGSUNG POTONG SALDO</span>
+                    </div>
+                    <div class="text-xs text-slate-500">GoPay, OVO, DANA, ShopeePay</div>
+                  </div>
+                </div>
+                <span class="text-xs font-semibold text-slate-500 shrink-0">Instan</span>
+              </label>
+
+              <div id="sub-options-ewallet" class="p-5 border-t border-slate-200 space-y-3 bg-slate-50/80 hidden">
+                <div class="text-xs font-bold text-slate-700">Pilih Aplikasi E-Wallet:</div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs font-bold text-center">
+                  <label class="p-3 rounded-xl border border-teal-500 bg-white text-teal-900 cursor-pointer flex items-center justify-center gap-1.5">
+                    <input type="radio" name="ewallet_app" value="GoPay" checked onchange="handleEwalletChange('GoPay')" class="text-teal-600" />
+                    <span>GoPay</span>
+                  </label>
+                  <label class="p-3 rounded-xl border border-slate-200 bg-white hover:border-slate-300 cursor-pointer flex items-center justify-center gap-1.5">
+                    <input type="radio" name="ewallet_app" value="OVO" onchange="handleEwalletChange('OVO')" class="text-teal-600" />
+                    <span>OVO</span>
+                  </label>
+                  <label class="p-3 rounded-xl border border-slate-200 bg-white hover:border-slate-300 cursor-pointer flex items-center justify-center gap-1.5">
+                    <input type="radio" name="ewallet_app" value="DANA" onchange="handleEwalletChange('DANA')" class="text-teal-600" />
+                    <span>DANA</span>
+                  </label>
+                  <label class="p-3 rounded-xl border border-slate-200 bg-white hover:border-slate-300 cursor-pointer flex items-center justify-center gap-1.5">
+                    <input type="radio" name="ewallet_app" value="ShopeePay" onchange="handleEwalletChange('ShopeePay')" class="text-teal-600" />
+                    <span>ShopeePay</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. KARTU KREDIT / DEBIT ONLINE -->
+            <div class="rounded-2xl border border-slate-200 hover:border-slate-300 overflow-hidden transition-all payment-channel-card" id="card-channel-card">
+              <label class="w-full p-4 flex items-center justify-between cursor-pointer">
+                <div class="flex items-center gap-3">
+                  <input type="radio" name="payment_channel" value="card" onchange="handleChannelChange('card')" class="w-4 h-4 text-teal-600 focus:ring-teal-500" />
+                  <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-700 flex items-center justify-center font-bold shrink-0">
+                    <span class="material-symbols-outlined text-xl">credit_card</span>
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-2">
+                      <span class="font-extrabold text-sm text-slate-900">Kartu Kredit / Debit Online</span>
+                      <span class="px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800 text-[10px] font-extrabold">3D SECURE</span>
+                    </div>
+                    <div class="text-xs text-slate-500">Visa, Mastercard, JCB (Cicilan 0% instrumen lab)</div>
+                  </div>
+                </div>
+                <span class="text-xs font-semibold text-slate-500 shrink-0">Visa / MC</span>
+              </label>
+
+              <div id="sub-options-card" class="p-5 border-t border-slate-200 space-y-3 bg-slate-50/80 hidden">
+                <div class="space-y-2 text-xs max-w-md">
+                  <div class="space-y-1">
+                    <label class="font-bold text-slate-700">Nomor Kartu (16 Digit)</label>
+                    <input type="text" placeholder="4000 1234 5678 9010" class="w-full p-2.5 rounded-xl border border-slate-200 font-mono-code bg-white" />
+                  </div>
+                  <div class="grid grid-cols-2 gap-2.5">
+                    <div class="space-y-1">
+                      <label class="font-bold text-slate-700">Masa Berlaku (MM/YY)</label>
+                      <input type="text" placeholder="12/28" class="w-full p-2.5 rounded-xl border border-slate-200 font-mono-code bg-white" />
+                    </div>
+                    <div class="space-y-1">
+                      <label class="font-bold text-slate-700">CVV</label>
+                      <input type="password" maxlength="3" placeholder="123" class="w-full p-2.5 rounded-xl border border-slate-200 font-mono-code bg-white" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6. PURCHASE ORDER (PO / SPK KHUSUS INSTITUSI) -->
+            <div class="rounded-2xl border border-slate-200 hover:border-slate-300 overflow-hidden transition-all payment-channel-card" id="card-channel-po">
+              <label class="w-full p-4 flex items-center justify-between cursor-pointer">
+                <div class="flex items-center gap-3">
+                  <input type="radio" name="payment_channel" value="po" onchange="handleChannelChange('po')" class="w-4 h-4 text-teal-600 focus:ring-teal-500" />
+                  <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-800 flex items-center justify-center font-bold shrink-0">
+                    <span class="material-symbols-outlined text-xl">description</span>
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-2">
+                      <span class="font-extrabold text-sm text-slate-900">Purchase Order (PO) / SPK TOP 30 Hari</span>
+                      <span class="px-2 py-0.5 rounded-full bg-teal-100 text-teal-800 text-[10px] font-extrabold">KHUSUS INSTITUSI</span>
+                    </div>
+                    <div class="text-xs text-slate-500">Khusus Universitas, Rumah Sakit, BUMN & Industri Riset</div>
+                  </div>
+                </div>
+                <span class="text-xs font-semibold text-slate-500 shrink-0">TOP 30 Hari</span>
+              </label>
+
+              <div id="sub-options-po" class="p-5 border-t border-slate-200 space-y-3 bg-amber-50/50 hidden">
+                <div class="p-3 bg-white rounded-xl border border-amber-200 space-y-2 text-xs">
+                  <div class="font-bold text-slate-800">Nomor Surat Pesanan / SPK Resmi:</div>
+                  <input type="text" value="PO/UGM/FMIPA/2026/0491" class="w-full p-2.5 rounded-xl border border-slate-300 font-mono-code" />
+                  <div class="text-[11px] text-slate-500">Faktur pajak dan surat jalan resmi akan dikirim bersama armada ekspedisi instrumen lab.</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Tombol Konfirmasi Pilihan di Bawah (Memicu Pindah ke Langkah 2) -->
+          <div class="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <a href="checkout.html" class="text-xs font-bold text-slate-500 hover:text-slate-800 flex items-center gap-1">
+              &larr; Kembali ke Rincian Pengiriman
+            </a>
+
+            <button 
+              type="button" 
+              onclick="proceedToInstructionView()" 
+              class="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-xl shadow-teal-600/30 active:scale-95 transition-all"
+            >
+              <span id="btn-confirm-text">Lanjut Pembayaran via QRIS</span>
+              <span class="material-symbols-outlined text-lg">arrow_forward</span>
+            </button>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- VIEW 2: INSTRUKSI & KODE PEMBAYARAN RESMI (TAMPIL SETELAH DIKONFIRMASI) -->
+      <section id="view-payment-instructions" class="space-y-6 hidden">
+
+        <!-- Navigasi Balik & Progress Tahap 2 -->
+        <div class="flex items-center justify-between bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+          <button 
+            type="button" 
+            onclick="backToSelectionView()" 
+            class="text-xs font-bold text-teal-700 hover:text-teal-800 flex items-center gap-1.5 p-1 rounded-lg hover:bg-teal-50 transition-colors"
+          >
+            <span class="material-symbols-outlined text-base">arrow_back</span>
+            <span>Ubah Pilihan Metode Pembayaran</span>
+          </button>
+
+          <div class="flex items-center gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span class="px-2.5 py-0.5 rounded-md bg-emerald-100 text-emerald-800 text-[11px] font-extrabold tracking-wide uppercase">Langkah 2 dari 2: Tagihan Diterbitkan</span>
+          </div>
+        </div>
+
+        <!-- Wadah Instruksi Spesifik yang Di-Render Secara Dinamis -->
+        <div id="instruction-dynamic-card">
+          <!-- Diisi oleh JavaScript berdasarkan kanal yang dipilih -->
+        </div>
+
+        <!-- Tombol Aksi Akhir di Langkah 2 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+          <button 
+            type="button" 
+            onclick="backToSelectionView()" 
+            class="text-xs font-bold text-slate-500 hover:text-slate-800"
+          >
+            &larr; Batalkan & Pilih Metode Lain
+          </button>
+
+          <div class="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+            <button 
+              type="button" 
+              onclick="executeSimulatedPaymentSuccess()" 
+              class="w-full sm:w-auto px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs flex items-center justify-center gap-2 shadow-md transition-all active:scale-95"
+            >
+              <span class="material-symbols-outlined text-base">bolt</span>
+              Simulasikan Pembayaran Berhasil (1-Klik Demo)
+            </button>
+
+            <button 
+              type="button" 
+              onclick="executeSimulatedPaymentSuccess()" 
+              class="w-full sm:w-auto px-7 py-3 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-lg shadow-teal-600/30 transition-all active:scale-95"
+            >
+              <span class="material-symbols-outlined text-base">verified</span>
+              Saya Sudah Membayar (Cek Status)
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 text-xs border-t border-slate-800 mt-16 py-8">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center sm:flex sm:justify-between sm:items-center">
+      <div>&copy; 2026 LabMart Indonesia. Terdaftar di Kemenkes RI AKD. Seluruh hak cipta dilindungi.</div>
+      <div class="mt-4 sm:mt-0 flex justify-center gap-4">
+        <a href="index.html" class="hover:text-white">Beranda</a>
+        <a href="cart.html" class="hover:text-white">Keranjang</a>
+        <a href="profile.html" class="hover:text-white">Akun Lab</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/users.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/store.js"></script>
+  <script>
+    // State Pembayaran
+    let selectedChannel = 'qris';
+    let selectedVaBank = 'BCA';
+    let selectedVaNumber = '8801 2938 1029 4819';
+    let selectedRetailStore = 'Indomaret';
+    let selectedRetailCode = 'IND-LAB-8910283';
+    let selectedEwallet = 'GoPay';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const order = getActiveOrder();
+      if (order && order.pricing) {
+        const grandTotalFormatted = formatRupiah(order.pricing.grandTotal);
+        document.getElementById('payment-grand-total').textContent = grandTotalFormatted;
+        document.getElementById('select-grand-total').textContent = grandTotalFormatted;
+        document.getElementById('payment-invoice-id').textContent = order.invoiceNumber;
+      }
+
+      startPaymentCountdown();
+      updateConfirmButtonText();
+    });
+
+    // Menangani Pergantian Pilihan Kanal di Langkah 1
+    function handleChannelChange(channel) {
+      selectedChannel = channel;
+
+      // Update styling kartu pilihan
+      document.querySelectorAll('.payment-channel-card').forEach(card => {
+        card.classList.remove('border-2', 'border-teal-500', 'bg-teal-50/20');
+        card.classList.add('border', 'border-slate-200');
+      });
+
+      const activeCard = document.getElementById(`card-channel-${channel}`);
+      if (activeCard) {
+        activeCard.classList.remove('border', 'border-slate-200');
+        activeCard.classList.add('border-2', 'border-teal-500', 'bg-teal-50/20');
+      }
+
+      // Sembunyikan semua sub-options
+      ['va', 'retail', 'ewallet', 'card', 'po'].forEach(id => {
+        const sub = document.getElementById(`sub-options-${id}`);
+        if (sub) sub.classList.add('hidden');
+      });
+
+      // Tampilkan sub-options yang sesuai jika ada
+      const targetSub = document.getElementById(`sub-options-${channel}`);
+      if (targetSub) {
+        targetSub.classList.remove('hidden');
+      }
+
+      updateConfirmButtonText();
+    }
+
+    function handleVaBankChange(bank, number) {
+      selectedVaBank = bank;
+      selectedVaNumber = number;
+      updateConfirmButtonText();
+    }
+
+    function handleRetailStoreChange(store, code) {
+      selectedRetailStore = store;
+      selectedRetailCode = code;
+      updateConfirmButtonText();
+    }
+
+    function handleEwalletChange(wallet) {
+      selectedEwallet = wallet;
+      updateConfirmButtonText();
+    }
+
+    function updateConfirmButtonText() {
+      const btnText = document.getElementById('btn-confirm-text');
+      if (!btnText) return;
+
+      if (selectedChannel === 'qris') {
+        btnText.textContent = 'Lanjut Pembayaran via QRIS';
+      } else if (selectedChannel === 'va') {
+        btnText.textContent = `Lanjut Pembayaran ${selectedVaBank} Virtual Account`;
+      } else if (selectedChannel === 'retail') {
+        btnText.textContent = `Lanjut Pembayaran di ${selectedRetailStore}`;
+      } else if (selectedChannel === 'ewallet') {
+        btnText.textContent = `Lanjut Pembayaran via ${selectedEwallet}`;
+      } else if (selectedChannel === 'card') {
+        btnText.textContent = 'Lanjut Pembayaran Kartu Kredit/Debit';
+      } else if (selectedChannel === 'po') {
+        btnText.textContent = 'Konfirmasi Purchase Order (TOP 30 Hari)';
+      }
+    }
+
+    // Berpindah ke Langkah 2 (Menampilkan Instruksi & Kode / QR)
+    function proceedToInstructionView() {
+      const order = getActiveOrder();
+      let displayName = 'QRIS Instant Standard';
+
+      if (selectedChannel === 'qris') {
+        displayName = 'QRIS Instant Standard';
+      } else if (selectedChannel === 'va') {
+        displayName = `${selectedVaBank} Virtual Account (${selectedVaNumber})`;
+      } else if (selectedChannel === 'retail') {
+        displayName = `Gerai ${selectedRetailStore} (${selectedRetailCode})`;
+      } else if (selectedChannel === 'ewallet') {
+        displayName = `E-Wallet ${selectedEwallet}`;
+      } else if (selectedChannel === 'card') {
+        displayName = 'Kartu Kredit / Debit Online (Visa)';
+      } else if (selectedChannel === 'po') {
+        displayName = 'Purchase Order (PO/SPK TOP 30 Hari)';
+      }
+
+      if (order) {
+        order.paymentMethod = displayName;
+        saveActiveOrder(order);
+      }
+
+      // Render konten instruksi spesifik
+      renderSpecificInstruction(order);
+
+      // Transisi view
+      document.getElementById('view-payment-selection').classList.add('hidden');
+      document.getElementById('view-payment-instructions').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      showToast(`Tagihan diterbitkan untuk metode ${displayName}`, 'info');
+    }
+
+    // Kembali ke Langkah 1 (Pemilihan Metode)
+    function backToSelectionView() {
+      document.getElementById('view-payment-instructions').classList.add('hidden');
+      document.getElementById('view-payment-selection').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Render Template Spesifik untuk Langkah 2
+    function renderSpecificInstruction(order) {
+      const container = document.getElementById('instruction-dynamic-card');
+      if (!container) return;
+
+      const grandTotalFormatted = order && order.pricing ? formatRupiah(order.pricing.grandTotal) : 'Rp 123.000';
+      const invNumber = order ? order.invoiceNumber : 'INV/LAB/2026/677717';
+
+      if (selectedChannel === 'qris') {
+        container.innerHTML = `
+          <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-9 shadow-lg space-y-6">
+            <!-- Header QRIS -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 border-b border-slate-200 gap-3">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-teal-50 border border-teal-200 text-teal-800 flex items-center justify-center font-bold">
+                  <span class="material-symbols-outlined text-2xl">qr_code_scanner</span>
+                </div>
+                <div>
+                  <h3 class="text-base font-extrabold text-slate-900">Pembayaran QRIS Nasional (Bank Indonesia & ASPI)</h3>
+                  <div class="text-xs text-slate-500">Merchant: <strong class="text-teal-800">PT SARANA LABORATORIUM NUSANTARA</strong></div>
+                </div>
+              </div>
+              <div class="text-left sm:text-right">
+                <span class="text-xs text-slate-400">Total Nominal Pas:</span>
+                <div class="text-2xl font-black text-teal-800 font-mono-code">${grandTotalFormatted}</div>
+              </div>
+            </div>
+
+            <!-- Wadah QR Code Resmi -->
+            <div class="flex flex-col md:flex-row items-center justify-center gap-8 bg-slate-900 text-white p-6 sm:p-8 rounded-3xl">
+              <!-- QR Code Card -->
+              <div class="p-4 bg-white rounded-2xl shadow-2xl shrink-0 text-center relative overflow-hidden">
+                <div class="qris-laser"></div>
+                <div class="flex items-center justify-between px-1 pb-2 border-b border-slate-200 mb-2">
+                  <span class="text-[10px] font-black text-rose-600 tracking-wider">QRIS</span>
+                  <span class="text-[9px] font-bold text-slate-400">PEMBAYARAN RESMI</span>
+                </div>
+                
+                <!-- SVG QR Code -->
+                <svg class="w-48 h-48 sm:w-56 sm:h-56 text-slate-900 mx-auto" viewBox="0 0 200 200" fill="currentColor">
+                  <rect x="10" y="10" width="50" height="50" rx="6" fill="#0f172a"/>
+                  <rect x="20" y="20" width="30" height="30" rx="3" fill="#ffffff"/>
+                  <rect x="27" y="27" width="16" height="16" fill="#0f172a"/>
+
+                  <rect x="140" y="10" width="50" height="50" rx="6" fill="#0f172a"/>
+                  <rect x="150" y="20" width="30" height="30" rx="3" fill="#ffffff"/>
+                  <rect x="157" y="27" width="16" height="16" fill="#0f172a"/>
+
+                  <rect x="10" y="140" width="50" height="50" rx="6" fill="#0f172a"/>
+                  <rect x="20" y="150" width="30" height="30" rx="3" fill="#ffffff"/>
+                  <rect x="27" y="157" width="16" height="16" fill="#0f172a"/>
+
+                  <rect x="70" y="15" width="8" height="8"/>
+                  <rect x="85" y="15" width="16" height="8"/>
+                  <rect x="110" y="15" width="8" height="16"/>
+                  <rect x="70" y="35" width="16" height="8"/>
+                  <rect x="95" y="35" width="8" height="8"/>
+                  <circle cx="100" cy="100" r="18" fill="#0d9488"/>
+                  <text x="100" y="104" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle" font-family="sans-serif">LAB</text>
+                  <rect x="140" y="70" width="16" height="8"/>
+                  <rect x="165" y="75" width="8" height="16"/>
+                  <rect x="140" y="140" width="8" height="16"/>
+                  <rect x="155" y="150" width="16" height="8"/>
+                </svg>
+
+                <div class="text-[10px] text-slate-500 font-mono-code font-bold mt-2">NMID: ID1020268899120</div>
+              </div>
+
+              <!-- Panduan Pindai QRIS -->
+              <div class="space-y-4 max-w-sm text-center md:text-left">
+                <div>
+                  <span class="text-xs text-teal-300 font-extrabold uppercase tracking-wide">Pindai & Bayar</span>
+                  <h4 class="text-lg font-bold text-white mt-0.5">Buka Aplikasi Perbankan atau E-Wallet Apapun</h4>
+                  <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+                    Mendukung BCA Mobile, Livin by Mandiri, BRImo, BNI Mobile, GoPay, OVO, ShopeePay, DANA, dan seluruh bank di Indonesia.
+                  </p>
+                </div>
+
+                <div class="p-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-xs space-y-1.5">
+                  <div class="flex justify-between text-slate-300">
+                    <span>No. Invoice:</span>
+                    <span class="font-mono-code font-bold text-white">${invNumber}</span>
+                  </div>
+                  <div class="flex justify-between text-slate-300">
+                    <span>Biaya Transaksi:</span>
+                    <span class="text-emerald-400 font-bold">Gratis (Rp 0)</span>
+                  </div>
+                </div>
+
+                <button 
+                  type="button" 
+                  onclick="showToast('Gambar QRIS berhasil diunduh ke galeri ponsel!', 'success')"
+                  class="w-full py-2.5 px-4 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md transition-all active:scale-95"
+                >
+                  <span class="material-symbols-outlined text-base">download</span>
+                  Simpan / Unduh Gambar QR Code
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (selectedChannel === 'va') {
+        container.innerHTML = `
+          <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-9 shadow-lg space-y-6">
+            <!-- Header VA -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 border-b border-slate-200 gap-3">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-200 text-blue-800 flex items-center justify-center font-bold">
+                  <span class="material-symbols-outlined text-2xl">account_balance</span>
+                </div>
+                <div>
+                  <h3 class="text-base font-extrabold text-slate-900">Virtual Account ${selectedVaBank} Terverifikasi</h3>
+                  <div class="text-xs text-slate-500">Penerima: <strong class="text-blue-800">PT SARANA LABORATORIUM NUSANTARA</strong></div>
+                </div>
+              </div>
+              <div class="text-left sm:text-right">
+                <span class="text-xs text-slate-400">Total Transfer:</span>
+                <div class="text-2xl font-black text-blue-800 font-mono-code">${grandTotalFormatted}</div>
+              </div>
+            </div>
+
+            <!-- Box Nomor Virtual Account -->
+            <div class="p-6 rounded-3xl bg-blue-50/60 border-2 border-blue-200 space-y-4">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <span class="text-xs text-blue-900/70 font-bold uppercase tracking-wider block">NOMOR ${selectedVaBank} VIRTUAL ACCOUNT RESMI:</span>
+                  <div class="text-2xl sm:text-3xl font-black text-slate-900 font-mono-code tracking-wide mt-1" id="active-va-num">
+                    ${selectedVaNumber}
+                  </div>
+                </div>
+                <button 
+                  type="button" 
+                  onclick="copyPaymentCode('${selectedVaNumber}')" 
+                  class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs flex items-center gap-2 shadow-md shadow-blue-600/25 active:scale-95 transition-all w-fit"
+                >
+                  <span class="material-symbols-outlined text-base">content_copy</span>
+                  Salin Nomor VA
+                </button>
+              </div>
+
+              <div class="p-3 bg-white rounded-xl border border-blue-100 text-xs text-slate-600 flex items-start gap-2">
+                <span class="material-symbols-outlined text-blue-600 text-base shrink-0">verified</span>
+                <span>Sistem perbankan akan memverifikasi pembayaran Anda secara otomatis dalam 1–2 menit. Tidak diperlukan unggah struk manual.</span>
+              </div>
+            </div>
+
+            <!-- Panduan Transfer Tab/Accordion -->
+            <div class="space-y-2 text-xs">
+              <div class="font-bold text-slate-800 text-sm">Petunjuk Cara Transfer ${selectedVaBank}:</div>
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                <div class="font-semibold text-slate-900">Melalui Mobile Banking (${selectedVaBank} Mobile / Livin'):</div>
+                <ol class="list-decimal pl-4 space-y-1 text-slate-600">
+                  <li>Buka aplikasi m-Banking dan lakukan login ke akun Anda.</li>
+                  <li>Pilih menu <strong>Transfer</strong> &rarr; <strong>Virtual Account</strong>.</li>
+                  <li>Masukkan nomor VA: <strong class="font-mono-code text-slate-900">${selectedVaNumber}</strong>.</li>
+                  <li>Periksa nama penerima: <strong>PT SARANA LABORATORIUM NUSANTARA</strong> dan nominal: <strong>${grandTotalFormatted}</strong>.</li>
+                  <li>Masukkan PIN transaksi m-Banking Anda untuk menyelesaikan pembayaran.</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (selectedChannel === 'retail') {
+        const storeColor = selectedRetailStore === 'Indomaret' ? 'blue' : 'rose';
+        container.innerHTML = `
+          <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-9 shadow-lg space-y-6">
+            <!-- Header Minimarket -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 border-b border-slate-200 gap-3">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-${storeColor}-50 border border-${storeColor}-200 text-${storeColor}-700 flex items-center justify-center font-bold">
+                  <span class="material-symbols-outlined text-2xl">storefront</span>
+                </div>
+                <div>
+                  <h3 class="text-base font-extrabold text-slate-900">Pembayaran Kasir ${selectedRetailStore}</h3>
+                  <div class="text-xs text-slate-500">Tunjukkan barcode atau sebutkan kode pembayaran kepada kasir gerai</div>
+                </div>
+              </div>
+              <div class="text-left sm:text-right">
+                <span class="text-xs text-slate-400">Total yang Harus Dibayar:</span>
+                <div class="text-2xl font-black text-teal-800 font-mono-code">${grandTotalFormatted}</div>
+              </div>
+            </div>
+
+            <!-- BOX UTAMA: BARCODE SCANNABLE KASIR + KODE MANUAL -->
+            <div class="bg-gradient-to-b from-slate-50 to-slate-100/70 p-6 sm:p-8 rounded-3xl border-2 border-slate-300 space-y-5 text-center">
+              
+              <!-- 1. BARCODE KASIR (SVG CODE 128 ASLI) -->
+              <div class="space-y-2">
+                <span class="text-[11px] font-extrabold text-slate-500 uppercase tracking-wider flex items-center justify-center gap-1.5">
+                  <span class="material-symbols-outlined text-teal-600 text-sm">barcode_scanner</span>
+                  ARAHKAN BARCODE KE SCANNER KASIR ${selectedRetailStore.toUpperCase()}:
+                </span>
+
+                <div class="bg-white p-5 sm:p-6 rounded-2xl border-2 border-slate-300 shadow-sm inline-block max-w-full overflow-hidden">
+                  <!-- SVG Barcode Realistis Format Code 128 -->
+                  <svg class="w-64 sm:w-80 h-20 sm:h-24 text-slate-950 mx-auto" viewBox="0 0 300 90" fill="currentColor">
+                    <!-- Left Guards -->
+                    <rect x="10" y="0" width="3" height="90"/>
+                    <rect x="15" y="0" width="2" height="90"/>
+                    <!-- Data Bars -->
+                    <rect x="22" y="0" width="4" height="75"/>
+                    <rect x="28" y="0" width="2" height="75"/>
+                    <rect x="33" y="0" width="5" height="75"/>
+                    <rect x="41" y="0" width="3" height="75"/>
+                    <rect x="47" y="0" width="6" height="75"/>
+                    <rect x="56" y="0" width="2" height="75"/>
+                    <rect x="61" y="0" width="5" height="75"/>
+                    <rect x="69" y="0" width="3" height="75"/>
+                    <rect x="75" y="0" width="6" height="75"/>
+                    <rect x="84" y="0" width="2" height="75"/>
+                    <rect x="89" y="0" width="4" height="75"/>
+                    <rect x="96" y="0" width="3" height="75"/>
+                    <rect x="102" y="0" width="6" height="75"/>
+                    <rect x="111" y="0" width="2" height="75"/>
+                    <rect x="116" y="0" width="5" height="75"/>
+                    <rect x="124" y="0" width="3" height="75"/>
+                    <rect x="130" y="0" width="6" height="75"/>
+                    <rect x="139" y="0" width="2" height="75"/>
+                    <rect x="144" y="0" width="4" height="75"/>
+                    <rect x="151" y="0" width="3" height="75"/>
+                    <rect x="157" y="0" width="5" height="75"/>
+                    <rect x="165" y="0" width="2" height="75"/>
+                    <rect x="170" y="0" width="6" height="75"/>
+                    <rect x="179" y="0" width="3" height="75"/>
+                    <rect x="185" y="0" width="2" height="75"/>
+                    <rect x="190" y="0" width="5" height="75"/>
+                    <rect x="198" y="0" width="3" height="75"/>
+                    <rect x="204" y="0" width="6" height="75"/>
+                    <rect x="213" y="0" width="2" height="75"/>
+                    <rect x="218" y="0" width="4" height="75"/>
+                    <rect x="225" y="0" width="3" height="75"/>
+                    <rect x="231" y="0" width="5" height="75"/>
+                    <rect x="239" y="0" width="2" height="75"/>
+                    <rect x="244" y="0" width="6" height="75"/>
+                    <rect x="253" y="0" width="3" height="75"/>
+                    <rect x="259" y="0" width="2" height="75"/>
+                    <rect x="264" y="0" width="4" height="75"/>
+                    <rect x="271" y="0" width="2" height="75"/>
+                    <!-- Right Guards -->
+                    <rect x="279" y="0" width="2" height="90"/>
+                    <rect x="284" y="0" width="3" height="90"/>
+                  </svg>
+                  <div class="text-xs font-mono-code font-extrabold text-slate-800 tracking-widest mt-1">
+                    * ${selectedRetailCode} *
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2. KODE PEMBAYARAN KASIR (INPUT MANUAL CADANGAN) -->
+              <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3 text-left">
+                <div>
+                  <span class="text-[11px] text-slate-500 block uppercase font-extrabold tracking-wider">KODE PEMBAYARAN KASIR (INPUT MANUAL):</span>
+                  <div class="text-2xl sm:text-3xl font-black text-slate-900 font-mono-code tracking-wider mt-0.5" id="active-retail-code">
+                    ${selectedRetailCode}
+                  </div>
+                  <div class="text-[11px] text-slate-500 mt-1">
+                    Jika barcode di atas tidak dapat di-scan oleh alat kasir, sampaikan kode ini untuk diketik manual.
+                  </div>
+                </div>
+                <button 
+                  type="button" 
+                  onclick="copyPaymentCode('${selectedRetailCode}')" 
+                  class="px-4 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-xs flex items-center gap-2 shadow-md shadow-teal-600/20 active:scale-95 transition-all shrink-0"
+                >
+                  <span class="material-symbols-outlined text-base">content_copy</span>
+                  Salin Kode Kasir
+                </button>
+              </div>
+
+            </div>
+
+            <!-- Langkah Panduan Pembayaran Kasir -->
+            <div class="space-y-2 text-xs">
+              <div class="font-bold text-slate-800 text-sm">Tata Cara Pembayaran di Kasir ${selectedRetailStore}:</div>
+              <ol class="list-decimal pl-4 space-y-1.5 text-slate-600">
+                <li>Datangi kasir ${selectedRetailStore} terdekat sebelum batas waktu berakhir.</li>
+                <li>Sampaikan kepada kasir bahwa Anda ingin membayar <strong>"LabMart Marketplace"</strong>.</li>
+                <li>Perlihatkan layar smartphone agar kasir dapat <strong>men-scan barcode</strong> di atas.</li>
+                <li>Jika scanner kasir terhalang pantulan layar, mintalah kasir memasukkan <strong>Kode: ${selectedRetailCode}</strong> secara manual.</li>
+                <li>Kasir akan mengonfirmasi nama penerima <strong>PT SARANA LABORATORIUM NUSANTARA</strong> dan nominal <strong>${grandTotalFormatted}</strong>.</li>
+                <li>Bayar secara tunai atau debit dan simpan struk fisik bukti bayar dari kasir.</li>
+              </ol>
+            </div>
+          </div>
+        `;
+      } else if (selectedChannel === 'ewallet') {
+        container.innerHTML = `
+          <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-9 shadow-lg space-y-6">
+            <div class="flex items-center gap-3 pb-5 border-b border-slate-200">
+              <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-700 flex items-center justify-center font-bold">
+                <span class="material-symbols-outlined text-2xl">account_balance_wallet</span>
+              </div>
+              <div>
+                <h3 class="text-base font-extrabold text-slate-900">Pembayaran via ${selectedEwallet}</h3>
+                <div class="text-xs text-slate-500">Notifikasi pembayaran telah dikirim ke nomor smartphone Anda</div>
+              </div>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-amber-50 border border-amber-200 text-center space-y-3">
+              <span class="text-xs text-amber-900 font-bold block uppercase">TOTAL PEMBAYARAN:</span>
+              <div class="text-3xl font-black text-amber-950 font-mono-code">${grandTotalFormatted}</div>
+              <p class="text-xs text-amber-800 max-w-md mx-auto">
+                Silakan buka aplikasi <strong>${selectedEwallet}</strong> di ponsel Anda dan konfirmasi pembayaran dalam waktu 15 menit.
+              </p>
+            </div>
+          </div>
+        `;
+      } else if (selectedChannel === 'card') {
+        container.innerHTML = `
+          <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-9 shadow-lg space-y-6">
+            <div class="flex items-center gap-3 pb-5 border-b border-slate-200">
+              <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-700 flex items-center justify-center font-bold">
+                <span class="material-symbols-outlined text-2xl">credit_card</span>
+              </div>
+              <div>
+                <h3 class="text-base font-extrabold text-slate-900">Otorisasi Kartu Kredit / Debit (3D Secure)</h3>
+                <div class="text-xs text-slate-500">Transaksi dilindungi enkripsi TLS 1.3 & Visa Secure</div>
+              </div>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-indigo-50 border border-indigo-200 text-center space-y-3">
+              <span class="text-xs text-indigo-900 font-bold block uppercase">TOTAL OTORISASI:</span>
+              <div class="text-3xl font-black text-indigo-950 font-mono-code">${grandTotalFormatted}</div>
+              <p class="text-xs text-indigo-800 max-w-md mx-auto">
+                Kode OTP One-Time-Password 6 digit telah dikirimkan melalui SMS ke nomor ponsel pemegang kartu.
+              </p>
+            </div>
+          </div>
+        `;
+      } else if (selectedChannel === 'po') {
+        container.innerHTML = `
+          <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-9 shadow-lg space-y-6">
+            <div class="flex items-center gap-3 pb-5 border-b border-slate-200">
+              <div class="w-12 h-12 rounded-2xl bg-teal-50 text-teal-800 flex items-center justify-center font-bold">
+                <span class="material-symbols-outlined text-2xl">description</span>
+              </div>
+              <div>
+                <h3 class="text-base font-extrabold text-slate-900">Purchase Order (PO / SPK) Resmi Diterima</h3>
+                <div class="text-xs text-slate-500">Term of Payment: 30 Hari sejak faktur pajak diterbitkan</div>
+              </div>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-teal-50 border border-teal-200 text-center space-y-3">
+              <span class="text-xs text-teal-900 font-bold block uppercase">NOMINAL TRANSAKSI INSTITUSI:</span>
+              <div class="text-3xl font-black text-teal-950 font-mono-code">${grandTotalFormatted}</div>
+              <p class="text-xs text-teal-800 max-w-md mx-auto">
+                Nomor Registrasi SPK telah dicatat dalam sistem faktur elektronik LabMart Indonesia. Surat jalan dan e-Faktur Pajak akan dikirimkan bersama barang.
+              </p>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function copyPaymentCode(code) {
+      navigator.clipboard.writeText(code).then(() => {
+        showToast(`Kode "${code}" berhasil disalin ke clipboard!`, 'success');
+      }).catch(() => {
+        showToast(`Kode: ${code}`, 'info');
+      });
+    }
+
+    function startPaymentCountdown() {
+      let seconds = 24 * 3600 - 15;
+      const el = document.getElementById('pay-countdown-timer');
+      if (!el) return;
+
+      setInterval(() => {
+        if (seconds <= 0) return;
+        seconds--;
+        const h = Math.floor(seconds / 3600);
+        const m = Math.floor((seconds % 3600) / 60);
+        const s = seconds % 60;
+        el.textContent = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+      }, 1000);
+    }
+
+    function executeSimulatedPaymentSuccess() {
+      const order = getActiveOrder();
+      if (order) {
+        let displayName = 'QRIS Instant Standard';
+        if (selectedChannel === 'qris') {
+          displayName = 'QRIS Instant Standard';
+        } else if (selectedChannel === 'va') {
+          displayName = `${selectedVaBank} Virtual Account (${selectedVaNumber})`;
+        } else if (selectedChannel === 'retail') {
+          displayName = `Gerai ${selectedRetailStore} (${selectedRetailCode})`;
+        } else if (selectedChannel === 'ewallet') {
+          displayName = `E-Wallet ${selectedEwallet}`;
+        } else if (selectedChannel === 'card') {
+          displayName = 'Kartu Kredit / Debit Online (Visa)';
+        } else if (selectedChannel === 'po') {
+          displayName = 'Purchase Order (PO/SPK TOP 30 Hari)';
+        }
+
+        order.paymentMethod = displayName;
+        order.paymentStatus = `Lunas (Verified by ${displayName})`;
+        saveActiveOrder(order);
+      }
+      showToast('Pembayaran berhasil diverifikasi! Mengalihkan ke faktur...', 'success');
+      setTimeout(() => {
+        window.location.href = 'order-status.html';
+      }, 1000);
+    }
+  </script>
+</body>
+</html>

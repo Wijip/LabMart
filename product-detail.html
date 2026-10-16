@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detail Produk Laboratorium - LabMart Indonesia</title>
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <!-- Tailwind Custom Config -->
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            teal: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              200: '#99f6e4',
+              300: '#5eead4',
+              400: '#2dd4bf',
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+              800: '#115e59',
+              900: '#134e4a',
+            },
+            accent: '#f59e0b',
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/custom.css" />
+</head>
+
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20 gap-4">
+        
+        <!-- Back to Home & Logo -->
+        <div class="flex items-center gap-3">
+          <a href="index.html" class="p-2 rounded-xl text-slate-600 hover:text-teal-700 hover:bg-slate-100 transition-colors flex items-center gap-1.5 text-xs font-bold" title="Kembali ke Beranda">
+            <span class="material-symbols-outlined text-xl">arrow_back</span>
+            <span class="hidden sm:inline">Katalog</span>
+          </a>
+
+          <div class="h-6 w-px bg-slate-200"></div>
+
+          <a href="index.html" class="flex items-center gap-2">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-teal-700 to-teal-500 text-white flex items-center justify-center shadow-sm">
+              <span class="material-symbols-outlined text-xl">science</span>
+            </div>
+            <span class="text-lg font-extrabold tracking-tight text-slate-900">
+              Lab<span class="text-teal-600">Mart</span><span class="text-xs text-amber-500 ml-0.5">.id</span>
+            </span>
+          </a>
+        </div>
+
+        <!-- Search input small -->
+        <div class="flex-1 max-w-md hidden md:block">
+          <div class="relative flex items-center">
+            <span class="material-symbols-outlined text-slate-400 absolute left-3 text-lg">search</span>
+            <input 
+              type="text" 
+              placeholder="Cari alat atau bahan lab lainnya..." 
+              onkeydown="if(event.key==='Enter') window.location.href='index.html';"
+              class="w-full pl-9 pr-4 py-2 bg-slate-100 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+            />
+          </div>
+        </div>
+
+        <!-- Right actions -->
+        <div class="flex items-center gap-3">
+          <!-- Cart Link -->
+          <a href="cart.html" class="flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-100 hover:bg-teal-50 hover:text-teal-700 text-slate-800 transition-all relative border border-slate-200">
+            <div class="relative">
+              <span class="material-symbols-outlined text-xl text-slate-700">shopping_cart</span>
+              <span class="cart-badge absolute -top-2 -right-2 bg-rose-600 text-white text-[10px] font-extrabold rounded-full px-1.5 min-w-[18px] h-4 leading-4 text-center shadow-sm hidden">0</span>
+            </div>
+            <span class="text-xs font-bold hidden sm:inline">Keranjang</span>
+          </a>
+
+          <!-- User Account / Mitra Lab (Rendered dynamically by js/users.js) -->
+          <div id="header-user-nav" class="flex items-center gap-2"></div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Breadcrumbs -->
+  <nav aria-label="Breadcrumb" class="bg-white border-b border-slate-200 py-3">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <ol class="flex items-center gap-2 text-xs text-slate-500 overflow-x-auto whitespace-nowrap">
+        <li><a href="index.html" class="hover:text-teal-700">Beranda</a></li>
+        <li class="material-symbols-outlined text-xs text-slate-400">chevron_right</li>
+        <li id="breadcrumb-category" class="hover:text-teal-700">Kategori Laboratorium</li>
+        <li class="material-symbols-outlined text-xs text-slate-400">chevron_right</li>
+        <li id="breadcrumb-title" class="font-bold text-slate-800 truncate max-w-xs sm:max-w-md">Nama Produk</li>
+      </ol>
+    </div>
+  </nav>
+
+  <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 pb-28 lg:pb-8 flex-1">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- Left Column: Gallery Images (4 cols on lg) -->
+      <div class="lg:col-span-5 space-y-4 lg:sticky lg:top-28">
+        <!-- Main Image Container -->
+        <div class="aspect-square w-full rounded-3xl overflow-hidden bg-white border border-slate-200/90 shadow-sm relative group">
+          <img 
+            id="main-image" 
+            src="" 
+            alt="Foto Produk Lab" 
+            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+          <div class="absolute bottom-3 right-3 bg-slate-900/70 text-white text-[11px] px-2.5 py-1 rounded-lg backdrop-blur-sm flex items-center gap-1 font-semibold">
+            <span class="material-symbols-outlined text-xs">zoom_in</span> Foto Asli Distributor
+          </div>
+        </div>
+
+        <!-- Thumbnails row -->
+        <div id="thumbs-container" class="flex gap-3 overflow-x-auto pb-1">
+          <!-- Rendered by js/detail.js -->
+        </div>
+
+        <!-- Jaminan Keaslian & Sertifikat -->
+        <div class="p-4 rounded-2xl bg-teal-50/60 border border-teal-200/80 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-teal-600 text-white flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-xl">verified</span>
+          </div>
+          <div class="text-xs">
+            <div class="font-bold text-teal-900">100% Produk Lab Terakreditasi</div>
+            <div class="text-teal-700 text-[11px] mt-0.5">Disertai lembar sertifikat CoA dan garansi resmi kalibrasi pabrikan.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Middle Column: Product Information (4 cols on lg) -->
+      <div class="lg:col-span-4 space-y-5">
+        
+        <!-- Badges -->
+        <div id="product-badges" class="flex flex-wrap items-center gap-2">
+          <!-- Rendered by js/detail.js -->
+        </div>
+
+        <!-- Title -->
+        <h1 id="product-title" class="text-xl sm:text-2xl font-extrabold text-slate-900 leading-snug">
+          Nama Produk Laboratorium
+        </h1>
+
+        <!-- Brand & Store Info -->
+        <div class="flex items-center gap-2 text-xs text-slate-600">
+          <span>Brand: <strong id="product-brand" class="text-teal-700">Brand</strong></span>
+          <span class="text-slate-300">•</span>
+          <span>Distributor: <span id="store-name" class="font-semibold text-slate-800">Store</span> (<span id="store-city">Kota</span>)</span>
+        </div>
+
+        <!-- Ratings & Sold -->
+        <div class="flex items-center gap-3 text-xs py-2 border-y border-slate-200/80">
+          <div class="flex items-center text-amber-500 font-bold gap-1">
+            <span class="material-symbols-outlined text-base fill-1">star</span>
+            <span id="product-rating">4.9</span>
+          </div>
+          <span class="text-slate-300">|</span>
+          <a href="#reviews-tab" class="text-slate-600 hover:text-teal-700 font-medium" id="product-reviews">0 Ulasan</a>
+          <span class="text-slate-300">|</span>
+          <span id="product-sold" class="text-slate-600 font-semibold">0 Terjual</span>
+        </div>
+
+        <!-- Price Display -->
+        <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-1">
+          <div class="text-xs font-semibold text-slate-500">Harga Satuan:</div>
+          <div class="flex items-baseline gap-3">
+            <span id="product-price-display" class="text-2xl sm:text-3xl font-extrabold text-teal-700">Rp 0</span>
+          </div>
+          <div class="text-[11px] text-slate-400">Harga belum termasuk PPN 11% (tersedia faktur pajak instansi)</div>
+        </div>
+
+        <!-- Variants Selector -->
+        <div class="space-y-2">
+          <label class="text-xs font-bold text-slate-800 uppercase tracking-wider block">Pilih Ukuran / Varian Produk:</label>
+          <div id="variants-container" class="flex flex-wrap gap-2">
+            <!-- Rendered by js/detail.js -->
+          </div>
+        </div>
+
+        <!-- Quick Specs Summary -->
+        <div class="space-y-2 pt-2">
+          <h2 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Ringkasan Spesifikasi:</h2>
+          <p id="product-desc-short" class="text-xs text-slate-600 leading-relaxed bg-slate-100/70 p-3 rounded-xl border border-slate-200">
+            Deskripsi singkat...
+          </p>
+        </div>
+
+        <!-- Pengiriman Ekspedisi Singkat -->
+        <div class="p-3.5 rounded-2xl border border-slate-200 bg-white space-y-2 text-xs">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-800 flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-base text-teal-600">local_shipping</span>
+              Opsi Ekspedisi Pengiriman:
+            </span>
+            <a href="checkout.html" class="text-teal-700 font-bold hover:underline">Cek Ongkir</a>
+          </div>
+          <p class="text-slate-500 text-[11px]">
+            Mendukung kurir standar (JNE, SiCepat), JTR Cargo alat berat, serta BioLogistics Cold-Chain berpendingin es kering untuk reagen.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Sticky Purchase Action Card (3 cols on lg) -->
+      <div class="lg:col-span-3 lg:sticky lg:top-28">
+        <div class="bg-white rounded-3xl border border-slate-200 p-5 shadow-lg shadow-slate-200/50 space-y-5">
+          <h3 class="font-bold text-slate-900 text-sm pb-2 border-b border-slate-100 flex items-center gap-2">
+            <span class="material-symbols-outlined text-teal-600 text-lg">add_shopping_cart</span>
+            Atur Jumlah & Catatan
+          </h3>
+
+          <!-- Varian Terpilih -->
+          <div class="text-xs">
+            <span class="text-slate-400 block">Varian yang dipilih:</span>
+            <span id="side-selected-variant" class="font-bold text-slate-800 mt-0.5 block">Varian Standar</span>
+          </div>
+
+          <!-- Quantity Stepper -->
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold text-slate-700">Jumlah Pesanan:</span>
+              <span id="side-stock-info" class="text-[11px] text-teal-700 font-semibold">Sisa Stok: ...</span>
+            </div>
+            <div class="flex items-center border border-slate-300 rounded-xl overflow-hidden bg-white shadow-sm">
+              <button 
+                onclick="adjustDetailQty(-1)"
+                class="w-10 h-10 flex items-center justify-center text-slate-600 hover:bg-slate-100 font-bold transition-colors"
+              >
+                -
+              </button>
+              <input 
+                id="side-qty-input"
+                type="number" 
+                value="1" 
+                readonly
+                class="w-full text-center text-sm font-extrabold text-slate-800 border-none py-1 focus:ring-0"
+              />
+              <button 
+                onclick="adjustDetailQty(1)"
+                class="w-10 h-10 flex items-center justify-center text-slate-600 hover:bg-slate-100 font-bold transition-colors"
+              >
+                +
+              </button>
+            </div>
+          </div>
+
+          <!-- Catatan Pembelian Tambahan -->
+          <div class="space-y-1">
+            <label class="text-[11px] font-semibold text-slate-600 block">Catatan untuk Penjual (Opsional):</label>
+            <input 
+              id="side-order-notes"
+              type="text" 
+              placeholder="Contoh: Minta lampirkan CoA asli..."
+              class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 placeholder:text-slate-400"
+            />
+          </div>
+
+          <!-- Subtotal Live Display -->
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-xs text-slate-500 font-medium">Subtotal Barang:</span>
+            <span id="side-subtotal-display" class="text-lg font-extrabold text-teal-700">Rp 0</span>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="space-y-2.5 pt-1">
+            <button 
+              onclick="handleDetailAddToCart()"
+              class="w-full py-3 px-4 rounded-2xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-teal-600/25 active:scale-[0.98] transition-all"
+            >
+              <span class="material-symbols-outlined text-lg">shopping_cart</span>
+              + Keranjang Belanja
+            </button>
+            
+            <button 
+              onclick="handleDetailBuyNow()"
+              class="w-full py-3 px-4 rounded-2xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md active:scale-[0.98] transition-all"
+            >
+              <span class="material-symbols-outlined text-lg">bolt</span>
+              Beli Langsung Sekarang
+            </button>
+
+            <!-- Tombol Pengadaan Institusi / RFQ Resmi -->
+            <button 
+              type="button"
+              onclick="openRfqModal(currentProduct.name, currentProduct.price)"
+              class="w-full py-2.5 px-4 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors border border-slate-300"
+            >
+              <span class="material-symbols-outlined text-base text-teal-700">description</span>
+              Minta Surat Penawaran Resmi (RFQ PDF)
+            </button>
+          </div>
+
+          <!-- Jaminan Tambahan -->
+          <div class="pt-3 border-t border-slate-100 space-y-1.5 text-[11px] text-slate-500">
+            <div class="flex items-center gap-2 text-slate-600">
+              <span class="material-symbols-outlined text-teal-600 text-sm">shield</span>
+              <span>Proteksi Asuransi Alat Lab & B3</span>
+            </div>
+            <div class="flex items-center gap-2 text-slate-600">
+              <span class="material-symbols-outlined text-teal-600 text-sm">package_2</span>
+              <span>Kemasan Packing Kayu / Bubble 4 Lapis</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Detailed Tabs Section: Deskripsi, Specs, Safety MSDS, Reviews, Diskusi -->
+    <section class="mt-16 bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+      
+      <!-- Tab Headers -->
+      <div class="flex border-b border-slate-200 gap-4 sm:gap-8 overflow-x-auto scrollbar-none">
+        <button 
+          data-tab-target="tab-deskripsi"
+          class="py-3 px-1 border-b-2 border-teal-600 text-teal-700 font-bold text-xs sm:text-sm whitespace-nowrap transition-colors"
+        >
+          Deskripsi Lengkap
+        </button>
+        <button 
+          data-tab-target="tab-spesifikasi"
+          class="py-3 px-1 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-medium text-xs sm:text-sm whitespace-nowrap transition-colors"
+        >
+          Spesifikasi Teknis Lab
+        </button>
+        <button 
+          data-tab-target="tab-msds"
+          class="py-3 px-1 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-medium text-xs sm:text-sm whitespace-nowrap transition-colors"
+        >
+          Keselamatan & Penanganan (MSDS)
+        </button>
+        <button 
+          id="reviews-tab"
+          data-tab-target="tab-ulasan"
+          class="py-3 px-1 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-medium text-xs sm:text-sm whitespace-nowrap transition-colors"
+        >
+          Ulasan Pembeli Lab (12)
+        </button>
+        <button 
+          data-tab-target="tab-diskusi"
+          class="py-3 px-1 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-medium text-xs sm:text-sm whitespace-nowrap transition-colors"
+        >
+          Diskusi Teknis Produk
+        </button>
+      </div>
+
+      <!-- Tab 1: Deskripsi -->
+      <div id="tab-deskripsi" class="tab-content-panel py-6 text-xs sm:text-sm text-slate-700 leading-relaxed space-y-4">
+        <h3 class="font-bold text-base text-slate-900">Penjelasan & Aplikasi Produk Laboratorium</h3>
+        <div id="product-desc-full">
+          <!-- Rendered by js/detail.js -->
+        </div>
+      </div>
+
+      <!-- Tab 2: Spesifikasi Teknis Table -->
+      <div id="tab-spesifikasi" class="tab-content-panel py-6 hidden space-y-4">
+        <h3 class="font-bold text-base text-slate-900">Tabel Karakteristik & Parameter Teknis</h3>
+        <div class="overflow-x-auto rounded-2xl border border-slate-200">
+          <table class="w-full text-left border-collapse">
+            <tbody id="product-specs-table">
+              <!-- Rendered by js/detail.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab 3: MSDS & Safety Handling -->
+      <div id="tab-msds" class="tab-content-panel py-6 hidden space-y-4">
+        <div class="p-4 rounded-2xl bg-amber-50 border border-amber-200 flex items-start gap-3">
+          <span class="material-symbols-outlined text-amber-700 text-2xl shrink-0">warning</span>
+          <div class="text-xs sm:text-sm text-amber-900 space-y-1">
+            <div class="font-bold">Pedoman Keselamatan & Kesehatan Kerja (K3) Laboratorium</div>
+            <p id="product-safety-notice">Pemberitahuan keselamatan...</p>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+          <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider">Dokumen Regulasi Laboratorium Terlampir:</h4>
+          <div class="flex flex-wrap gap-3">
+            <button onclick="alert('Mengunduh lembar CoA (Certificate of Analysis) PDF simulasi...')" class="px-4 py-2 rounded-xl bg-white border border-slate-300 hover:border-teal-500 text-xs font-semibold text-slate-700 flex items-center gap-2 shadow-sm">
+              <span class="material-symbols-outlined text-teal-600 text-base">picture_as_pdf</span>
+              Unduh Certificate of Analysis (CoA)
+            </button>
+            <button onclick="alert('Mengunduh lembar Safety Data Sheet (SDS/MSDS) PDF simulasi...')" class="px-4 py-2 rounded-xl bg-white border border-slate-300 hover:border-teal-500 text-xs font-semibold text-slate-700 flex items-center gap-2 shadow-sm">
+              <span class="material-symbols-outlined text-teal-600 text-base">picture_as_pdf</span>
+              Unduh Lembar Data Keselamatan (MSDS)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 4: Ulasan Pembeli -->
+      <div id="tab-ulasan" class="tab-content-panel py-6 hidden space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 rounded-2xl bg-slate-50 border border-slate-200">
+          <div class="flex flex-col items-center justify-center text-center border-b md:border-b-0 md:border-r border-slate-200 pb-4 md:pb-0">
+            <span class="text-4xl font-extrabold text-slate-900">4.9</span>
+            <div class="flex text-amber-500 my-1">
+              <span class="material-symbols-outlined fill-1 text-lg">star</span>
+              <span class="material-symbols-outlined fill-1 text-lg">star</span>
+              <span class="material-symbols-outlined fill-1 text-lg">star</span>
+              <span class="material-symbols-outlined fill-1 text-lg">star</span>
+              <span class="material-symbols-outlined fill-1 text-lg">star</span>
+            </div>
+            <span class="text-xs text-slate-500">Berdasarkan kepuasan institusi riset & universitas</span>
+          </div>
+
+          <div class="md:col-span-2 space-y-2 text-xs">
+            <div class="flex items-center gap-3">
+              <span class="w-12 text-slate-600 font-semibold">5 Bintang</span>
+              <div class="flex-1 bg-slate-200 h-2 rounded-full overflow-hidden">
+                <div class="bg-amber-400 h-full w-[92%] rounded-full"></div>
+              </div>
+              <span class="text-slate-500">92%</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="w-12 text-slate-600 font-semibold">4 Bintang</span>
+              <div class="flex-1 bg-slate-200 h-2 rounded-full overflow-hidden">
+                <div class="bg-amber-400 h-full w-[8%] rounded-full"></div>
+              </div>
+              <span class="text-slate-500">8%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review items -->
+        <div class="space-y-4">
+          <div class="p-4 rounded-2xl border border-slate-200 space-y-2">
+            <div class="flex items-center justify-between text-xs">
+              <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-full bg-teal-100 text-teal-800 font-bold flex items-center justify-center text-xs">UGM</div>
+                <span class="font-bold text-slate-800">Lab Kimia FMIPA UGM</span>
+                <span class="bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded text-[10px] font-semibold">Pembeli Terverifikasi</span>
+              </div>
+              <span class="text-slate-400">12 Oktober 2026</span>
+            </div>
+            <div class="flex text-amber-500">
+              <span class="material-symbols-outlined fill-1 text-sm">star</span>
+              <span class="material-symbols-outlined fill-1 text-sm">star</span>
+              <span class="material-symbols-outlined fill-1 text-sm">star</span>
+              <span class="material-symbols-outlined fill-1 text-sm">star</span>
+              <span class="material-symbols-outlined fill-1 text-sm">star</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700">
+              Barang tiba dalam kondisi sangat prima dengan packing kayu kokoh dan segel original utuh. Dokumen Certificate of Analysis (CoA) lot terbaru juga disertakan dalam map terpisah. Sangat direkomendasikan untuk pengadaan lab kampus!
+            </p>
+          </div>
+
+          <div class="p-4 rounded-2xl border border-slate-200 space-y-2">
+            <div class="flex items-center justify-between text-xs">
+              <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-full bg-blue-100 text-blue-800 font-bold flex items-center justify-center text-xs">QC</div>
+                <span class="font-bold text-slate-800">QA/QC Manager PT BioFarma</span>
+                <span class="bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded text-[10px] font-semibold">Pembeli Terverifikasi</span>
+              </div>
+              <span class="text-slate-400">5 Oktober 2026</span>
+            </div>
+            <div class="flex text-amber-500">
+              <span class="material-symbols-outlined fill-1 text-sm">star</span>
+              <span class="material-symbols-outlined fill-1 text-sm">star</span>
+              <span class="material-symbols-outlined fill-1 text-sm">star</span>
+              <span class="material-symbols-outlined fill-1 text-sm">star</span>
+              <span class="material-symbols-outlined fill-1 text-sm">star</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700">
+              Akurasi pengukuran luar biasa presisi. Kalibrasi KAN sesuai spesifikasi. Pelayanan pengiriman cepat dan faktur pajak langsung kami terima via email.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 5: Diskusi Teknis -->
+      <div id="tab-diskusi" class="tab-content-panel py-6 hidden space-y-6">
+        <div class="space-y-3">
+          <h4 class="font-bold text-sm text-slate-900">Punya Pertanyaan Mengenai Spesifikasi atau Kompatibilitas Alat?</h4>
+          <div class="flex gap-2">
+            <input 
+              id="discussion-input"
+              type="text" 
+              placeholder="Tanyakan ke spesialis laboratorium kami (contoh: Apakah dapat diautoklaf pada 121°C?)..." 
+              class="flex-1 text-xs p-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500"
+            />
+            <button 
+              id="submit-discussion-btn"
+              class="px-5 py-3 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs shrink-0 transition-colors"
+            >
+              Kirim Pertanyaan
+            </button>
+          </div>
+        </div>
+
+        <div id="discussion-list" class="space-y-3">
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/70 space-y-2">
+            <div class="flex items-center justify-between text-xs text-slate-500">
+              <span class="font-bold text-slate-800">Analis Lab Lingkungan</span>
+              <span>3 hari yang lalu</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-700">Apakah produk ini kompatibel dengan larutan asam nitrat pekat?</p>
+            <div class="mt-2 pl-4 border-l-2 border-teal-500 text-xs text-slate-600">
+              <strong class="text-teal-800">Admin LabMart Teknis:</strong> Ya, material borosilikat 3.3 tahan terhadap asam anorganik termasuk asam nitrat pekat, kecuali asam fluorida (HF).
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Bottom: Related Products -->
+    <section class="mt-16 space-y-4">
+      <div class="flex items-center justify-between">
+        <h3 class="text-lg sm:text-xl font-extrabold text-slate-900">Produk Laboratorium Serupa & Rekomendasi</h3>
+        <a href="index.html" class="text-xs font-bold text-teal-700 hover:underline">Lihat Semua Katalog</a>
+      </div>
+      <div id="related-products-grid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
+        <!-- Rendered by js/detail.js -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Bottom Buy Bar (Mobile Only: Tokopedia / Shopee Style) -->
+  <div class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-3 py-2.5 flex items-center gap-2 lg:hidden shadow-2xl shadow-slate-900/30">
+    <button 
+      onclick="toggleLabChat()" 
+      class="p-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 flex flex-col items-center justify-center text-[10px] shrink-0"
+      title="Chat Ahli Lab"
+    >
+      <span class="material-symbols-outlined text-lg text-teal-700">chat</span>
+      <span class="font-bold text-[9px]">Chat</span>
+    </button>
+    <button 
+      onclick="if(currentProduct) openRfqModal(currentProduct.name, currentProduct.price)" 
+      class="p-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 flex flex-col items-center justify-center text-[10px] shrink-0"
+      title="Minta Surat Penawaran Resmi"
+    >
+      <span class="material-symbols-outlined text-lg text-teal-700">description</span>
+      <span class="font-bold text-[9px]">RFQ</span>
+    </button>
+    <button 
+      onclick="handleDetailAddToCart()" 
+      class="flex-1 py-2.5 px-2 rounded-xl border-2 border-teal-600 bg-teal-50 hover:bg-teal-100 text-teal-800 font-extrabold text-xs flex items-center justify-center gap-1 active:scale-95 transition-all"
+    >
+      <span class="material-symbols-outlined text-base">add_shopping_cart</span>
+      <span>+ Keranjang</span>
+    </button>
+    <button 
+      onclick="handleDetailBuyNow()" 
+      class="flex-1 py-2.5 px-3 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-xs flex items-center justify-center gap-1 shadow-md shadow-teal-600/30 active:scale-95 transition-all"
+    >
+      <span class="material-symbols-outlined text-base">bolt</span>
+      <span>Beli Langsung</span>
+    </button>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 text-xs border-t border-slate-800 mt-16 py-8">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center sm:flex sm:justify-between sm:items-center">
+      <div>&copy; 2026 LabMart Indonesia. Terdaftar di Kemenkes RI AKD. Seluruh hak cipta dilindungi.</div>
+      <div class="mt-4 sm:mt-0 flex justify-center gap-4">
+        <a href="index.html" class="hover:text-white">Beranda</a>
+        <a href="cart.html" class="hover:text-white">Keranjang</a>
+        <a href="checkout.html" class="hover:text-white">Pengadaan</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/users.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/chat-rfq.js"></script>
+  <script src="js/detail.js"></script>
+
+</body>
+</html>

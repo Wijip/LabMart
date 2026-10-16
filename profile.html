@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profil Akun Laboratorium - LabMart Indonesia</title>
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            teal: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              200: '#99f6e4',
+              300: '#5eead4',
+              400: '#2dd4bf',
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+              800: '#115e59',
+              900: '#134e4a',
+            },
+            accent: '#f59e0b',
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="css/custom.css" />
+</head>
+
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <div class="flex items-center gap-3">
+          <a href="index.html" class="p-2 rounded-xl text-slate-600 hover:text-teal-700 hover:bg-slate-100 transition-colors flex items-center gap-1.5 text-xs font-bold">
+            <span class="material-symbols-outlined text-lg">arrow_back</span>
+            <span>Kembali ke Beranda</span>
+          </a>
+
+          <div class="h-6 w-px bg-slate-200 hidden sm:block"></div>
+
+          <a href="index.html" class="flex items-center gap-2">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-teal-700 to-teal-500 text-white flex items-center justify-center shadow-sm">
+              <span class="material-symbols-outlined text-lg">science</span>
+            </div>
+            <span class="text-xl font-black tracking-tight text-slate-900 hidden sm:inline">Lab<span class="text-teal-600">Mart</span>.id</span>
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <a href="cart.html" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-teal-50 text-slate-800 hover:text-teal-700 font-bold text-xs flex items-center gap-2 transition-colors">
+            <span class="material-symbols-outlined text-base">shopping_cart</span>
+            <span class="hidden sm:inline">Keranjang</span>
+          </a>
+          <button onclick="logoutUser()" class="px-3.5 py-2 rounded-xl bg-rose-50 text-rose-700 hover:bg-rose-100 font-bold text-xs flex items-center gap-1.5 transition-colors">
+            <span class="material-symbols-outlined text-base">logout</span>
+            <span>Keluar</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Profile Page -->
+  <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1">
+    <div class="max-w-6xl mx-auto space-y-6">
+
+      <!-- Profile Header Banner -->
+      <div class="bg-gradient-to-r from-teal-900 via-teal-800 to-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
+        <div class="relative z-10 flex flex-col sm:flex-row items-center sm:items-start gap-6">
+          
+          <!-- Avatar -->
+          <div class="w-24 h-24 rounded-2xl bg-teal-600 text-white flex items-center justify-center font-bold text-3xl overflow-hidden border-2 border-teal-400 shadow-xl shrink-0">
+            <img id="prof-avatar" src="" alt="Avatar" class="w-full h-full object-cover" />
+          </div>
+
+          <!-- User Details -->
+          <div class="space-y-1.5 text-center sm:text-left flex-1">
+            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+              <h1 id="prof-name" class="text-xl sm:text-2xl font-black text-white">Nama Pengguna</h1>
+              <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold text-xs flex items-center gap-1 border border-emerald-400/30">
+                <span class="material-symbols-outlined text-xs">verified</span> Akun Terverifikasi Kemenkes
+              </span>
+            </div>
+
+            <p id="prof-institution" class="text-xs sm:text-sm text-teal-200 font-semibold">Institusi Laboratorium</p>
+            <p id="prof-labname" class="text-xs text-slate-300">Nama Laboratorium</p>
+
+            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-4 text-xs text-slate-300 pt-2">
+              <span id="prof-email" class="flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm text-teal-400">mail</span> email@institusi.ac.id
+              </span>
+              <span id="prof-phone" class="flex items-center gap-1 font-mono-code">
+                <span class="material-symbols-outlined text-sm text-teal-400">call</span> 0812-xxxx-xxxx
+              </span>
+              <span id="prof-labtype" class="flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm text-teal-400">category</span> Universitas / Pendidikan
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Main Tabs Section -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- Left Sidebar Tabs (4 cols) -->
+        <div class="lg:col-span-4 bg-white rounded-3xl border border-slate-200 p-3 sm:p-4 shadow-sm grid grid-cols-2 lg:grid-cols-1 gap-2">
+          <button 
+            onclick="switchProfileTab('orders')" 
+            id="tab-btn-orders"
+            class="w-full p-2.5 sm:p-3 rounded-xl sm:rounded-2xl flex items-center gap-2 sm:gap-3 text-xs font-bold transition-all bg-teal-50 text-teal-800"
+          >
+            <span class="material-symbols-outlined text-lg shrink-0">receipt_long</span>
+            <span class="truncate">Pesanan Lab</span>
+          </button>
+
+          <button 
+            onclick="switchProfileTab('address')" 
+            id="tab-btn-address"
+            class="w-full p-2.5 sm:p-3 rounded-xl sm:rounded-2xl flex items-center gap-2 sm:gap-3 text-xs font-bold transition-all text-slate-600 hover:bg-slate-50"
+          >
+            <span class="material-symbols-outlined text-lg shrink-0">location_on</span>
+            <span class="truncate">Buku Alamat</span>
+          </button>
+
+          <button 
+            onclick="switchProfileTab('docs')" 
+            id="tab-btn-docs"
+            class="w-full p-2.5 sm:p-3 rounded-xl sm:rounded-2xl flex items-center gap-2 sm:gap-3 text-xs font-bold transition-all text-slate-600 hover:bg-slate-50"
+          >
+            <span class="material-symbols-outlined text-lg shrink-0">folder_shared</span>
+            <span class="truncate">Sertifikat CoA</span>
+          </button>
+
+          <button 
+            onclick="switchProfileTab('settings')" 
+            id="tab-btn-settings"
+            class="w-full p-2.5 sm:p-3 rounded-xl sm:rounded-2xl flex items-center gap-2 sm:gap-3 text-xs font-bold transition-all text-slate-600 hover:bg-slate-50"
+          >
+            <span class="material-symbols-outlined text-lg shrink-0">manage_accounts</span>
+            <span class="truncate">Pengaturan</span>
+          </button>
+        </div>
+
+        <!-- Right Content Panels (8 cols) -->
+        <div class="lg:col-span-8 space-y-4">
+          
+          <!-- PANEL 1: PESANAN SAYA -->
+          <div id="panel-orders" class="space-y-4">
+            <div class="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-4">
+              <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <h3 class="font-extrabold text-base text-slate-900">Daftar Transaksi Pengadaan Lab</h3>
+                <span class="text-xs text-slate-500 font-semibold" id="orders-total-count">0 Pesanan Ditemukan</span>
+              </div>
+
+              <!-- Orders List Container -->
+              <div id="user-orders-list" class="space-y-4">
+                <!-- Rendered by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- PANEL 2: BUKU ALAMAT -->
+          <div id="panel-address" class="hidden bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <h3 class="font-extrabold text-base text-slate-900">Buku Alamat Laboratorium</h3>
+              <button onclick="alert('Fitur tambah alamat lab baru!')" class="px-3.5 py-1.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold">
+                + Tambah Alamat Lab
+              </button>
+            </div>
+
+            <div class="p-4 rounded-2xl border-2 border-teal-500 bg-teal-50/30 space-y-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="font-bold text-xs text-slate-900">Laboratorium Utama (Default)</span>
+                  <span class="px-2 py-0.5 rounded bg-teal-600 text-white font-bold text-[10px]">Alamat Utama</span>
+                </div>
+                <button class="text-teal-700 text-xs font-bold hover:underline">Ubah</button>
+              </div>
+              <div class="text-xs text-slate-700 leading-relaxed" id="prof-address-full">
+                Gedung FMIPA Terpadu Lt. 3, Jl. Kaliurang KM 4.5, Sekip Utara, Sinduadi, Mlati, Sleman, D.I. Yogyakarta 55284
+              </div>
+              <div class="text-xs text-slate-500 font-mono-code" id="prof-address-phone">Telp: 0812-8877-6655</div>
+            </div>
+          </div>
+
+          <!-- PANEL 3: ARSIP SERTIFIKAT & COA -->
+          <div id="panel-docs" class="hidden bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-4">
+            <h3 class="font-extrabold text-base text-slate-900 pb-3 border-b border-slate-100">Arsip Sertifikat CoA & Lembar MSDS Digital</h3>
+            
+            <div class="space-y-3">
+              <div class="p-4 rounded-2xl border border-slate-200 hover:border-teal-500 flex items-center justify-between transition-colors">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center font-bold">
+                    <span class="material-symbols-outlined text-xl">description</span>
+                  </div>
+                  <div>
+                    <div class="font-bold text-xs text-slate-900">CoA - Etanol 96% Pro Analisis (PA)</div>
+                    <div class="text-[11px] text-slate-500">Lot: 2026-ETH96-8821 • Merck KGaA Germany</div>
+                  </div>
+                </div>
+                <button onclick="alert('Mengunduh dokumen Certificate of Analysis PDF simulasi...')" class="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold flex items-center gap-1">
+                  <span class="material-symbols-outlined text-sm">download</span> Unduh PDF
+                </button>
+              </div>
+
+              <div class="p-4 rounded-2xl border border-slate-200 hover:border-teal-500 flex items-center justify-between transition-colors">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center font-bold">
+                    <span class="material-symbols-outlined text-xl">verified</span>
+                  </div>
+                  <div>
+                    <div class="font-bold text-xs text-slate-900">Sertifikat Tera Kalibrasi KAN - Labu Ukur 50 mL & Glassware Volumetrik</div>
+                    <div class="text-[11px] text-slate-500">Standar ISO/IEC 17025 • Berlaku hingga Oktober 2027</div>
+                  </div>
+                </div>
+                <button onclick="alert('Mengunduh sertifikat kalibrasi KAN PDF simulasi...')" class="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold flex items-center gap-1">
+                  <span class="material-symbols-outlined text-sm">download</span> Unduh PDF
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- PANEL 4: PENGATURAN -->
+          <div id="panel-settings" class="hidden bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-4">
+            <h3 class="font-extrabold text-base text-slate-900 pb-3 border-b border-slate-100">Pengaturan Akun & Keamanan</h3>
+            
+            <div class="space-y-3 text-xs">
+              <div>
+                <label class="font-bold text-slate-700 block mb-1">Ganti Kata Sandi Baru</label>
+                <input type="password" placeholder="Masukkan sandi baru" class="w-full p-2.5 rounded-xl border border-slate-200" />
+              </div>
+              <button onclick="showToast('Pengaturan profil berhasil diperbarui!', 'success')" class="px-5 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold">
+                Simpan Perubahan
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 text-xs border-t border-slate-800 mt-16 py-8">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center sm:flex sm:justify-between sm:items-center">
+      <div>&copy; 2026 LabMart Indonesia. Terdaftar di Kemenkes RI AKD. Seluruh hak cipta dilindungi.</div>
+      <div class="mt-4 sm:mt-0 flex justify-center gap-4">
+        <a href="index.html" class="hover:text-white">Beranda</a>
+        <a href="cart.html" class="hover:text-white">Keranjang</a>
+        <a href="order-status.html" class="hover:text-white">Faktur</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/users.js"></script>
+  <script src="js/store.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const user = getCurrentUser();
+      if (!user) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      // Fill user data
+      document.getElementById('prof-name').textContent = user.name;
+      document.getElementById('prof-institution').textContent = user.institution;
+      document.getElementById('prof-labname').textContent = user.labName || user.institution;
+      document.getElementById('prof-email').innerHTML = `<span class="material-symbols-outlined text-sm text-teal-400">mail</span> ${user.email}`;
+      document.getElementById('prof-phone').innerHTML = `<span class="material-symbols-outlined text-sm text-teal-400">call</span> ${user.phone}`;
+      document.getElementById('prof-labtype').innerHTML = `<span class="material-symbols-outlined text-sm text-teal-400">category</span> ${user.labType}`;
+      
+      const avatarEl = document.getElementById('prof-avatar');
+      if (user.avatar) {
+        avatarEl.src = user.avatar;
+        avatarEl.onerror = function() {
+          this.style.display = 'none';
+          this.parentElement.textContent = user.name.charAt(0);
+        };
+      } else {
+        avatarEl.parentElement.innerHTML = user.name.charAt(0);
+      }
+
+      document.getElementById('prof-address-full').textContent = (user.address ? user.address + ', ' : '') + user.city;
+      document.getElementById('prof-address-phone').textContent = `Telp: ${user.phone}`;
+
+      renderUserOrders();
+    });
+
+    function renderUserOrders() {
+      const listContainer = document.getElementById('user-orders-list');
+      const countEl = document.getElementById('orders-total-count');
+
+      const activeOrder = getActiveOrder();
+      const rawHistory = localStorage.getItem('labmart_orders_history_v1');
+      let orders = rawHistory ? JSON.parse(rawHistory) : [];
+
+      if (activeOrder && !orders.some(o => o.invoiceNumber === activeOrder.invoiceNumber)) {
+        orders.unshift(activeOrder);
+      }
+
+      if (orders.length === 0) {
+        listContainer.innerHTML = `
+          <div class="py-8 text-center text-slate-400 text-xs">
+            Belum ada riwayat pesanan laboratorium.
+          </div>
+        `;
+        countEl.textContent = '0 Pesanan';
+        return;
+      }
+
+      countEl.textContent = `${orders.length} Pesanan Tercatat`;
+
+      listContainer.innerHTML = orders.map(ord => {
+        const dateStr = new Date(ord.createdAt).toLocaleDateString('id-ID', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric'
+        });
+
+        return `
+          <div class="p-5 rounded-2xl border border-slate-200 hover:border-teal-500 transition-all space-y-3">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs pb-3 border-b border-slate-100">
+              <div class="flex items-center gap-2">
+                <span class="font-extrabold text-teal-800 font-mono-code">${ord.invoiceNumber}</span>
+                <span class="text-slate-400">•</span>
+                <span class="text-slate-500">${dateStr}</span>
+              </div>
+              <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-extrabold text-[11px] w-fit">
+                ${ord.paymentStatus}
+              </span>
+            </div>
+
+            <!-- Items -->
+            <div class="space-y-2">
+              ${ord.items.map(it => `
+                <div class="flex items-center justify-between text-xs">
+                  <div class="flex items-center gap-2">
+                    <span class="w-6 h-6 rounded bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-[10px]">${it.quantity}x</span>
+                    <span class="font-bold text-slate-800 truncate max-w-xs sm:max-w-md">${it.productName}</span>
+                  </div>
+                  <span class="font-mono-code text-slate-700">${formatRupiah(it.subtotal)}</span>
+                </div>
+              `).join('')}
+            </div>
+
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+              <div>
+                <span class="text-[11px] text-slate-400 block">Total Pembayaran:</span>
+                <span class="text-sm font-black text-teal-700 font-mono-code">${formatRupiah(ord.pricing ? ord.pricing.grandTotal : 0)}</span>
+              </div>
+
+              <a 
+                href="order-status.html"
+                class="px-4 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs flex items-center gap-1.5 transition-colors shadow-sm"
+              >
+                <span class="material-symbols-outlined text-sm">receipt</span>
+                Lihat Faktur & Resi
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function switchProfileTab(tabId) {
+      const panels = ['orders', 'address', 'docs', 'settings'];
+      panels.forEach(p => {
+        const el = document.getElementById(`panel-${p}`);
+        const btn = document.getElementById(`tab-btn-${p}`);
+        if (p === tabId) {
+          el.classList.remove('hidden');
+          btn.className = 'w-full p-3 rounded-2xl flex items-center gap-3 text-xs font-bold transition-all bg-teal-50 text-teal-800';
+        } else {
+          el.classList.add('hidden');
+          btn.className = 'w-full p-3 rounded-2xl flex items-center gap-3 text-xs font-bold transition-all text-slate-600 hover:bg-slate-50';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Faktur Pesanan Laboratorium - LabMart Indonesia</title>
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <!-- Tailwind Custom Config -->
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            teal: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              200: '#99f6e4',
+              300: '#5eead4',
+              400: '#2dd4bf',
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+              800: '#115e59',
+              900: '#134e4a',
+            },
+            accent: '#f59e0b',
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/custom.css" />
+  
+  <style>
+    /* Styling khusus cetak (Print Invoice A4) */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 10mm 12mm 10mm 12mm;
+      }
+      
+      html, body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: 11px !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      /* Sembunyikan semua elemen navigasi, status pelacakan, dan tombol saat mencetak */
+      header, 
+      footer, 
+      nav, 
+      aside, 
+      .no-print, 
+      #tracking-section, 
+      #order-success-banner, 
+      #view-controls-bar {
+        display: none !important;
+      }
+
+      main {
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .printable-invoice {
+        box-shadow: none !important;
+        border: 1px solid #94a3b8 !important;
+        border-radius: 8px !important;
+        padding: 18px 22px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        page-break-inside: avoid !important;
+        page-break-after: avoid !important;
+      }
+
+      .printable-invoice table {
+        font-size: 10.5px !important;
+      }
+
+      .price-cell {
+        white-space: nowrap !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
+
+  <!-- Header Atas (Hanya tampil di layar) -->
+  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm no-print">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <a href="index.html" class="flex items-center gap-2">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-teal-700 to-teal-500 text-white flex items-center justify-center shadow-sm">
+            <span class="material-symbols-outlined text-xl">science</span>
+          </div>
+          <span class="text-lg font-extrabold tracking-tight text-slate-900">
+            Lab<span class="text-teal-600">Mart</span><span class="text-xs text-amber-500 ml-0.5">.id</span>
+          </span>
+        </a>
+
+        <!-- Tombol Aksi Cepat -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <button 
+            onclick="window.print()" 
+            class="px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs flex items-center gap-1.5 sm:gap-2 shadow-md shadow-teal-600/20 active:scale-95 transition-all"
+          >
+            <span class="material-symbols-outlined text-base sm:text-lg">print</span>
+            <span class="hidden sm:inline">Cetak Invoice Resmi (PDF)</span>
+            <span class="sm:hidden">Cetak Invoice</span>
+          </button>
+          
+          <a 
+            href="index.html" 
+            class="px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center gap-1.5 transition-colors"
+          >
+            <span class="material-symbols-outlined text-base">shopping_bag</span>
+            <span class="hidden sm:inline">Belanja Lagi</span>
+            <span class="sm:hidden">Belanja</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex-1">
+    <div class="max-w-4xl mx-auto space-y-6">
+
+      <!-- View Switcher & Notification Bar (no-print) -->
+      <div id="view-controls-bar" class="flex flex-col sm:flex-row items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm no-print">
+        <div class="flex items-center gap-2 text-xs font-semibold text-slate-700">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>Pesanan Selesai • Pembayaran Lunas Terverifikasi</span>
+        </div>
+
+        <!-- Tombol Pengalih Tampilan (Invoice vs Pelacakan Kurir) -->
+        <div class="flex items-center bg-slate-100 p-1 rounded-xl gap-1 text-xs font-bold">
+          <button 
+            id="tab-btn-invoice" 
+            onclick="switchView('invoice')" 
+            class="px-3.5 py-1.5 rounded-lg bg-white text-teal-700 shadow-sm flex items-center gap-1.5 transition-all"
+          >
+            <span class="material-symbols-outlined text-base">receipt_long</span>
+            Faktur Invoice
+          </button>
+          <button 
+            id="tab-btn-tracking" 
+            onclick="switchView('tracking')" 
+            class="px-3.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 flex items-center gap-1.5 transition-all"
+          >
+            <span class="material-symbols-outlined text-base">local_shipping</span>
+            Lacak Status Kurir
+          </button>
+        </div>
+      </div>
+
+      <!-- SEKSI PELACAKAN KURIR (Default tersembunyi di cetak & bisa di-toggle) -->
+      <section id="tracking-section" class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6 no-print hidden">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-100">
+          <div>
+            <h3 class="text-base font-extrabold text-slate-900">Pelacakan Logistik & Kurir Laboratorium</h3>
+            <div class="text-xs text-slate-500 mt-0.5">
+              Ekspedisi: <strong id="tracking-courier-name" class="text-teal-700">SiCepat BEST</strong> • No. Resi: <strong id="tracking-resi-code" class="font-mono-code text-slate-800">SICEPAT-BEST-1759699860</strong>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+            <span id="tracking-status-badge" class="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">
+              Quality Control & Packing Lab
+            </span>
+          </div>
+        </div>
+
+        <!-- 4 Step Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div id="step-node-1" class="step-card p-4 rounded-2xl bg-teal-50 border border-teal-200">
+            <div class="w-8 h-8 rounded-xl bg-teal-600 text-white flex items-center justify-center font-bold text-sm mb-2">✓</div>
+            <div class="text-xs font-bold text-teal-900">1. Pembayaran Diverifikasi</div>
+            <div class="text-[11px] text-teal-700 mt-0.5" id="step-node-1-sub">Lunas via QRIS / Bank Transfer</div>
+          </div>
+
+          <div id="step-node-2" class="step-card p-4 rounded-2xl bg-teal-50 border border-teal-500 ring-2 ring-teal-500/30">
+            <div class="w-8 h-8 rounded-xl bg-teal-600 text-white flex items-center justify-center font-bold text-sm mb-2">
+              <span class="material-symbols-outlined text-base">science</span>
+            </div>
+            <div class="text-xs font-bold text-teal-900">2. QC & Dokumen CoA</div>
+            <div class="text-[11px] text-teal-700 mt-0.5">Pengecekan lot & lembar MSDS</div>
+          </div>
+
+          <div id="step-node-3" class="step-card p-4 rounded-2xl bg-slate-50 border border-slate-200 text-slate-400">
+            <div class="w-8 h-8 rounded-xl bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm mb-2">
+              <span class="material-symbols-outlined text-base">local_shipping</span>
+            </div>
+            <div class="text-xs font-bold text-slate-800">3. Dalam Perjalanan Kurir</div>
+            <div class="text-[11px] text-slate-500 mt-0.5">Diserahkan ke armada pengiriman</div>
+          </div>
+
+          <div id="step-node-4" class="step-card p-4 rounded-2xl bg-slate-50 border border-slate-200 text-slate-400">
+            <div class="w-8 h-8 rounded-xl bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm mb-2">
+              <span class="material-symbols-outlined text-base">domain_verification</span>
+            </div>
+            <div class="text-xs font-bold text-slate-800">4. Tiba di Laboratorium</div>
+            <div class="text-[11px] text-slate-500 mt-0.5">Diterima analis / penanggung jawab</div>
+          </div>
+        </div>
+
+        <!-- Log Riwayat -->
+        <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200 space-y-2 text-xs text-slate-600">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-800 flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-teal-600 text-base">schedule</span>
+              Riwayat Logistik Terkini:
+            </span>
+            <button onclick="advanceTrackingStage()" class="px-3 py-1 rounded-lg bg-teal-600 text-white font-bold text-[11px] hover:bg-teal-700 flex items-center gap-1">
+              <span class="material-symbols-outlined text-xs">sync</span>
+              Simulasi Status Bergerak
+            </button>
+          </div>
+          <ul id="tracking-logs" class="space-y-1.5 pl-4 border-l-2 border-teal-500">
+            <li><strong>Hari ini:</strong> Pembayaran terverifikasi lunas. Invoice resmi diterbitkan.</li>
+            <li><strong>Hari ini:</strong> Item disiapkan oleh staf teknis gudang logistik LabMart.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- DOKUMEN FAKTUR INVOICE RESMI (Tampil langsung & Sempurna Saat Dicetak) -->
+      <section id="invoice-section" class="printable-invoice bg-white rounded-3xl border border-slate-200 p-4 sm:p-9 shadow-lg space-y-5">
+        
+        <!-- Header Kop Surat Invoice -->
+        <div class="flex flex-col sm:flex-row justify-between items-start gap-4 pb-5 border-b-2 border-slate-200">
+          <!-- Identitas Perusahaan -->
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <div class="w-9 h-9 rounded-xl bg-teal-700 text-white flex items-center justify-center font-bold shadow-sm">
+                <span class="material-symbols-outlined text-xl">science</span>
+              </div>
+              <span class="text-2xl font-black tracking-tight text-slate-900">Lab<span class="text-teal-600">Mart</span><span class="text-xs text-amber-500 ml-0.5">.id</span></span>
+            </div>
+            <div class="text-xs font-bold text-slate-800">PT SARANA LABORATORIUM NUSANTARA</div>
+            <div class="text-[11px] text-slate-500 leading-tight">
+              NPWP: 01.382.910.2-021.000 • Izin Edar Kemenkes RI: FK.01.02/VI/892-e/2024<br />
+              Pusat Distribusi Alat Riset Terakreditasi & Reagen Kimia Pro Analisis (PA)
+            </div>
+          </div>
+
+          <!-- Metadata Invoice & Status Pembayaran -->
+          <div class="text-left sm:text-right space-y-1 shrink-0">
+            <div class="text-lg sm:text-xl font-black text-slate-900 tracking-wider">FAKTUR PESANAN LAB</div>
+            <div class="font-mono-code font-bold text-teal-700 text-sm" id="inv-number">INV/LAB/2026/677717</div>
+            <div class="text-xs text-slate-500 font-medium" id="inv-date">Tanggal: 16 Oktober 2026</div>
+            <div class="pt-1">
+              <span id="inv-payment-badge" class="inline-flex items-center gap-1 px-3 py-1 rounded-md bg-emerald-100 text-emerald-800 font-extrabold text-xs border border-emerald-300">
+                <span class="material-symbols-outlined text-sm">verified</span>
+                <span id="inv-payment-badge-text">LUNAS (QRIS INSTANT)</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Box 2 Kolom: Informasi Penerima & Informasi Pengiriman -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs bg-slate-50/80 p-4 rounded-xl border border-slate-200">
+          <!-- Kolom Kiri: Tujuan Pengiriman Lab -->
+          <div class="space-y-1">
+            <div class="font-extrabold text-slate-500 uppercase tracking-wider text-[10px] pb-1 border-b border-slate-200">
+              TUJUAN PENGIRIMAN LAB:
+            </div>
+            <div id="inv-recipient-name" class="font-extrabold text-slate-900 text-sm pt-0.5">Dr. Rian Pratama, S.Si., M.Biotech</div>
+            <div id="inv-recipient-lab" class="font-semibold text-teal-800">Laboratorium Riset Terpadu & Kimia Analitik - Gedung FMIPA Lt. 3</div>
+            <div id="inv-recipient-address" class="text-slate-600 leading-snug">
+              Jl. Kaliurang KM 4.5, Sekip Utara, Sinduadi, Kec. Mlati, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55284
+            </div>
+            <div id="inv-recipient-phone" class="text-slate-700 font-mono-code font-bold pt-0.5">Telp: 0812-8877-6655</div>
+          </div>
+
+          <!-- Kolom Kanan: Ekspedisi & Detail Bayar -->
+          <div class="space-y-1 sm:pl-3 sm:border-l border-slate-200">
+            <div class="font-extrabold text-slate-500 uppercase tracking-wider text-[10px] pb-1 border-b border-slate-200">
+              INFORMASI EKSPEDISI & PEMBAYARAN:
+            </div>
+            <div class="flex justify-between items-baseline pt-0.5">
+              <span class="text-slate-500">Ekspedisi:</span>
+              <span id="inv-courier-name" class="font-bold text-slate-800 text-right">SiCepat BEST (1 Hari Kerja)</span>
+            </div>
+            <div class="flex justify-between items-baseline">
+              <span class="text-slate-500">No. Resi:</span>
+              <span id="inv-tracking-code" class="font-mono-code font-bold text-teal-800 text-right">SICEPAT-BEST-1759699860</span>
+            </div>
+            <div class="flex justify-between items-baseline">
+              <span class="text-slate-500">Metode Bayar:</span>
+              <span id="inv-payment-method" class="font-semibold text-slate-800 text-right">QRIS Instant Standard</span>
+            </div>
+            <div class="flex justify-between items-baseline pt-0.5">
+              <span class="text-slate-500">Proteksi Lab:</span>
+              <span id="inv-protection-note" class="font-bold text-teal-700 text-right">Asuransi Pecah Belah & Peti Kayu</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabel Rincian Produk Laboratorium -->
+        <div class="overflow-x-auto rounded-xl border border-slate-200 -mx-1 sm:mx-0">
+          <table class="w-full text-left text-xs border-collapse min-w-[540px]">
+            <thead>
+              <tr class="bg-slate-100 text-slate-800 border-b border-slate-200 font-bold">
+                <th class="py-2.5 px-3 text-center w-10">No</th>
+                <th class="py-2.5 px-3">Deskripsi Alat / Bahan Kimia Lab</th>
+                <th class="py-2.5 px-3 w-36">Varian / Tipe</th>
+                <th class="py-2.5 px-3 text-center w-14">Jumlah</th>
+                <th class="py-2.5 px-3 text-right w-28 price-cell">Harga Satuan</th>
+                <th class="py-2.5 px-3 text-right w-32 price-cell">Total Subtotal</th>
+              </tr>
+            </thead>
+            <tbody id="inv-items-table" class="divide-y divide-slate-100 text-slate-700">
+              <!-- Rendered by JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Bagian Bawah: Catatan Syarat Lab & Ringkasan Keuangan Tertata Rapi -->
+        <div class="pt-3 border-t-2 border-slate-200 grid grid-cols-1 sm:grid-cols-12 gap-6 items-start">
+          
+          <!-- Catatan Resmi Lab (Kiri - 7 cols) -->
+          <div class="sm:col-span-7 space-y-2 text-xs text-slate-500">
+            <div class="font-bold text-slate-800 uppercase tracking-wider text-[11px] flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-teal-600 text-sm">verified_user</span>
+              Ketentuan Garansi & Regulasi Laboratorium:
+            </div>
+            <ul class="space-y-1 text-[11px] leading-relaxed text-slate-600 list-disc pl-4">
+              <li>Lembar resmi <strong>Certificate of Analysis (CoA)</strong> dan <strong>MSDS</strong> lot spesifik disertakan dalam amplop dokumen paket.</li>
+              <li>Garansi resmi kalibrasi instrumen analitik berlaku 1-2 tahun sejak tanggal faktur.</li>
+              <li>Klaim retur kerusakan pecah belah dilindungi asuransi lab (wajib melampirkan video unboxing maks. 3x24 jam).</li>
+            </ul>
+          </div>
+
+          <!-- Rincian Biaya Tertata Rapi (Kanan - 5 cols) -->
+          <div class="sm:col-span-5 bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-2 text-xs">
+            <div class="flex justify-between items-center text-slate-600">
+              <span>Total Harga Barang:</span>
+              <span id="inv-subtotal" class="font-bold text-slate-800 font-mono-code price-cell">Rp 120.000</span>
+            </div>
+            <div class="flex justify-between items-center text-slate-600">
+              <span>Biaya Ekspedisi Pengiriman:</span>
+              <span id="inv-shipping" class="font-bold text-teal-700 font-mono-code price-cell">Rp 12.000</span>
+            </div>
+            <div id="inv-protection-row" class="flex justify-between items-center text-slate-600">
+              <span>Proteksi & Packing Kayu:</span>
+              <span id="inv-protection" class="font-bold text-slate-800 font-mono-code price-cell">Rp 0</span>
+            </div>
+            <div id="inv-discount-row" class="flex justify-between items-center text-rose-600 font-bold">
+              <span>Potongan Voucher Promo:</span>
+              <span id="inv-discount" class="font-mono-code price-cell">-Rp 10.000</span>
+            </div>
+            <div class="flex justify-between items-center text-slate-500 text-[11px]">
+              <span>Biaya Layanan Sistem:</span>
+              <span class="font-mono-code price-cell">Rp 1.000</span>
+            </div>
+
+            <!-- Grand Total -->
+            <div class="pt-2 border-t border-slate-300 flex justify-between items-center">
+              <span class="font-black text-slate-900 text-xs uppercase">TOTAL DIBAYAR:</span>
+              <span id="inv-grand-total" class="font-black text-base text-teal-800 font-mono-code price-cell">
+                Rp 123.000
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Tanda Tangan & Cap Validasi Digital -->
+        <div class="pt-6 border-t border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 text-xs text-slate-600">
+          <div class="space-y-1">
+            <div class="text-[11px] text-slate-400">Dicetak resmi secara sistem komputerisasi:</div>
+            <div id="inv-timestamp" class="font-mono-code font-bold text-slate-700 text-[11px]">
+              16 Oktober 2026 • Diverifikasi Sistem e-Faktur
+            </div>
+            <div class="text-[10px] text-slate-400">Dokumen ini sah tanpa tanda tangan basah fisik (UU ITE).</div>
+          </div>
+
+          <!-- Stempel Resmi QA/QC Lab -->
+          <div class="w-full sm:w-auto flex sm:justify-end">
+            <div class="border-2 border-dashed border-teal-600/80 rounded-xl px-4 py-2 bg-teal-50/50 text-center w-full sm:w-52 space-y-0.5">
+              <div class="text-[10px] font-extrabold text-teal-800 tracking-wider">LABORATORY VERIFIED STAMP</div>
+              <div class="text-xs font-black text-teal-900">VERIFIED & QC PASSED</div>
+              <div class="text-[9px] text-teal-700">PT SARANA LABORATORIUM NUSANTARA</div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer (no-print) -->
+  <footer class="bg-slate-900 text-slate-400 text-xs border-t border-slate-800 mt-16 py-8 no-print">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center sm:flex sm:justify-between sm:items-center">
+      <div>&copy; 2026 LabMart Indonesia. Terdaftar di Kemenkes RI AKD. Seluruh hak cipta dilindungi.</div>
+      <div class="mt-4 sm:mt-0 flex justify-center gap-4">
+        <a href="index.html" class="hover:text-white">Beranda</a>
+        <a href="cart.html" class="hover:text-white">Keranjang</a>
+        <a href="checkout.html" class="hover:text-white">Pengadaan</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/users.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/chat-rfq.js"></script>
+  <script>
+    let currentTrackingStage = 2; // Default stage: QC
+
+    document.addEventListener('DOMContentLoaded', () => {
+      let order = getActiveOrder();
+
+      // Fallback data simulasi realistis jika belum ada order aktif
+      if (!order) {
+        order = {
+          invoiceNumber: 'INV/LAB/2026/677717',
+          trackingNumber: 'SICEPAT-BEST-1759699860',
+          createdAt: new Date().toISOString(),
+          status: 'Menunggu Pengiriman',
+          paymentStatus: 'Lunas (Verified by QRIS)',
+          paymentMethod: 'QRIS Instant Standard',
+          recipient: {
+            name: 'Dr. Rian Pratama, S.Si., M.Biotech',
+            phone: '0812-8877-6655',
+            lab: 'Laboratorium Riset Terpadu & Kimia Analitik - Gedung FMIPA Lt. 3',
+            address: 'Jl. Kaliurang KM 4.5, Sekip Utara, Sinduadi, Kec. Mlati, Kabupaten Sleman',
+            city: 'Daerah Istimewa Yogyakarta 55284'
+          },
+          courier: {
+            id: 'sicepat-best',
+            name: 'SiCepat BEST (Besok Sampai Tujuan)',
+            code: 'SICEPAT-BEST',
+            etd: '1 Hari Kerja (Next Day)',
+            isColdChain: false
+          },
+          protection: { insurance: true, woodCrate: true, coldPack: false },
+          items: [
+            {
+              productId: 'LAB-001',
+              productName: 'Aquades (Air Demineralisasi Pro Analisis) 5L',
+              variantName: 'Jerigen Segel 5 Liter',
+              quantity: 2,
+              unitPrice: 35000,
+              subtotal: 70000,
+              notes: 'Mohon kemas rapat anti-bocor'
+            },
+            {
+              productId: 'LAB-017',
+              productName: 'Gelas ukur kaca ukuran 100 mL',
+              variantName: 'Kapasitas 100 mL Standar',
+              quantity: 1,
+              unitPrice: 50000,
+              subtotal: 50000,
+              notes: 'Sertakan bubble wrap ekstra fragile'
+            }
+          ],
+          pricing: {
+            subtotal: 120000,
+            shippingCost: 12000,
+            protectionTotal: 0,
+            discountAmount: 10000,
+            platformFee: 1000,
+            grandTotal: 123000
+          }
+        };
+      }
+
+      renderOrderInvoice(order);
+    });
+
+    function renderOrderInvoice(order) {
+      document.getElementById('inv-number').textContent = order.invoiceNumber;
+      document.getElementById('tracking-resi-code').textContent = order.trackingNumber;
+      document.getElementById('inv-tracking-code').textContent = order.trackingNumber;
+
+      const dateStr = new Date(order.createdAt).toLocaleDateString('id-ID', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      });
+      document.getElementById('inv-date').textContent = `Tanggal: ${dateStr}`;
+      document.getElementById('inv-timestamp').textContent = `${dateStr} • Diverifikasi Sistem e-Faktur`;
+
+      // Ekspedisi
+      document.getElementById('tracking-courier-name').textContent = order.courier.name;
+      document.getElementById('inv-courier-name').textContent = `${order.courier.name} (${order.courier.etd || 'Reguler'})`;
+
+      // Penerima Lab
+      document.getElementById('inv-recipient-name').textContent = order.recipient.name;
+      document.getElementById('inv-recipient-lab').textContent = order.recipient.lab;
+      document.getElementById('inv-recipient-address').textContent = order.recipient.address + ', ' + (order.recipient.city || '');
+      document.getElementById('inv-recipient-phone').textContent = `Telp: ${order.recipient.phone}`;
+
+      // Pembayaran
+      const paymentMethodStr = order.paymentMethod || 'QRIS Instant Standard';
+      document.getElementById('inv-payment-method').textContent = paymentMethodStr;
+
+      // Update Badge Lunas Dinamis di Header Faktur Sesuai Metode Pembayaran Terpilih
+      const badgeText = formatPaymentBadgeText(paymentMethodStr);
+      const badgeTextEl = document.getElementById('inv-payment-badge-text');
+      const badgeContainerEl = document.getElementById('inv-payment-badge');
+      if (badgeTextEl) {
+        badgeTextEl.textContent = badgeText;
+      } else if (badgeContainerEl) {
+        badgeContainerEl.innerHTML = `
+          <span class="material-symbols-outlined text-sm">verified</span>
+          <span id="inv-payment-badge-text">${badgeText}</span>
+        `;
+      }
+
+      // Update Sub-text pada Tracking Step 1
+      const step1Sub = document.getElementById('step-node-1-sub');
+      if (step1Sub) {
+        step1Sub.textContent = `Lunas via ${paymentMethodStr}`;
+      }
+
+      // Proteksi
+      if (order.protection) {
+        const prots = [];
+        if (order.protection.insurance) prots.push('Asuransi Pecah Belah');
+        if (order.protection.woodCrate) prots.push('Peti Kayu');
+        if (order.protection.coldPack) prots.push('Ice Pack');
+        document.getElementById('inv-protection-note').textContent = prots.length > 0 ? prots.join(' & ') : 'Standar Bubble Wrap';
+      }
+
+      // Tabel Produk Lab
+      const itemsContainer = document.getElementById('inv-items-table');
+      itemsContainer.innerHTML = order.items.map((item, idx) => `
+        <tr class="hover:bg-slate-50/70 border-b border-slate-100 last:border-0">
+          <td class="py-2.5 px-3 text-center text-slate-500 font-medium">${idx + 1}</td>
+          <td class="py-2.5 px-3">
+            <div class="font-bold text-slate-900 leading-snug">${item.productName}</div>
+            ${item.notes ? `<div class="text-[10px] text-teal-700 italic mt-0.5">Catatan: "${item.notes}"</div>` : ''}
+          </td>
+          <td class="py-2.5 px-3 text-slate-600">${item.variantName}</td>
+          <td class="py-2.5 px-3 text-center font-bold text-slate-900">${item.quantity}</td>
+          <td class="py-2.5 px-3 text-right font-mono-code price-cell text-slate-700">${formatRupiah(item.unitPrice)}</td>
+          <td class="py-2.5 px-3 text-right font-mono-code font-bold price-cell text-slate-900">${formatRupiah(item.subtotal)}</td>
+        </tr>
+      `).join('');
+
+      // Ringkasan Harga
+      document.getElementById('inv-subtotal').textContent = formatRupiah(order.pricing.subtotal);
+      document.getElementById('inv-shipping').textContent = formatRupiah(order.pricing.shippingCost);
+
+      const protectionRow = document.getElementById('inv-protection-row');
+      if (order.pricing.protectionTotal > 0) {
+        protectionRow.classList.remove('hidden');
+        document.getElementById('inv-protection').textContent = formatRupiah(order.pricing.protectionTotal);
+      } else {
+        protectionRow.classList.add('hidden');
+      }
+
+      const discountRow = document.getElementById('inv-discount-row');
+      if (order.pricing.discountAmount > 0) {
+        discountRow.classList.remove('hidden');
+        document.getElementById('inv-discount').textContent = `-${formatRupiah(order.pricing.discountAmount)}`;
+      } else {
+        discountRow.classList.add('hidden');
+      }
+
+      document.getElementById('inv-grand-total').textContent = formatRupiah(order.pricing.grandTotal);
+    }
+
+    // Pengalih Tampilan (Invoice vs Pelacakan)
+    function switchView(view) {
+      const invoiceSection = document.getElementById('invoice-section');
+      const trackingSection = document.getElementById('tracking-section');
+      const btnInvoice = document.getElementById('tab-btn-invoice');
+      const btnTracking = document.getElementById('tab-btn-tracking');
+
+      if (view === 'invoice') {
+        invoiceSection.classList.remove('hidden');
+        trackingSection.classList.add('hidden');
+
+        btnInvoice.className = 'px-3.5 py-1.5 rounded-lg bg-white text-teal-700 shadow-sm flex items-center gap-1.5 transition-all';
+        btnTracking.className = 'px-3.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 flex items-center gap-1.5 transition-all';
+      } else {
+        invoiceSection.classList.add('hidden');
+        trackingSection.classList.remove('hidden');
+
+        btnTracking.className = 'px-3.5 py-1.5 rounded-lg bg-white text-teal-700 shadow-sm flex items-center gap-1.5 transition-all';
+        btnInvoice.className = 'px-3.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 flex items-center gap-1.5 transition-all';
+      }
+    }
+
+    // Simulasi Pergerakan Kurir
+    function advanceTrackingStage() {
+      currentTrackingStage = (currentTrackingStage % 4) + 1;
+      const logs = document.getElementById('tracking-logs');
+      const badge = document.getElementById('tracking-status-badge');
+
+      for (let i = 1; i <= 4; i++) {
+        const node = document.getElementById(`step-node-${i}`);
+        if (!node) continue;
+        if (i < currentTrackingStage) {
+          node.className = 'step-card p-4 rounded-2xl bg-teal-50 border border-teal-200 transition-all';
+          node.querySelector('div').className = 'w-8 h-8 rounded-xl bg-teal-600 text-white flex items-center justify-center font-bold text-sm mb-2';
+        } else if (i === currentTrackingStage) {
+          node.className = 'step-card p-4 rounded-2xl bg-teal-50 border border-teal-500 ring-2 ring-teal-500/30 transition-all';
+          node.querySelector('div').className = 'w-8 h-8 rounded-xl bg-teal-600 text-white flex items-center justify-center font-bold text-sm mb-2 animate-pulse';
+        } else {
+          node.className = 'step-card p-4 rounded-2xl bg-slate-50 border border-slate-200 text-slate-400 transition-all';
+          node.querySelector('div').className = 'w-8 h-8 rounded-xl bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm mb-2';
+        }
+      }
+
+      const time = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+
+      if (currentTrackingStage === 1) {
+        badge.textContent = 'Pembayaran Diverifikasi';
+        logs.innerHTML = `<li><strong>${time} WIB:</strong> Pembayaran terkonfirmasi lunas melalui sistem.</li>`;
+        showToast('Tahap 1: Pembayaran Diverifikasi Lunas', 'info');
+      } else if (currentTrackingStage === 2) {
+        badge.textContent = 'Quality Control & Packing Lab';
+        logs.innerHTML += `<li><strong>${time} WIB:</strong> Tim lab memverifikasi kelayakan fisik, tanggal kedaluwarsa, dan nomor lot sertifikat CoA.</li>`;
+        showToast('Tahap 2: Quality Control & Packing Lab', 'info');
+      } else if (currentTrackingStage === 3) {
+        badge.textContent = 'Dalam Perjalanan Menuju Lab Tujuan';
+        logs.innerHTML += `<li><strong>${time} WIB:</strong> Paket telah diserahkan kepada kurir ekspedisi logistik. Sedang dalam perjalanan via darat.</li>`;
+        showToast('Tahap 3: Paket Diserahkan ke Ekspedisi Kurir', 'success');
+      } else if (currentTrackingStage === 4) {
+        badge.textContent = 'Paket Tiba di Laboratorium (Selesai)';
+        logs.innerHTML += `<li><strong>${time} WIB:</strong> Paket telah diterima dan ditandatangani oleh penerima lab. Transaksi selesai.</li>`;
+        showToast('Tahap 4: Paket Telah Diterima di Lab Tujuan!', 'success');
+      }
+    }
+
+    // Helper untuk memformat Badge Status Lunas sesuai Kanal Pembayaran
+    function formatPaymentBadgeText(methodStr) {
+      if (!methodStr) return 'LUNAS (TERVERIFIKASI)';
+      const m = methodStr.toUpperCase();
+
+      if (m.includes('BCA')) {
+        return 'LUNAS (BCA VIRTUAL ACCOUNT)';
+      } else if (m.includes('MANDIRI')) {
+        return 'LUNAS (MANDIRI VIRTUAL ACCOUNT)';
+      } else if (m.includes('BRI') || m.includes('BRIVA')) {
+        return 'LUNAS (BRI VIRTUAL ACCOUNT)';
+      } else if (m.includes('BNI')) {
+        return 'LUNAS (BNI VIRTUAL ACCOUNT)';
+      } else if (m.includes('BSI')) {
+        return 'LUNAS (BSI VIRTUAL ACCOUNT)';
+      } else if (m.includes('VIRTUAL ACCOUNT') || m.includes('VA')) {
+        return 'LUNAS (VIRTUAL ACCOUNT)';
+      } else if (m.includes('QRIS')) {
+        return 'LUNAS (QRIS INSTANT)';
+      } else if (m.includes('INDOMARET')) {
+        return 'LUNAS (KASIR INDOMARET)';
+      } else if (m.includes('ALFAMART')) {
+        return 'LUNAS (KASIR ALFAMART)';
+      } else if (m.includes('GOPAY')) {
+        return 'LUNAS (E-WALLET GOPAY)';
+      } else if (m.includes('OVO')) {
+        return 'LUNAS (E-WALLET OVO)';
+      } else if (m.includes('DANA')) {
+        return 'LUNAS (E-WALLET DANA)';
+      } else if (m.includes('SHOPEEPAY')) {
+        return 'LUNAS (E-WALLET SHOPEEPAY)';
+      } else if (m.includes('E-WALLET') || m.includes('DOMPET DIGITAL')) {
+        return 'LUNAS (E-WALLET)';
+      } else if (m.includes('KARTU') || m.includes('CREDIT') || m.includes('DEBIT') || m.includes('VISA')) {
+        return 'LUNAS (KARTU KREDIT/DEBIT)';
+      } else if (m.includes('PURCHASE ORDER') || m.includes('PO') || m.includes('SPK')) {
+        return 'TERVERIFIKASI (PURCHASE ORDER)';
+      } else {
+        return `LUNAS (${methodStr.replace(/\\(.*?\\)/g, '').trim().toUpperCase()})`;
+      }
+    }
+  </script>
+
+</body>
+</html>

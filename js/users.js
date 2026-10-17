@@ -222,66 +222,66 @@ function updateGlobalUserNav() {
   if (user) {
     const isSeller = Boolean(user.isSeller);
     userContainer.innerHTML = `
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-1.5 sm:gap-2">
         <!-- Shortcut Seller Center -->
         <a 
           href="seller.html" 
-          class="flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl ${isSeller ? 'bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-black shadow-sm shadow-amber-500/20' : 'bg-amber-50 hover:bg-amber-100 text-amber-800 font-bold border border-amber-200'} text-xs transition-all"
+          class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl ${isSeller ? 'bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-black shadow-sm shadow-amber-500/20' : 'bg-amber-50 hover:bg-amber-100 text-amber-900 font-extrabold border border-amber-300'} text-xs sm:text-sm transition-all"
           title="Buka Pusat Mitra Seller LabMart"
         >
           <span class="material-symbols-outlined text-base">storefront</span>
-          <span class="hidden sm:inline">${isSeller ? 'Pusat Seller' : 'Mitra Toko'}</span>
+          <span class="hidden md:inline">${isSeller ? 'Pusat Seller' : 'Mitra Toko'}</span>
         </a>
 
         <!-- User Dropdown Menu -->
         <div class="relative group/user">
-          <button class="flex items-center gap-2 p-1 rounded-xl hover:bg-slate-100 transition-colors">
-            <div class="w-9 h-9 rounded-xl ${isSeller ? 'bg-amber-600 border-amber-400' : 'bg-teal-600 border-teal-500'} text-white flex items-center justify-center font-bold text-xs overflow-hidden border shadow-sm">
+          <button class="flex items-center gap-1.5 p-1 rounded-xl hover:bg-slate-100 transition-colors">
+            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl ${isSeller ? 'bg-amber-600 border-amber-400' : 'bg-teal-600 border-teal-500'} text-white flex items-center justify-center font-bold text-xs sm:text-sm overflow-hidden border shadow-sm">
               ${user.avatar ? `<img src="${user.avatar}" alt="${user.name}" onerror="this.style.display='none'; this.parentElement.textContent='${user.name.charAt(0)}';" class="w-full h-full object-cover" />` : user.name.charAt(0)}
             </div>
             <div class="hidden xl:flex flex-col text-left">
-              <span class="text-xs font-bold text-slate-800 truncate max-w-[130px]">${user.name.split(',')[0]}</span>
-              <span class="text-[10px] ${isSeller ? 'text-amber-700' : 'text-teal-700'} font-semibold flex items-center gap-0.5">
-                <span class="material-symbols-outlined text-[12px]">verified</span> ${isSeller ? 'Mitra Toko' : 'Terverifikasi'}
+              <span class="text-xs sm:text-sm font-extrabold text-slate-900 truncate max-w-[140px]">${user.name.split(',')[0]}</span>
+              <span class="text-xs ${isSeller ? 'text-amber-800' : 'text-teal-800'} font-bold flex items-center gap-0.5">
+                <span class="material-symbols-outlined text-sm">verified</span> ${isSeller ? 'Mitra Toko' : 'Terverifikasi'}
               </span>
             </div>
-            <span class="material-symbols-outlined text-slate-400 text-sm hidden xl:inline">arrow_drop_down</span>
+            <span class="material-symbols-outlined text-slate-500 text-base hidden xl:inline">arrow_drop_down</span>
           </button>
 
           <!-- Dropdown Menu -->
-          <div class="absolute right-0 top-full mt-2 w-64 bg-white rounded-2xl shadow-xl border border-slate-200 py-2 hidden group-hover/user:block z-50 transition-all">
-            <div class="px-4 py-2 border-b border-slate-100">
-              <div class="font-bold text-xs text-slate-900 truncate">${user.name}</div>
-              <div class="text-[11px] text-slate-500 truncate">${user.email}</div>
-              <div class="text-[10px] ${isSeller ? 'text-amber-700 font-bold' : 'text-teal-700 font-semibold'} mt-0.5">
+          <div class="absolute right-0 top-full mt-1.5 w-64 sm:w-72 max-w-[90vw] bg-white rounded-2xl shadow-xl border border-slate-200 py-2 hidden group-hover/user:block z-50 transition-all">
+            <div class="px-4 py-2.5 border-b border-slate-100">
+              <div class="font-black text-xs sm:text-sm text-slate-900 truncate">${user.name}</div>
+              <div class="text-xs text-slate-500 truncate mt-0.5">${user.email}</div>
+              <div class="text-xs ${isSeller ? 'text-amber-800 font-bold' : 'text-teal-800 font-bold'} mt-1 truncate">
                 ${isSeller ? '🏢 ' + (user.storeName || user.institution) : user.institution}
               </div>
             </div>
 
             <!-- Pusat Mitra Seller Button in Dropdown -->
-            <a href="seller.html" class="flex items-center gap-2.5 px-4 py-2.5 text-xs text-amber-900 bg-amber-50 hover:bg-amber-100 font-bold border-b border-amber-100 transition-colors">
-              <span class="material-symbols-outlined text-base text-amber-600">storefront</span>
+            <a href="seller.html" class="flex items-center gap-2.5 px-4 py-2.5 text-xs sm:text-sm text-amber-950 bg-amber-50 hover:bg-amber-100 font-black border-b border-amber-200 transition-colors">
+              <span class="material-symbols-outlined text-lg text-amber-600">storefront</span>
               <div class="flex flex-col">
                 <span>Pusat Mitra Seller</span>
-                <span class="text-[10px] text-amber-700 font-normal">Kelola produk & pesanan lab</span>
+                <span class="text-xs text-amber-800 font-medium">Kelola produk & pesanan lab</span>
               </div>
             </a>
 
-            <a href="profile.html" class="flex items-center gap-2.5 px-4 py-2 text-xs text-slate-700 hover:bg-slate-50 font-medium">
-              <span class="material-symbols-outlined text-base text-slate-400">person</span>
+            <a href="profile.html" class="flex items-center gap-2.5 px-4 py-2.5 text-xs sm:text-sm text-slate-800 hover:bg-slate-50 font-bold">
+              <span class="material-symbols-outlined text-lg text-slate-500">person</span>
               <span>Profil & Pengaturan Akun</span>
             </a>
-            <a href="order-status.html" class="flex items-center gap-2.5 px-4 py-2 text-xs text-slate-700 hover:bg-slate-50 font-medium">
-              <span class="material-symbols-outlined text-base text-slate-400">receipt_long</span>
+            <a href="order-status.html" class="flex items-center gap-2.5 px-4 py-2.5 text-xs sm:text-sm text-slate-800 hover:bg-slate-50 font-bold">
+              <span class="material-symbols-outlined text-lg text-slate-500">receipt_long</span>
               <span>Faktur & Pelacakan</span>
             </a>
-            <a href="cart.html" class="flex items-center gap-2.5 px-4 py-2 text-xs text-slate-700 hover:bg-slate-50 font-medium">
-              <span class="material-symbols-outlined text-base text-slate-400">shopping_cart</span>
+            <a href="cart.html" class="flex items-center gap-2.5 px-4 py-2.5 text-xs sm:text-sm text-slate-800 hover:bg-slate-50 font-bold">
+              <span class="material-symbols-outlined text-lg text-slate-500">shopping_cart</span>
               <span>Keranjang Belanja</span>
             </a>
             <div class="border-t border-slate-100 my-1"></div>
-            <button onclick="logoutUser()" class="w-full flex items-center gap-2.5 px-4 py-2 text-xs text-rose-600 hover:bg-rose-50 font-bold text-left">
-              <span class="material-symbols-outlined text-base">logout</span>
+            <button onclick="logoutUser()" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-xs sm:text-sm text-rose-600 hover:bg-rose-50 font-black text-left">
+              <span class="material-symbols-outlined text-lg">logout</span>
               <span>Keluar Akun</span>
             </button>
           </div>
@@ -290,15 +290,15 @@ function updateGlobalUserNav() {
     `;
   } else {
     userContainer.innerHTML = `
-      <div class="flex items-center gap-2">
-        <a href="seller.html" class="hidden sm:flex items-center gap-1 text-xs font-bold text-amber-600 hover:text-amber-700 px-2.5 py-1.5 rounded-xl hover:bg-amber-50 border border-transparent hover:border-amber-200 transition-all">
+      <div class="flex items-center gap-1.5 sm:gap-2">
+        <a href="seller.html" class="hidden md:flex items-center gap-1 text-xs sm:text-sm font-extrabold text-amber-600 hover:text-amber-700 px-3 py-1.5 rounded-xl hover:bg-amber-50 border border-transparent hover:border-amber-200 transition-all">
           <span class="material-symbols-outlined text-base">storefront</span>
           <span>Mitra Seller</span>
         </a>
-        <a href="login.html" class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-700 hover:text-teal-700 hover:bg-slate-100 transition-colors">
+        <a href="login.html" class="px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-extrabold text-teal-800 bg-teal-50 hover:bg-teal-100 border border-teal-200 transition-colors">
           Masuk
         </a>
-        <a href="register.html" class="px-3.5 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-xs font-extrabold shadow-sm transition-all">
+        <a href="register.html" class="hide-on-mobile hidden sm:inline-flex px-4 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-xs sm:text-sm font-black shadow-sm transition-all">
           Daftar Lab
         </a>
       </div>

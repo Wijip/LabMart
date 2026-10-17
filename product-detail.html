@@ -45,30 +45,30 @@
   </script>
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="css/custom.css" />
+  <link rel="stylesheet" href="css/custom.css?v=2" />
 </head>
 
 <body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
 
   <!-- Header -->
   <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-20 gap-4">
+    <div class="container mx-auto px-3 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20 gap-2 sm:gap-4">
         
         <!-- Back to Home & Logo -->
-        <div class="flex items-center gap-3">
-          <a href="index.html" class="p-2 rounded-xl text-slate-600 hover:text-teal-700 hover:bg-slate-100 transition-colors flex items-center gap-1.5 text-xs font-bold" title="Kembali ke Beranda">
-            <span class="material-symbols-outlined text-xl">arrow_back</span>
+        <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+          <a href="index.html" class="p-1.5 sm:p-2 rounded-xl text-slate-600 hover:text-teal-700 hover:bg-slate-100 transition-colors flex items-center gap-1 text-xs font-bold" title="Kembali ke Beranda">
+            <span class="material-symbols-outlined text-lg sm:text-xl">arrow_back</span>
             <span class="hidden sm:inline">Katalog</span>
           </a>
 
-          <div class="h-6 w-px bg-slate-200"></div>
+          <div class="h-5 sm:h-6 w-px bg-slate-200"></div>
 
-          <a href="index.html" class="flex items-center gap-2">
-            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-teal-700 to-teal-500 text-white flex items-center justify-center shadow-sm">
-              <span class="material-symbols-outlined text-xl">science</span>
+          <a href="index.html" class="flex items-center gap-1.5 sm:gap-2">
+            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-teal-700 to-teal-500 text-white flex items-center justify-center shadow-sm">
+              <span class="material-symbols-outlined text-lg sm:text-xl">science</span>
             </div>
-            <span class="text-lg font-extrabold tracking-tight text-slate-900">
+            <span class="text-base sm:text-lg font-extrabold tracking-tight text-slate-900">
               Lab<span class="text-teal-600">Mart</span><span class="text-xs text-amber-500 ml-0.5">.id</span>
             </span>
           </a>
@@ -88,18 +88,18 @@
         </div>
 
         <!-- Right actions -->
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-1.5 sm:gap-3 shrink-0">
           <!-- Cart Link -->
-          <a href="cart.html" class="flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-100 hover:bg-teal-50 hover:text-teal-700 text-slate-800 transition-all relative border border-slate-200">
+          <a href="cart.html" class="flex items-center gap-1 sm:gap-2 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl bg-slate-100 hover:bg-teal-50 hover:text-teal-700 text-slate-800 transition-all relative border border-slate-200">
             <div class="relative">
               <span class="material-symbols-outlined text-xl text-slate-700">shopping_cart</span>
-              <span class="cart-badge absolute -top-2 -right-2 bg-rose-600 text-white text-[10px] font-extrabold rounded-full px-1.5 min-w-[18px] h-4 leading-4 text-center shadow-sm hidden">0</span>
+              <span class="cart-badge absolute -top-2 -right-2 bg-rose-600 text-white text-[9px] sm:text-[10px] font-extrabold rounded-full px-1 min-w-[16px] sm:min-w-[18px] h-4 leading-4 text-center shadow-sm hidden">0</span>
             </div>
             <span class="text-xs font-bold hidden sm:inline">Keranjang</span>
           </a>
 
           <!-- User Account / Mitra Lab (Rendered dynamically by js/users.js) -->
-          <div id="header-user-nav" class="flex items-center gap-2"></div>
+          <div id="header-user-nav" class="flex items-center gap-1.5 sm:gap-2"></div>
         </div>
 
       </div>
@@ -109,12 +109,12 @@
   <!-- Breadcrumbs -->
   <nav aria-label="Breadcrumb" class="bg-white border-b border-slate-200 py-3">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <ol class="flex items-center gap-2 text-xs text-slate-500 overflow-x-auto whitespace-nowrap">
+      <ol class="flex items-center gap-2 text-xs sm:text-sm font-medium text-slate-600 overflow-x-auto whitespace-nowrap">
         <li><a href="index.html" class="hover:text-teal-700">Beranda</a></li>
-        <li class="material-symbols-outlined text-xs text-slate-400">chevron_right</li>
+        <li class="material-symbols-outlined text-sm text-slate-400">chevron_right</li>
         <li id="breadcrumb-category" class="hover:text-teal-700">Kategori Laboratorium</li>
-        <li class="material-symbols-outlined text-xs text-slate-400">chevron_right</li>
-        <li id="breadcrumb-title" class="font-bold text-slate-800 truncate max-w-xs sm:max-w-md">Nama Produk</li>
+        <li class="material-symbols-outlined text-sm text-slate-400">chevron_right</li>
+        <li id="breadcrumb-title" class="font-bold text-slate-900 truncate max-w-xs sm:max-w-md">Nama Produk</li>
       </ol>
     </div>
   </nav>
@@ -133,8 +133,8 @@
             alt="Foto Produk Lab" 
             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
-          <div class="absolute bottom-3 right-3 bg-slate-900/70 text-white text-[11px] px-2.5 py-1 rounded-lg backdrop-blur-sm flex items-center gap-1 font-semibold">
-            <span class="material-symbols-outlined text-xs">zoom_in</span> Foto Asli Distributor
+          <div class="absolute bottom-3 right-3 bg-slate-900/80 text-white text-xs px-3 py-1 rounded-lg backdrop-blur-sm flex items-center gap-1.5 font-bold">
+            <span class="material-symbols-outlined text-sm">zoom_in</span> Foto Asli Distributor
           </div>
         </div>
 
@@ -144,13 +144,13 @@
         </div>
 
         <!-- Jaminan Keaslian & Sertifikat -->
-        <div class="p-4 rounded-2xl bg-teal-50/60 border border-teal-200/80 flex items-center gap-3">
+        <div class="p-4 rounded-2xl bg-teal-50/70 border border-teal-200 flex items-center gap-3">
           <div class="w-10 h-10 rounded-xl bg-teal-600 text-white flex items-center justify-center shrink-0">
             <span class="material-symbols-outlined text-xl">verified</span>
           </div>
-          <div class="text-xs">
-            <div class="font-bold text-teal-900">100% Produk Lab Terakreditasi</div>
-            <div class="text-teal-700 text-[11px] mt-0.5">Disertai lembar sertifikat CoA dan garansi resmi kalibrasi pabrikan.</div>
+          <div>
+            <div class="font-extrabold text-teal-900 text-xs sm:text-sm">100% Produk Lab Terakreditasi</div>
+            <div class="text-teal-800 text-xs mt-0.5 font-medium">Disertai lembar sertifikat CoA dan garansi resmi kalibrasi pabrikan.</div>
           </div>
         </div>
       </div>
@@ -164,41 +164,41 @@
         </div>
 
         <!-- Title -->
-        <h1 id="product-title" class="text-xl sm:text-2xl font-extrabold text-slate-900 leading-snug">
+        <h1 id="product-title" class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-snug">
           Nama Produk Laboratorium
         </h1>
 
         <!-- Brand & Store Info -->
-        <div class="flex items-center gap-2 text-xs text-slate-600">
-          <span>Brand: <strong id="product-brand" class="text-teal-700">Brand</strong></span>
+        <div class="flex items-center gap-2 text-xs sm:text-sm text-slate-700">
+          <span>Brand: <strong id="product-brand" class="text-teal-700 font-extrabold">Brand</strong></span>
           <span class="text-slate-300">•</span>
-          <span>Distributor: <span id="store-name" class="font-semibold text-slate-800">Store</span> (<span id="store-city">Kota</span>)</span>
+          <span>Distributor: <span id="store-name" class="font-bold text-slate-800">Store</span> (<span id="store-city" class="font-medium text-slate-600">Kota</span>)</span>
         </div>
 
         <!-- Ratings & Sold -->
-        <div class="flex items-center gap-3 text-xs py-2 border-y border-slate-200/80">
-          <div class="flex items-center text-amber-500 font-bold gap-1">
+        <div class="flex items-center gap-3 text-xs sm:text-sm py-2 border-y border-slate-200">
+          <div class="flex items-center text-amber-500 font-extrabold gap-1">
             <span class="material-symbols-outlined text-base fill-1">star</span>
             <span id="product-rating">4.9</span>
           </div>
           <span class="text-slate-300">|</span>
-          <a href="#reviews-tab" class="text-slate-600 hover:text-teal-700 font-medium" id="product-reviews">0 Ulasan</a>
+          <a href="#reviews-tab" class="text-slate-700 hover:text-teal-700 font-semibold" id="product-reviews">0 Ulasan</a>
           <span class="text-slate-300">|</span>
-          <span id="product-sold" class="text-slate-600 font-semibold">0 Terjual</span>
+          <span id="product-sold" class="text-slate-700 font-extrabold">0 Terjual</span>
         </div>
 
         <!-- Price Display -->
-        <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-1">
-          <div class="text-xs font-semibold text-slate-500">Harga Satuan:</div>
+        <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-1">
+          <div class="text-xs sm:text-sm font-bold text-slate-500 uppercase tracking-wide">Harga Satuan:</div>
           <div class="flex items-baseline gap-3">
-            <span id="product-price-display" class="text-2xl sm:text-3xl font-extrabold text-teal-700">Rp 0</span>
+            <span id="product-price-display" class="text-3xl sm:text-4xl font-black text-teal-700 font-mono-code">Rp 0</span>
           </div>
-          <div class="text-[11px] text-slate-400">Harga belum termasuk PPN 11% (tersedia faktur pajak instansi)</div>
+          <div class="text-xs text-slate-500 font-medium">Harga belum termasuk PPN 11% (tersedia faktur pajak instansi resmi)</div>
         </div>
 
         <!-- Variants Selector -->
         <div class="space-y-2">
-          <label class="text-xs font-bold text-slate-800 uppercase tracking-wider block">Pilih Ukuran / Varian Produk:</label>
+          <label class="text-xs sm:text-sm font-extrabold text-slate-900 uppercase tracking-wide block">Pilih Ukuran / Varian Produk:</label>
           <div id="variants-container" class="flex flex-wrap gap-2">
             <!-- Rendered by js/detail.js -->
           </div>
@@ -206,22 +206,22 @@
 
         <!-- Quick Specs Summary -->
         <div class="space-y-2 pt-2">
-          <h2 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Ringkasan Spesifikasi:</h2>
-          <p id="product-desc-short" class="text-xs text-slate-600 leading-relaxed bg-slate-100/70 p-3 rounded-xl border border-slate-200">
+          <h2 class="text-xs sm:text-sm font-extrabold text-slate-900 uppercase tracking-wide">Ringkasan Spesifikasi:</h2>
+          <p id="product-desc-short" class="text-xs sm:text-sm text-slate-700 leading-relaxed bg-slate-100/80 p-3.5 rounded-xl border border-slate-200 font-medium">
             Deskripsi singkat...
           </p>
         </div>
 
         <!-- Pengiriman Ekspedisi Singkat -->
-        <div class="p-3.5 rounded-2xl border border-slate-200 bg-white space-y-2 text-xs">
+        <div class="p-4 rounded-2xl border border-slate-200 bg-white space-y-2 text-xs sm:text-sm">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-slate-800 flex items-center gap-1.5">
-              <span class="material-symbols-outlined text-base text-teal-600">local_shipping</span>
+            <span class="font-extrabold text-slate-900 flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-lg text-teal-600">local_shipping</span>
               Opsi Ekspedisi Pengiriman:
             </span>
-            <a href="checkout.html" class="text-teal-700 font-bold hover:underline">Cek Ongkir</a>
+            <a href="checkout.html" class="text-teal-700 font-extrabold hover:underline">Cek Ongkir</a>
           </div>
-          <p class="text-slate-500 text-[11px]">
+          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
             Mendukung kurir standar (JNE, SiCepat), JTR Cargo alat berat, serta BioLogistics Cold-Chain berpendingin es kering untuk reagen.
           </p>
         </div>
@@ -231,27 +231,27 @@
       <!-- Right Column: Sticky Purchase Action Card (3 cols on lg) -->
       <div class="lg:col-span-3 lg:sticky lg:top-28">
         <div class="bg-white rounded-3xl border border-slate-200 p-5 shadow-lg shadow-slate-200/50 space-y-5">
-          <h3 class="font-bold text-slate-900 text-sm pb-2 border-b border-slate-100 flex items-center gap-2">
-            <span class="material-symbols-outlined text-teal-600 text-lg">add_shopping_cart</span>
+          <h3 class="font-extrabold text-slate-900 text-base pb-2 border-b border-slate-100 flex items-center gap-2">
+            <span class="material-symbols-outlined text-teal-600 text-xl">add_shopping_cart</span>
             Atur Jumlah & Catatan
           </h3>
 
           <!-- Varian Terpilih -->
-          <div class="text-xs">
-            <span class="text-slate-400 block">Varian yang dipilih:</span>
-            <span id="side-selected-variant" class="font-bold text-slate-800 mt-0.5 block">Varian Standar</span>
+          <div class="text-xs sm:text-sm">
+            <span class="text-slate-500 font-medium block">Varian yang dipilih:</span>
+            <span id="side-selected-variant" class="font-extrabold text-slate-900 mt-0.5 block text-sm sm:text-base">Varian Standar</span>
           </div>
 
           <!-- Quantity Stepper -->
           <div class="space-y-2">
             <div class="flex items-center justify-between">
-              <span class="text-xs font-semibold text-slate-700">Jumlah Pesanan:</span>
-              <span id="side-stock-info" class="text-[11px] text-teal-700 font-semibold">Sisa Stok: ...</span>
+              <span class="text-xs sm:text-sm font-bold text-slate-700">Jumlah Pesanan:</span>
+              <span id="side-stock-info" class="text-xs font-bold text-teal-700">Sisa Stok: ...</span>
             </div>
             <div class="flex items-center border border-slate-300 rounded-xl overflow-hidden bg-white shadow-sm">
               <button 
                 onclick="adjustDetailQty(-1)"
-                class="w-10 h-10 flex items-center justify-center text-slate-600 hover:bg-slate-100 font-bold transition-colors"
+                class="w-10 h-10 flex items-center justify-center text-slate-700 hover:bg-slate-100 font-bold transition-colors text-base"
               >
                 -
               </button>
@@ -260,11 +260,11 @@
                 type="number" 
                 value="1" 
                 readonly
-                class="w-full text-center text-sm font-extrabold text-slate-800 border-none py-1 focus:ring-0"
+                class="w-full text-center text-base font-extrabold text-slate-900 border-none py-1 focus:ring-0"
               />
               <button 
                 onclick="adjustDetailQty(1)"
-                class="w-10 h-10 flex items-center justify-center text-slate-600 hover:bg-slate-100 font-bold transition-colors"
+                class="w-10 h-10 flex items-center justify-center text-slate-700 hover:bg-slate-100 font-bold transition-colors text-base"
               >
                 +
               </button>
@@ -273,36 +273,36 @@
 
           <!-- Catatan Pembelian Tambahan -->
           <div class="space-y-1">
-            <label class="text-[11px] font-semibold text-slate-600 block">Catatan untuk Penjual (Opsional):</label>
+            <label class="text-xs sm:text-sm font-bold text-slate-700 block">Catatan untuk Penjual (Opsional):</label>
             <input 
               id="side-order-notes"
               type="text" 
               placeholder="Contoh: Minta lampirkan CoA asli..."
-              class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 placeholder:text-slate-400"
+              class="w-full text-xs sm:text-sm p-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 placeholder:text-slate-400 font-medium"
             />
           </div>
 
           <!-- Subtotal Live Display -->
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-            <span class="text-xs text-slate-500 font-medium">Subtotal Barang:</span>
-            <span id="side-subtotal-display" class="text-lg font-extrabold text-teal-700">Rp 0</span>
+            <span class="text-xs sm:text-sm text-slate-600 font-medium">Subtotal Barang:</span>
+            <span id="side-subtotal-display" class="text-xl sm:text-2xl font-black text-teal-700 font-mono-code">Rp 0</span>
           </div>
 
           <!-- Action Buttons -->
           <div class="space-y-2.5 pt-1">
             <button 
               onclick="handleDetailAddToCart()"
-              class="w-full py-3 px-4 rounded-2xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-teal-600/25 active:scale-[0.98] transition-all"
+              class="w-full py-3 sm:py-3.5 px-4 rounded-2xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg shadow-teal-600/25 active:scale-[0.98] transition-all"
             >
-              <span class="material-symbols-outlined text-lg">shopping_cart</span>
+              <span class="material-symbols-outlined text-lg sm:text-xl">shopping_cart</span>
               + Keranjang Belanja
             </button>
             
             <button 
               onclick="handleDetailBuyNow()"
-              class="w-full py-3 px-4 rounded-2xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md active:scale-[0.98] transition-all"
+              class="w-full py-3 sm:py-3.5 px-4 rounded-2xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-sm sm:text-base flex items-center justify-center gap-2 shadow-md active:scale-[0.98] transition-all"
             >
-              <span class="material-symbols-outlined text-lg">bolt</span>
+              <span class="material-symbols-outlined text-lg sm:text-xl">bolt</span>
               Beli Langsung Sekarang
             </button>
 
@@ -310,21 +310,21 @@
             <button 
               type="button"
               onclick="openRfqModal(currentProduct.name, currentProduct.price)"
-              class="w-full py-2.5 px-4 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors border border-slate-300"
+              class="w-full py-2.5 sm:py-3 px-4 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-colors border border-slate-300"
             >
-              <span class="material-symbols-outlined text-base text-teal-700">description</span>
+              <span class="material-symbols-outlined text-base sm:text-lg text-teal-700">description</span>
               Minta Surat Penawaran Resmi (RFQ PDF)
             </button>
           </div>
 
           <!-- Jaminan Tambahan -->
-          <div class="pt-3 border-t border-slate-100 space-y-1.5 text-[11px] text-slate-500">
-            <div class="flex items-center gap-2 text-slate-600">
-              <span class="material-symbols-outlined text-teal-600 text-sm">shield</span>
+          <div class="pt-3 border-t border-slate-100 space-y-1.5 text-xs text-slate-600">
+            <div class="flex items-center gap-2 text-slate-700 font-medium">
+              <span class="material-symbols-outlined text-teal-600 text-base">shield</span>
               <span>Proteksi Asuransi Alat Lab & B3</span>
             </div>
-            <div class="flex items-center gap-2 text-slate-600">
-              <span class="material-symbols-outlined text-teal-600 text-sm">package_2</span>
+            <div class="flex items-center gap-2 text-slate-700 font-medium">
+              <span class="material-symbols-outlined text-teal-600 text-base">package_2</span>
               <span>Kemasan Packing Kayu / Bubble 4 Lapis</span>
             </div>
           </div>
@@ -548,33 +548,33 @@
   <div class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-3 py-2.5 flex items-center gap-2 lg:hidden shadow-2xl shadow-slate-900/30">
     <button 
       onclick="toggleLabChat()" 
-      class="p-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 flex flex-col items-center justify-center text-[10px] shrink-0"
+      class="p-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-800 flex flex-col items-center justify-center shrink-0 min-w-[50px]"
       title="Chat Ahli Lab"
     >
-      <span class="material-symbols-outlined text-lg text-teal-700">chat</span>
-      <span class="font-bold text-[9px]">Chat</span>
+      <span class="material-symbols-outlined text-xl text-teal-700">chat</span>
+      <span class="font-extrabold text-xs">Chat</span>
     </button>
     <button 
       onclick="if(currentProduct) openRfqModal(currentProduct.name, currentProduct.price)" 
-      class="p-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 flex flex-col items-center justify-center text-[10px] shrink-0"
+      class="p-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-800 flex flex-col items-center justify-center shrink-0 min-w-[50px]"
       title="Minta Surat Penawaran Resmi"
     >
-      <span class="material-symbols-outlined text-lg text-teal-700">description</span>
-      <span class="font-bold text-[9px]">RFQ</span>
+      <span class="material-symbols-outlined text-xl text-teal-700">description</span>
+      <span class="font-extrabold text-xs">RFQ</span>
     </button>
     <button 
       onclick="handleDetailAddToCart()" 
-      class="flex-1 py-2.5 px-2 rounded-xl border-2 border-teal-600 bg-teal-50 hover:bg-teal-100 text-teal-800 font-extrabold text-xs flex items-center justify-center gap-1 active:scale-95 transition-all"
+      class="flex-1 py-2.5 px-2.5 rounded-xl border-2 border-teal-600 bg-teal-50 hover:bg-teal-100 text-teal-900 font-extrabold text-xs sm:text-sm flex items-center justify-center gap-1 active:scale-95 transition-all truncate"
     >
-      <span class="material-symbols-outlined text-base">add_shopping_cart</span>
-      <span>+ Keranjang</span>
+      <span class="material-symbols-outlined text-base sm:text-lg shrink-0">add_shopping_cart</span>
+      <span class="truncate">+ Keranjang</span>
     </button>
     <button 
       onclick="handleDetailBuyNow()" 
-      class="flex-1 py-2.5 px-3 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-xs flex items-center justify-center gap-1 shadow-md shadow-teal-600/30 active:scale-95 transition-all"
+      class="flex-1 py-2.5 px-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-xs sm:text-sm flex items-center justify-center gap-1 shadow-md shadow-teal-600/30 active:scale-95 transition-all truncate"
     >
-      <span class="material-symbols-outlined text-base">bolt</span>
-      <span>Beli Langsung</span>
+      <span class="material-symbols-outlined text-base sm:text-lg shrink-0">bolt</span>
+      <span class="truncate">Beli Langsung</span>
     </button>
   </div>
 

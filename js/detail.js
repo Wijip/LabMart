@@ -77,22 +77,22 @@ function renderProductDetails() {
   if (badgesContainer) {
     badgesContainer.innerHTML = `
       ${p.badge ? `
-        <span class="inline-flex items-center gap-1.5 bg-teal-50 border border-teal-200 text-teal-800 text-xs font-bold px-3 py-1 rounded-full">
-          <span class="material-symbols-outlined text-sm">verified</span>
+        <span class="inline-flex items-center gap-1.5 bg-teal-50 border border-teal-200 text-teal-800 text-xs sm:text-sm font-bold px-3 py-1 rounded-full">
+          <span class="material-symbols-outlined text-sm sm:text-base">verified</span>
           ${p.badge}
         </span>
       ` : ''}
-      <span class="inline-flex items-center gap-1 bg-slate-100 border border-slate-200 text-slate-700 text-xs font-semibold px-2.5 py-1 rounded-full">
+      <span class="inline-flex items-center gap-1 bg-slate-100 border border-slate-200 text-slate-800 text-xs sm:text-sm font-bold px-3 py-1 rounded-full">
         Grade: ${p.grade}
       </span>
       ${p.casNumber !== '-' ? `
-        <span class="inline-flex items-center gap-1 bg-amber-50 border border-amber-200 text-amber-800 text-xs font-mono-code font-semibold px-2.5 py-1 rounded-full">
+        <span class="inline-flex items-center gap-1 bg-amber-50 border border-amber-200 text-amber-900 text-xs sm:text-sm font-mono-code font-bold px-3 py-1 rounded-full">
           ${p.casNumber}
         </span>
       ` : ''}
       ${p.requiresColdChain ? `
-        <span class="inline-flex items-center gap-1 bg-cyan-50 border border-cyan-200 text-cyan-800 text-xs font-bold px-2.5 py-1 rounded-full">
-          <span class="material-symbols-outlined text-sm">ac_unit</span>
+        <span class="inline-flex items-center gap-1.5 bg-cyan-50 border border-cyan-200 text-cyan-900 text-xs sm:text-sm font-bold px-3 py-1 rounded-full">
+          <span class="material-symbols-outlined text-sm sm:text-base">ac_unit</span>
           Pengiriman Rantai Dingin (Cold-Chain)
         </span>
       ` : ''}
@@ -267,22 +267,21 @@ function renderRelatedProducts() {
       <a href="product-detail.html?id=${p.id}" class="block aspect-square w-full bg-slate-50 overflow-hidden relative">
         <img src="${p.images[0]}" alt="${p.name}" onerror="this.onerror=null; this.src='images/microscope.jpg';" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
       </a>
-      <div class="p-2.5 sm:p-4 flex flex-col flex-1">
-        <span class="text-[10px] sm:text-[11px] font-semibold text-teal-700 bg-teal-50 px-2 py-0.5 rounded w-fit mb-1">${p.categoryLabel}</span>
-        <a href="product-detail.html?id=${p.id}" class="text-xs sm:text-sm font-bold text-slate-800 hover:text-teal-600 line-clamp-2 leading-snug">
+      <div class="p-3 sm:p-4 flex flex-col flex-1">
+        <span class="text-xs sm:text-sm font-bold text-teal-800 bg-teal-50 px-2.5 py-0.5 rounded w-fit mb-1">${p.categoryLabel}</span>
+        <a href="product-detail.html?id=${p.id}" class="text-xs sm:text-sm font-extrabold text-slate-900 hover:text-teal-600 line-clamp-2 leading-snug">
           ${p.name}
         </a>
-        <div class="mt-2 text-xs sm:text-sm font-extrabold text-teal-700">
+        <div class="mt-2 text-xs sm:text-sm font-black text-teal-800 font-mono-code">
           ${formatRupiah(p.price)}
         </div>
         <div class="mt-auto pt-3">
           <button 
             onclick="addToCart('${p.id}', 0, 1, '')"
-            class="w-full py-1.5 px-2 sm:px-3 rounded-lg sm:rounded-xl bg-slate-100 hover:bg-teal-600 hover:text-white text-slate-700 text-[11px] sm:text-xs font-semibold flex items-center justify-center gap-1 sm:gap-1.5 transition-colors"
+            class="w-full py-2 px-3 rounded-xl bg-slate-100 hover:bg-teal-600 hover:text-white text-slate-800 text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition-colors shadow-2xs"
           >
-            <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
-            <span class="hidden sm:inline">+ Keranjang</span>
-            <span class="sm:hidden">+ Keranjang</span>
+            <span class="material-symbols-outlined text-base">add_shopping_cart</span>
+            <span>+ Keranjang</span>
           </button>
         </div>
       </div>
@@ -307,15 +306,15 @@ function setupDiscussionForm() {
       const item = document.createElement('div');
       item.className = 'p-4 rounded-xl border border-slate-200 bg-slate-50/70 space-y-2';
       item.innerHTML = `
-        <div class="flex items-center justify-between text-xs text-slate-500">
+        <div class="flex items-center justify-between text-xs sm:text-sm text-slate-600">
           <div class="flex items-center gap-2">
-            <span class="font-bold text-slate-800">Peneliti / Pengguna Lab</span>
-            <span class="px-2 py-0.5 rounded bg-teal-100 text-teal-800 font-semibold text-[10px]">Anda</span>
+            <span class="font-bold text-slate-900">Peneliti / Pengguna Lab</span>
+            <span class="px-2.5 py-0.5 rounded bg-teal-100 text-teal-800 font-black text-xs">Anda</span>
           </div>
-          <span>Baru saja</span>
+          <span class="font-medium">Baru saja</span>
         </div>
-        <p class="text-xs sm:text-sm text-slate-700">${text}</p>
-        <div class="mt-2 pl-4 border-l-2 border-teal-500 text-xs text-slate-600 italic">
+        <p class="text-xs sm:text-sm text-slate-800 font-medium">${text}</p>
+        <div class="mt-2 pl-4 border-l-2 border-teal-500 text-xs sm:text-sm text-slate-600 italic">
           Admin Laboratorium sedang meninjau pertanyaan ini dan akan membalas segera.
         </div>
       `;

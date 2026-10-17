@@ -42,117 +42,118 @@
       }
     };
   </script>
-  <link rel="stylesheet" href="css/custom.css" />
+  <link rel="stylesheet" href="css/custom.css?v=2" />
 </head>
 
 <body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
 
   <!-- Header Minimal -->
-  <header class="py-4 px-6 sm:px-8 border-b border-slate-200 bg-white shadow-sm">
+  <header class="py-3 sm:py-4 px-3 sm:px-8 border-b border-slate-200 bg-white shadow-sm">
     <div class="container mx-auto flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-2">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-teal-700 to-teal-500 text-white flex items-center justify-center shadow-sm">
-          <span class="material-symbols-outlined text-xl">science</span>
+      <a href="index.html" class="flex items-center gap-1.5 sm:gap-2">
+        <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-teal-700 to-teal-500 text-white flex items-center justify-center shadow-sm">
+          <span class="material-symbols-outlined text-lg sm:text-xl">science</span>
         </div>
-        <span class="text-xl font-black tracking-tight text-slate-900">Lab<span class="text-teal-600">Mart</span><span class="text-xs text-amber-500 ml-0.5">.id</span></span>
+        <span class="text-lg sm:text-xl font-black tracking-tight text-slate-900">Lab<span class="text-teal-600">Mart</span><span class="text-xs text-amber-500 ml-0.5">.id</span></span>
       </a>
 
-      <a href="index.html" class="text-xs font-bold text-slate-600 hover:text-teal-700 flex items-center gap-1">
+      <a href="index.html" class="text-xs sm:text-sm font-extrabold text-slate-700 hover:text-teal-700 flex items-center gap-1.5 transition-colors">
         <span class="material-symbols-outlined text-base">arrow_back</span>
-        Kembali ke Katalog
+        <span class="hidden sm:inline">Kembali ke Katalog</span>
+        <span class="sm:hidden">Katalog</span>
       </a>
     </div>
   </header>
 
   <!-- Login Card Container -->
-  <main class="flex-1 flex items-center justify-center p-4 sm:p-6 my-6">
-    <div class="w-full max-w-md bg-white rounded-3xl border border-slate-200/90 shadow-xl p-6 sm:p-8 space-y-6">
+  <main class="flex-1 flex items-center justify-center p-3 sm:p-6 my-4 sm:my-6">
+    <div class="w-full max-w-md bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 shadow-xl p-5 sm:p-8 space-y-5 sm:space-y-6">
       
       <!-- Heading -->
-      <div class="text-center space-y-1">
-        <div class="w-12 h-12 rounded-2xl bg-teal-50 text-teal-700 border border-teal-200 flex items-center justify-center mx-auto mb-2">
+      <div class="text-center space-y-1.5">
+        <div class="w-12 h-12 rounded-2xl bg-teal-50 text-teal-700 border border-teal-200 flex items-center justify-center mx-auto mb-2 shadow-xs">
           <span class="material-symbols-outlined text-2xl">lock</span>
         </div>
-        <h1 class="text-2xl font-black text-slate-900 tracking-tight">Masuk Akun Laboratorium</h1>
-        <p class="text-xs text-slate-500">Akses katalog instrumen, reagen PA, dan riwayat faktur institusi</p>
+        <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Masuk Akun Laboratorium</h1>
+        <p class="text-xs sm:text-sm text-slate-600 font-medium">Akses katalog instrumen, reagen PA, dan riwayat faktur institusi</p>
       </div>
 
       <!-- Quick Demo Login Bar (Untuk Presentasi ke Klien) -->
-      <div class="p-3.5 rounded-2xl bg-amber-50 border border-amber-200 text-xs text-amber-900 space-y-2">
-        <div class="font-extrabold flex items-center justify-between text-[11px] text-amber-800">
-          <span class="flex items-center gap-1">
-            <span class="material-symbols-outlined text-sm">bolt</span>
-            1-KLIK AKUN DEMO (UNTUK PRESENTASI):
+      <div class="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-xs text-amber-900 space-y-2.5">
+        <div class="font-black flex items-center justify-between text-xs sm:text-sm text-amber-900">
+          <span class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-base text-amber-600">bolt</span>
+            1-KLIK AKUN DEMO:
           </span>
-          <span class="text-[10px] text-amber-600 font-semibold">Buyer & Seller</span>
+          <span class="text-xs text-amber-700 font-bold">Buyer & Seller</span>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5 text-[11px] font-bold">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs sm:text-sm font-bold">
           <button 
             type="button" 
             onclick="fillDemoUser('peneliti@ugm.ac.id', 'password123')"
-            class="px-2 py-1.5 rounded-lg bg-white border border-amber-300 hover:bg-amber-100 text-slate-800 text-left truncate shadow-2xs"
+            class="px-2.5 py-2 rounded-xl bg-white border border-amber-300 hover:bg-amber-100 text-slate-900 text-left truncate shadow-2xs transition-colors"
           >
             👨‍🔬 Dosen UGM
           </button>
           <button 
             type="button" 
             onclick="fillDemoUser('qc@biofarma.co.id', 'password123')"
-            class="px-2 py-1.5 rounded-lg bg-white border border-amber-300 hover:bg-amber-100 text-slate-800 text-left truncate shadow-2xs"
+            class="px-2.5 py-2 rounded-xl bg-white border border-amber-300 hover:bg-amber-100 text-slate-900 text-left truncate shadow-2xs transition-colors"
           >
             👩‍🔬 QA Bio Farma
           </button>
           <button 
             type="button" 
             onclick="fillDemoUser('seller@smartlab.co.id', 'seller123')"
-            class="px-2 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-white text-left truncate shadow-2xs border border-amber-600 font-extrabold"
+            class="px-2.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-left truncate shadow-2xs border border-amber-600 font-black transition-colors"
           >
-            🏢 Mitra Seller (SmartLab)
+            🏢 Mitra Seller
           </button>
         </div>
       </div>
 
       <!-- Form Login -->
       <form id="login-form" class="space-y-4" onsubmit="handleLoginSubmit(event)">
-        <div class="space-y-1">
-          <label class="text-xs font-bold text-slate-700 block">Email Institusi / Akun Lab</label>
+        <div class="space-y-1.5">
+          <label class="text-xs sm:text-sm font-extrabold text-slate-800 block">Email Institusi / Akun Lab</label>
           <div class="relative flex items-center">
-            <span class="material-symbols-outlined text-slate-400 absolute left-3 text-lg">mail</span>
+            <span class="material-symbols-outlined text-slate-400 absolute left-3.5 text-lg">mail</span>
             <input 
               id="login-email" 
               type="email" 
               required
               placeholder="nama@kampus.ac.id atau nama@pt.com" 
-              class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+              class="w-full pl-10 pr-3 py-2.5 sm:py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500 font-medium"
             />
           </div>
         </div>
 
-        <div class="space-y-1">
+        <div class="space-y-1.5">
           <div class="flex items-center justify-between">
-            <label class="text-xs font-bold text-slate-700 block">Kata Sandi</label>
-            <a href="#" onclick="alert('Petunjuk reset kata sandi telah dikirimkan ke email simulasi Anda.'); return false;" class="text-[11px] text-teal-700 font-semibold hover:underline">Lupa Sandi?</a>
+            <label class="text-xs sm:text-sm font-extrabold text-slate-800 block">Kata Sandi</label>
+            <a href="#" onclick="alert('Petunjuk reset kata sandi telah dikirimkan ke email simulasi Anda.'); return false;" class="text-xs sm:text-sm text-teal-700 font-bold hover:underline">Lupa Sandi?</a>
           </div>
           <div class="relative flex items-center">
-            <span class="material-symbols-outlined text-slate-400 absolute left-3 text-lg">key</span>
+            <span class="material-symbols-outlined text-slate-400 absolute left-3.5 text-lg">key</span>
             <input 
               id="login-password" 
               type="password" 
               required
               placeholder="••••••••" 
-              class="w-full pl-9 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+              class="w-full pl-10 pr-10 py-2.5 sm:py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500 font-medium"
             />
             <button 
               type="button" 
               onclick="togglePasswordVisibility()" 
-              class="absolute right-3 text-slate-400 hover:text-slate-600"
+              class="absolute right-3.5 text-slate-400 hover:text-slate-600"
             >
-              <span id="pwd-icon" class="material-symbols-outlined text-base">visibility</span>
+              <span id="pwd-icon" class="material-symbols-outlined text-lg">visibility</span>
             </button>
           </div>
         </div>
 
-        <div class="flex items-center justify-between text-xs text-slate-600">
-          <label class="flex items-center gap-2 cursor-pointer">
+        <div class="flex items-center justify-between text-xs sm:text-sm text-slate-700">
+          <label class="flex items-center gap-2 cursor-pointer font-medium">
             <input type="checkbox" checked class="w-4 h-4 rounded text-teal-600 focus:ring-teal-500 border-slate-300" />
             <span>Ingat akun saya di perangkat ini</span>
           </label>
@@ -161,24 +162,24 @@
         <button 
           id="btn-login-submit"
           type="submit" 
-          class="w-full py-3 px-4 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-teal-600/25 active:scale-[0.98] transition-all"
+          class="w-full py-3.5 px-4 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-black text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg shadow-teal-600/25 active:scale-[0.98] transition-all"
         >
           <span>Masuk ke Akun Lab</span>
-          <span class="material-symbols-outlined text-lg">login</span>
+          <span class="material-symbols-outlined text-xl">login</span>
         </button>
       </form>
 
       <!-- Register Link -->
-      <div class="pt-4 border-t border-slate-100 text-center text-xs text-slate-500">
+      <div class="pt-4 border-t border-slate-100 text-center text-xs sm:text-sm text-slate-600">
         Belum memiliki akun instansi laboratorium? <br />
-        <a href="register.html" class="text-teal-700 font-extrabold hover:underline mt-1 inline-block">Daftar Akun Lab Baru Sekarang</a>
+        <a href="register.html" class="text-teal-700 font-black hover:underline mt-1.5 inline-block text-xs sm:text-sm">Daftar Akun Lab Baru Sekarang</a>
       </div>
 
     </div>
   </main>
 
   <!-- Footer -->
-  <footer class="py-4 text-center text-slate-400 text-xs border-t border-slate-200 bg-white">
+  <footer class="py-4 text-center text-slate-500 text-xs sm:text-sm border-t border-slate-200 bg-white">
     &copy; 2026 LabMart Indonesia. Terdaftar di Kemenkes RI AKD. Seluruh hak cipta dilindungi.
   </footer>
 

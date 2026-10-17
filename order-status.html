@@ -45,7 +45,7 @@
   </script>
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="css/custom.css" />
+  <link rel="stylesheet" href="css/custom.css?v=2" />
   
   <style>
     /* Styling khusus cetak (Print Invoice A4) */
@@ -180,16 +180,16 @@
 
       <!-- SEKSI PELACAKAN KURIR (Default tersembunyi di cetak & bisa di-toggle) -->
       <section id="tracking-section" class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6 no-print hidden">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-100">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
           <div>
-            <h3 class="text-base font-extrabold text-slate-900">Pelacakan Logistik & Kurir Laboratorium</h3>
-            <div class="text-xs text-slate-500 mt-0.5">
-              Ekspedisi: <strong id="tracking-courier-name" class="text-teal-700">SiCepat BEST</strong> • No. Resi: <strong id="tracking-resi-code" class="font-mono-code text-slate-800">SICEPAT-BEST-1759699860</strong>
+            <h3 class="text-base sm:text-xl font-black text-slate-900">Pelacakan Logistik & Kurir Laboratorium</h3>
+            <div class="text-xs sm:text-sm text-slate-600 mt-1 font-medium">
+              Ekspedisi: <strong id="tracking-courier-name" class="text-teal-800 font-bold">SiCepat BEST</strong> • No. Resi: <strong id="tracking-resi-code" class="font-mono-code font-bold text-slate-900">SICEPAT-BEST-1759699860</strong>
             </div>
           </div>
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2 shrink-0">
             <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
-            <span id="tracking-status-badge" class="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">
+            <span id="tracking-status-badge" class="text-xs sm:text-sm font-extrabold text-emerald-800 bg-emerald-50 border border-emerald-300 px-3.5 py-1.5 rounded-full">
               Quality Control & Packing Lab
             </span>
           </div>
@@ -199,48 +199,48 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div id="step-node-1" class="step-card p-4 rounded-2xl bg-teal-50 border border-teal-200">
             <div class="w-8 h-8 rounded-xl bg-teal-600 text-white flex items-center justify-center font-bold text-sm mb-2">✓</div>
-            <div class="text-xs font-bold text-teal-900">1. Pembayaran Diverifikasi</div>
-            <div class="text-[11px] text-teal-700 mt-0.5" id="step-node-1-sub">Lunas via QRIS / Bank Transfer</div>
+            <div class="text-xs sm:text-sm font-extrabold text-teal-950">1. Pembayaran Diverifikasi</div>
+            <div class="text-xs text-teal-800 font-medium mt-0.5" id="step-node-1-sub">Lunas via QRIS / Bank Transfer</div>
           </div>
 
           <div id="step-node-2" class="step-card p-4 rounded-2xl bg-teal-50 border border-teal-500 ring-2 ring-teal-500/30">
             <div class="w-8 h-8 rounded-xl bg-teal-600 text-white flex items-center justify-center font-bold text-sm mb-2">
               <span class="material-symbols-outlined text-base">science</span>
             </div>
-            <div class="text-xs font-bold text-teal-900">2. QC & Dokumen CoA</div>
-            <div class="text-[11px] text-teal-700 mt-0.5">Pengecekan lot & lembar MSDS</div>
+            <div class="text-xs sm:text-sm font-extrabold text-teal-950">2. QC & Dokumen CoA</div>
+            <div class="text-xs text-teal-800 font-medium mt-0.5">Pengecekan lot & lembar MSDS</div>
           </div>
 
           <div id="step-node-3" class="step-card p-4 rounded-2xl bg-slate-50 border border-slate-200 text-slate-400">
             <div class="w-8 h-8 rounded-xl bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm mb-2">
               <span class="material-symbols-outlined text-base">local_shipping</span>
             </div>
-            <div class="text-xs font-bold text-slate-800">3. Dalam Perjalanan Kurir</div>
-            <div class="text-[11px] text-slate-500 mt-0.5">Diserahkan ke armada pengiriman</div>
+            <div class="text-xs sm:text-sm font-extrabold text-slate-900">3. Dalam Perjalanan Kurir</div>
+            <div class="text-xs text-slate-600 font-medium mt-0.5">Diserahkan ke armada pengiriman</div>
           </div>
 
           <div id="step-node-4" class="step-card p-4 rounded-2xl bg-slate-50 border border-slate-200 text-slate-400">
             <div class="w-8 h-8 rounded-xl bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm mb-2">
               <span class="material-symbols-outlined text-base">domain_verification</span>
             </div>
-            <div class="text-xs font-bold text-slate-800">4. Tiba di Laboratorium</div>
-            <div class="text-[11px] text-slate-500 mt-0.5">Diterima analis / penanggung jawab</div>
+            <div class="text-xs sm:text-sm font-extrabold text-slate-900">4. Tiba di Laboratorium</div>
+            <div class="text-xs text-slate-600 font-medium mt-0.5">Diterima analis / penanggung jawab</div>
           </div>
         </div>
 
         <!-- Log Riwayat -->
-        <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200 space-y-2 text-xs text-slate-600">
+        <div class="bg-slate-50 rounded-2xl p-4 sm:p-5 border border-slate-200 space-y-2.5 text-xs sm:text-sm text-slate-700">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-slate-800 flex items-center gap-1.5">
-              <span class="material-symbols-outlined text-teal-600 text-base">schedule</span>
+            <span class="font-extrabold text-slate-900 flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-teal-700 text-lg">schedule</span>
               Riwayat Logistik Terkini:
             </span>
-            <button onclick="advanceTrackingStage()" class="px-3 py-1 rounded-lg bg-teal-600 text-white font-bold text-[11px] hover:bg-teal-700 flex items-center gap-1">
-              <span class="material-symbols-outlined text-xs">sync</span>
+            <button onclick="advanceTrackingStage()" class="px-3.5 py-1.5 rounded-lg bg-teal-600 text-white font-extrabold text-xs hover:bg-teal-700 flex items-center gap-1 shadow-sm">
+              <span class="material-symbols-outlined text-sm">sync</span>
               Simulasi Status Bergerak
             </button>
           </div>
-          <ul id="tracking-logs" class="space-y-1.5 pl-4 border-l-2 border-teal-500">
+          <ul id="tracking-logs" class="space-y-2 pl-4 border-l-2 border-teal-500 font-medium">
             <li><strong>Hari ini:</strong> Pembayaran terverifikasi lunas. Invoice resmi diterbitkan.</li>
             <li><strong>Hari ini:</strong> Item disiapkan oleh staf teknis gudang logistik LabMart.</li>
           </ul>
@@ -248,33 +248,33 @@
       </section>
 
       <!-- DOKUMEN FAKTUR INVOICE RESMI (Tampil langsung & Sempurna Saat Dicetak) -->
-      <section id="invoice-section" class="printable-invoice bg-white rounded-3xl border border-slate-200 p-4 sm:p-9 shadow-lg space-y-5">
+      <section id="invoice-section" class="printable-invoice bg-white rounded-3xl border border-slate-200 p-5 sm:p-9 shadow-lg space-y-6">
         
         <!-- Header Kop Surat Invoice -->
-        <div class="flex flex-col sm:flex-row justify-between items-start gap-4 pb-5 border-b-2 border-slate-200">
+        <div class="flex flex-col sm:flex-row justify-between items-start gap-4 pb-6 border-b-2 border-slate-200">
           <!-- Identitas Perusahaan -->
-          <div class="space-y-1">
+          <div class="space-y-1.5">
             <div class="flex items-center gap-2">
-              <div class="w-9 h-9 rounded-xl bg-teal-700 text-white flex items-center justify-center font-bold shadow-sm">
-                <span class="material-symbols-outlined text-xl">science</span>
+              <div class="w-10 h-10 rounded-xl bg-teal-700 text-white flex items-center justify-center font-bold shadow-sm">
+                <span class="material-symbols-outlined text-2xl">science</span>
               </div>
-              <span class="text-2xl font-black tracking-tight text-slate-900">Lab<span class="text-teal-600">Mart</span><span class="text-xs text-amber-500 ml-0.5">.id</span></span>
+              <span class="text-2xl sm:text-3xl font-black tracking-tight text-slate-900">Lab<span class="text-teal-600">Mart</span><span class="text-xs text-amber-500 ml-0.5">.id</span></span>
             </div>
-            <div class="text-xs font-bold text-slate-800">PT SARANA LABORATORIUM NUSANTARA</div>
-            <div class="text-[11px] text-slate-500 leading-tight">
+            <div class="text-xs sm:text-sm font-black text-slate-900">PT SARANA LABORATORIUM NUSANTARA</div>
+            <div class="text-xs text-slate-600 leading-relaxed font-medium">
               NPWP: 01.382.910.2-021.000 • Izin Edar Kemenkes RI: FK.01.02/VI/892-e/2024<br />
               Pusat Distribusi Alat Riset Terakreditasi & Reagen Kimia Pro Analisis (PA)
             </div>
           </div>
 
           <!-- Metadata Invoice & Status Pembayaran -->
-          <div class="text-left sm:text-right space-y-1 shrink-0">
-            <div class="text-lg sm:text-xl font-black text-slate-900 tracking-wider">FAKTUR PESANAN LAB</div>
-            <div class="font-mono-code font-bold text-teal-700 text-sm" id="inv-number">INV/LAB/2026/677717</div>
-            <div class="text-xs text-slate-500 font-medium" id="inv-date">Tanggal: 16 Oktober 2026</div>
+          <div class="text-left sm:text-right space-y-1.5 shrink-0">
+            <div class="text-xl sm:text-2xl font-black text-slate-900 tracking-wider">FAKTUR PESANAN LAB</div>
+            <div class="font-mono-code font-black text-teal-800 text-base" id="inv-number">INV/LAB/2026/677717</div>
+            <div class="text-xs sm:text-sm text-slate-600 font-semibold" id="inv-date">Tanggal: 16 Oktober 2026</div>
             <div class="pt-1">
-              <span id="inv-payment-badge" class="inline-flex items-center gap-1 px-3 py-1 rounded-md bg-emerald-100 text-emerald-800 font-extrabold text-xs border border-emerald-300">
-                <span class="material-symbols-outlined text-sm">verified</span>
+              <span id="inv-payment-badge" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-100 text-emerald-900 font-black text-xs sm:text-sm border border-emerald-300">
+                <span class="material-symbols-outlined text-base">verified</span>
                 <span id="inv-payment-badge-text">LUNAS (QRIS INSTANT)</span>
               </span>
             </div>
@@ -282,73 +282,73 @@
         </div>
 
         <!-- Box 2 Kolom: Informasi Penerima & Informasi Pengiriman -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs bg-slate-50/80 p-4 rounded-xl border border-slate-200">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 text-xs sm:text-sm bg-slate-50/80 p-5 rounded-2xl border border-slate-200">
           <!-- Kolom Kiri: Tujuan Pengiriman Lab -->
-          <div class="space-y-1">
-            <div class="font-extrabold text-slate-500 uppercase tracking-wider text-[10px] pb-1 border-b border-slate-200">
+          <div class="space-y-1.5">
+            <div class="font-black text-slate-600 uppercase tracking-wider text-xs pb-1.5 border-b border-slate-200">
               TUJUAN PENGIRIMAN LAB:
             </div>
-            <div id="inv-recipient-name" class="font-extrabold text-slate-900 text-sm pt-0.5">Dr. Rian Pratama, S.Si., M.Biotech</div>
-            <div id="inv-recipient-lab" class="font-semibold text-teal-800">Laboratorium Riset Terpadu & Kimia Analitik - Gedung FMIPA Lt. 3</div>
-            <div id="inv-recipient-address" class="text-slate-600 leading-snug">
+            <div id="inv-recipient-name" class="font-black text-slate-900 text-sm sm:text-base pt-0.5">Dr. Rian Pratama, S.Si., M.Biotech</div>
+            <div id="inv-recipient-lab" class="font-bold text-teal-800 text-xs sm:text-sm">Laboratorium Riset Terpadu & Kimia Analitik - Gedung FMIPA Lt. 3</div>
+            <div id="inv-recipient-address" class="text-slate-700 leading-relaxed font-medium">
               Jl. Kaliurang KM 4.5, Sekip Utara, Sinduadi, Kec. Mlati, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55284
             </div>
-            <div id="inv-recipient-phone" class="text-slate-700 font-mono-code font-bold pt-0.5">Telp: 0812-8877-6655</div>
+            <div id="inv-recipient-phone" class="text-slate-800 font-mono-code font-bold pt-0.5">Telp: 0812-8877-6655</div>
           </div>
 
           <!-- Kolom Kanan: Ekspedisi & Detail Bayar -->
-          <div class="space-y-1 sm:pl-3 sm:border-l border-slate-200">
-            <div class="font-extrabold text-slate-500 uppercase tracking-wider text-[10px] pb-1 border-b border-slate-200">
+          <div class="space-y-1.5 sm:pl-4 sm:border-l border-slate-200">
+            <div class="font-black text-slate-600 uppercase tracking-wider text-xs pb-1.5 border-b border-slate-200">
               INFORMASI EKSPEDISI & PEMBAYARAN:
             </div>
             <div class="flex justify-between items-baseline pt-0.5">
-              <span class="text-slate-500">Ekspedisi:</span>
-              <span id="inv-courier-name" class="font-bold text-slate-800 text-right">SiCepat BEST (1 Hari Kerja)</span>
+              <span class="text-slate-600 font-medium">Ekspedisi:</span>
+              <span id="inv-courier-name" class="font-bold text-slate-900 text-right">SiCepat BEST (1 Hari Kerja)</span>
             </div>
             <div class="flex justify-between items-baseline">
-              <span class="text-slate-500">No. Resi:</span>
-              <span id="inv-tracking-code" class="font-mono-code font-bold text-teal-800 text-right">SICEPAT-BEST-1759699860</span>
+              <span class="text-slate-600 font-medium">No. Resi:</span>
+              <span id="inv-tracking-code" class="font-mono-code font-black text-teal-800 text-right">SICEPAT-BEST-1759699860</span>
             </div>
             <div class="flex justify-between items-baseline">
-              <span class="text-slate-500">Metode Bayar:</span>
-              <span id="inv-payment-method" class="font-semibold text-slate-800 text-right">QRIS Instant Standard</span>
+              <span class="text-slate-600 font-medium">Metode Bayar:</span>
+              <span id="inv-payment-method" class="font-bold text-slate-900 text-right">QRIS Instant Standard</span>
             </div>
             <div class="flex justify-between items-baseline pt-0.5">
-              <span class="text-slate-500">Proteksi Lab:</span>
-              <span id="inv-protection-note" class="font-bold text-teal-700 text-right">Asuransi Pecah Belah & Peti Kayu</span>
+              <span class="text-slate-600 font-medium">Proteksi Lab:</span>
+              <span id="inv-protection-note" class="font-extrabold text-teal-800 text-right">Asuransi Pecah Belah & Peti Kayu</span>
             </div>
           </div>
         </div>
 
         <!-- Tabel Rincian Produk Laboratorium -->
-        <div class="overflow-x-auto rounded-xl border border-slate-200 -mx-1 sm:mx-0">
-          <table class="w-full text-left text-xs border-collapse min-w-[540px]">
+        <div class="overflow-x-auto rounded-2xl border border-slate-200 -mx-1 sm:mx-0">
+          <table class="w-full text-left text-xs sm:text-sm border-collapse min-w-[580px]">
             <thead>
-              <tr class="bg-slate-100 text-slate-800 border-b border-slate-200 font-bold">
-                <th class="py-2.5 px-3 text-center w-10">No</th>
-                <th class="py-2.5 px-3">Deskripsi Alat / Bahan Kimia Lab</th>
-                <th class="py-2.5 px-3 w-36">Varian / Tipe</th>
-                <th class="py-2.5 px-3 text-center w-14">Jumlah</th>
-                <th class="py-2.5 px-3 text-right w-28 price-cell">Harga Satuan</th>
-                <th class="py-2.5 px-3 text-right w-32 price-cell">Total Subtotal</th>
+              <tr class="bg-slate-100 text-slate-900 border-b border-slate-200 font-black">
+                <th class="py-3 px-3.5 text-center w-12">No</th>
+                <th class="py-3 px-3.5">Deskripsi Alat / Bahan Kimia Lab</th>
+                <th class="py-3 px-3.5 w-40">Varian / Tipe</th>
+                <th class="py-3 px-3.5 text-center w-16">Jumlah</th>
+                <th class="py-3 px-3.5 text-right w-32 price-cell">Harga Satuan</th>
+                <th class="py-3 px-3.5 text-right w-36 price-cell">Total Subtotal</th>
               </tr>
             </thead>
-            <tbody id="inv-items-table" class="divide-y divide-slate-100 text-slate-700">
+            <tbody id="inv-items-table" class="divide-y divide-slate-100 text-slate-800 font-medium">
               <!-- Rendered by JS -->
             </tbody>
           </table>
         </div>
 
         <!-- Bagian Bawah: Catatan Syarat Lab & Ringkasan Keuangan Tertata Rapi -->
-        <div class="pt-3 border-t-2 border-slate-200 grid grid-cols-1 sm:grid-cols-12 gap-6 items-start">
+        <div class="pt-4 border-t-2 border-slate-200 grid grid-cols-1 sm:grid-cols-12 gap-6 items-start">
           
           <!-- Catatan Resmi Lab (Kiri - 7 cols) -->
-          <div class="sm:col-span-7 space-y-2 text-xs text-slate-500">
-            <div class="font-bold text-slate-800 uppercase tracking-wider text-[11px] flex items-center gap-1.5">
-              <span class="material-symbols-outlined text-teal-600 text-sm">verified_user</span>
+          <div class="sm:col-span-7 space-y-2.5 text-xs sm:text-sm text-slate-600">
+            <div class="font-black text-slate-900 uppercase tracking-wider text-xs flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-teal-700 text-base">verified_user</span>
               Ketentuan Garansi & Regulasi Laboratorium:
             </div>
-            <ul class="space-y-1 text-[11px] leading-relaxed text-slate-600 list-disc pl-4">
+            <ul class="space-y-1.5 text-xs sm:text-sm leading-relaxed text-slate-700 list-disc pl-5 font-medium">
               <li>Lembar resmi <strong>Certificate of Analysis (CoA)</strong> dan <strong>MSDS</strong> lot spesifik disertakan dalam amplop dokumen paket.</li>
               <li>Garansi resmi kalibrasi instrumen analitik berlaku 1-2 tahun sejak tanggal faktur.</li>
               <li>Klaim retur kerusakan pecah belah dilindungi asuransi lab (wajib melampirkan video unboxing maks. 3x24 jam).</li>
@@ -356,32 +356,32 @@
           </div>
 
           <!-- Rincian Biaya Tertata Rapi (Kanan - 5 cols) -->
-          <div class="sm:col-span-5 bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-2 text-xs">
-            <div class="flex justify-between items-center text-slate-600">
-              <span>Total Harga Barang:</span>
-              <span id="inv-subtotal" class="font-bold text-slate-800 font-mono-code price-cell">Rp 120.000</span>
+          <div class="sm:col-span-5 bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200 space-y-2.5 text-xs sm:text-sm">
+            <div class="flex justify-between items-center text-slate-700">
+              <span class="font-medium">Total Harga Barang:</span>
+              <span id="inv-subtotal" class="font-bold text-slate-900 font-mono-code price-cell">Rp 120.000</span>
             </div>
-            <div class="flex justify-between items-center text-slate-600">
-              <span>Biaya Ekspedisi Pengiriman:</span>
-              <span id="inv-shipping" class="font-bold text-teal-700 font-mono-code price-cell">Rp 12.000</span>
+            <div class="flex justify-between items-center text-slate-700">
+              <span class="font-medium">Biaya Ekspedisi Pengiriman:</span>
+              <span id="inv-shipping" class="font-bold text-teal-800 font-mono-code price-cell">Rp 12.000</span>
             </div>
-            <div id="inv-protection-row" class="flex justify-between items-center text-slate-600">
-              <span>Proteksi & Packing Kayu:</span>
-              <span id="inv-protection" class="font-bold text-slate-800 font-mono-code price-cell">Rp 0</span>
+            <div id="inv-protection-row" class="flex justify-between items-center text-slate-700">
+              <span class="font-medium">Proteksi & Packing Kayu:</span>
+              <span id="inv-protection" class="font-bold text-slate-900 font-mono-code price-cell">Rp 0</span>
             </div>
             <div id="inv-discount-row" class="flex justify-between items-center text-rose-600 font-bold">
               <span>Potongan Voucher Promo:</span>
-              <span id="inv-discount" class="font-mono-code price-cell">-Rp 10.000</span>
+              <span id="inv-discount" class="font-mono-code price-cell font-black">-Rp 10.000</span>
             </div>
-            <div class="flex justify-between items-center text-slate-500 text-[11px]">
+            <div class="flex justify-between items-center text-slate-600 text-xs">
               <span>Biaya Layanan Sistem:</span>
-              <span class="font-mono-code price-cell">Rp 1.000</span>
+              <span class="font-mono-code font-bold price-cell text-slate-800">Rp 1.000</span>
             </div>
 
             <!-- Grand Total -->
-            <div class="pt-2 border-t border-slate-300 flex justify-between items-center">
-              <span class="font-black text-slate-900 text-xs uppercase">TOTAL DIBAYAR:</span>
-              <span id="inv-grand-total" class="font-black text-base text-teal-800 font-mono-code price-cell">
+            <div class="pt-3 border-t border-slate-300 flex justify-between items-center">
+              <span class="font-black text-slate-900 text-xs sm:text-sm uppercase">TOTAL DIBAYAR:</span>
+              <span id="inv-grand-total" class="font-black text-lg sm:text-2xl text-teal-800 font-mono-code price-cell">
                 Rp 123.000
               </span>
             </div>
@@ -390,21 +390,21 @@
         </div>
 
         <!-- Tanda Tangan & Cap Validasi Digital -->
-        <div class="pt-6 border-t border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 text-xs text-slate-600">
+        <div class="pt-6 border-t border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 text-xs sm:text-sm text-slate-600">
           <div class="space-y-1">
-            <div class="text-[11px] text-slate-400">Dicetak resmi secara sistem komputerisasi:</div>
-            <div id="inv-timestamp" class="font-mono-code font-bold text-slate-700 text-[11px]">
+            <div class="text-xs text-slate-500 font-medium">Dicetak resmi secara sistem komputerisasi:</div>
+            <div id="inv-timestamp" class="font-mono-code font-bold text-slate-800 text-xs">
               16 Oktober 2026 • Diverifikasi Sistem e-Faktur
             </div>
-            <div class="text-[10px] text-slate-400">Dokumen ini sah tanpa tanda tangan basah fisik (UU ITE).</div>
+            <div class="text-xs text-slate-500 font-medium">Dokumen ini sah tanpa tanda tangan basah fisik (UU ITE).</div>
           </div>
 
           <!-- Stempel Resmi QA/QC Lab -->
           <div class="w-full sm:w-auto flex sm:justify-end">
-            <div class="border-2 border-dashed border-teal-600/80 rounded-xl px-4 py-2 bg-teal-50/50 text-center w-full sm:w-52 space-y-0.5">
-              <div class="text-[10px] font-extrabold text-teal-800 tracking-wider">LABORATORY VERIFIED STAMP</div>
-              <div class="text-xs font-black text-teal-900">VERIFIED & QC PASSED</div>
-              <div class="text-[9px] text-teal-700">PT SARANA LABORATORIUM NUSANTARA</div>
+            <div class="border-2 border-dashed border-teal-600 rounded-2xl px-5 py-3 bg-teal-50 text-center w-full sm:w-60 space-y-1">
+              <div class="text-xs font-black text-teal-800 tracking-wider">LABORATORY VERIFIED STAMP</div>
+              <div class="text-sm font-black text-teal-950">VERIFIED & QC PASSED</div>
+              <div class="text-xs text-teal-800 font-bold">PT SARANA LABORATORIUM NUSANTARA</div>
             </div>
           </div>
         </div>
@@ -554,15 +554,15 @@
       const itemsContainer = document.getElementById('inv-items-table');
       itemsContainer.innerHTML = order.items.map((item, idx) => `
         <tr class="hover:bg-slate-50/70 border-b border-slate-100 last:border-0">
-          <td class="py-2.5 px-3 text-center text-slate-500 font-medium">${idx + 1}</td>
-          <td class="py-2.5 px-3">
-            <div class="font-bold text-slate-900 leading-snug">${item.productName}</div>
-            ${item.notes ? `<div class="text-[10px] text-teal-700 italic mt-0.5">Catatan: "${item.notes}"</div>` : ''}
+          <td class="py-3 px-3 text-center text-slate-600 font-bold text-xs sm:text-sm">${idx + 1}</td>
+          <td class="py-3 px-3">
+            <div class="font-bold text-slate-900 leading-snug text-xs sm:text-sm">${item.productName}</div>
+            ${item.notes ? `<div class="text-xs text-teal-800 font-medium italic mt-1">Catatan: "${item.notes}"</div>` : ''}
           </td>
-          <td class="py-2.5 px-3 text-slate-600">${item.variantName}</td>
-          <td class="py-2.5 px-3 text-center font-bold text-slate-900">${item.quantity}</td>
-          <td class="py-2.5 px-3 text-right font-mono-code price-cell text-slate-700">${formatRupiah(item.unitPrice)}</td>
-          <td class="py-2.5 px-3 text-right font-mono-code font-bold price-cell text-slate-900">${formatRupiah(item.subtotal)}</td>
+          <td class="py-3 px-3 text-slate-700 text-xs sm:text-sm font-medium">${item.variantName}</td>
+          <td class="py-3 px-3 text-center font-extrabold text-slate-900 text-xs sm:text-sm">${item.quantity}</td>
+          <td class="py-3 px-3 text-right font-mono-code price-cell text-slate-800 text-xs sm:text-sm font-semibold">${formatRupiah(item.unitPrice)}</td>
+          <td class="py-3 px-3 text-right font-mono-code font-bold price-cell text-slate-950 text-xs sm:text-sm">${formatRupiah(item.subtotal)}</td>
         </tr>
       `).join('');
 

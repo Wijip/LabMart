@@ -34,40 +34,40 @@ function renderCartView() {
     const v = item.variant;
 
     return `
-      <div class="bg-white rounded-2xl border border-slate-200/90 p-4 sm:p-5 shadow-sm transition-all hover:border-slate-300">
-        <div class="flex items-start gap-3 sm:gap-4">
+      <div class="bg-white rounded-2xl border border-slate-200/90 p-3.5 sm:p-5 shadow-sm transition-all hover:border-slate-300">
+        <div class="flex items-start gap-2.5 sm:gap-4">
           <!-- Checkbox item -->
-          <div class="pt-2">
+          <div class="pt-1.5 sm:pt-2 shrink-0">
             <input 
               type="checkbox" 
               ${item.selected ? 'checked' : ''} 
               onchange="toggleCartItemSelection(${item.cartIndex}); renderCartView();"
-              class="w-5 h-5 rounded text-teal-600 focus:ring-teal-500 border-slate-300 cursor-pointer"
+              class="w-4 h-4 sm:w-5 sm:h-5 rounded text-teal-600 focus:ring-teal-500 border-slate-300 cursor-pointer"
             />
           </div>
 
           <!-- Gambar Produk -->
-          <a href="product-detail.html?id=${p.id}" class="w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden bg-slate-100 shrink-0 border border-slate-200 block">
+          <a href="product-detail.html?id=${p.id}" class="w-16 h-16 sm:w-24 sm:h-24 rounded-xl overflow-hidden bg-slate-100 shrink-0 border border-slate-200 block">
             <img src="${p.images[0]}" alt="${p.name}" onerror="this.onerror=null; this.src='images/microscope.jpg';" class="w-full h-full object-cover" />
           </a>
 
           <!-- Detail Produk & Harga -->
           <div class="flex-1 min-w-0">
-            <div class="flex items-start justify-between gap-2">
-              <div>
-                <span class="text-[11px] font-semibold text-teal-700 bg-teal-50 px-2 py-0.5 rounded">${p.categoryLabel}</span>
-                <a href="product-detail.html?id=${p.id}" class="block text-sm sm:text-base font-bold text-slate-800 hover:text-teal-600 mt-1 line-clamp-1">
+            <div class="flex items-start justify-between gap-1.5">
+              <div class="min-w-0">
+                <span class="text-xs font-bold text-teal-800 bg-teal-50 px-2 py-0.5 rounded">${p.categoryLabel}</span>
+                <a href="product-detail.html?id=${p.id}" class="block text-sm sm:text-base font-extrabold text-slate-900 hover:text-teal-600 mt-1 line-clamp-1">
                   ${p.name}
                 </a>
-                <div class="flex flex-wrap items-center gap-2 mt-1 text-xs text-slate-500">
-                  <span class="bg-slate-100 text-slate-700 px-2 py-0.5 rounded-md font-medium">Varian: ${v ? v.name : 'Standar'}</span>
-                  ${p.casNumber !== '-' ? `<span class="font-mono-code text-slate-600">${p.casNumber}</span>` : ''}
-                  <span>Berat: ${formatWeight(item.weight)}</span>
+                <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 mt-1 text-xs sm:text-sm text-slate-600 font-medium">
+                  <span class="bg-slate-100 text-slate-800 px-2 py-0.5 rounded font-bold">Varian: ${v ? v.name : 'Standar'}</span>
+                  ${p.casNumber !== '-' ? `<span class="font-mono-code text-slate-700 hidden xs:inline font-semibold">${p.casNumber}</span>` : ''}
+                  <span>Berat: <strong class="text-slate-800">${formatWeight(item.weight)}</strong></span>
                 </div>
                 ${p.requiresColdChain ? `
-                  <div class="inline-flex items-center gap-1 mt-1 text-[11px] font-bold text-cyan-700 bg-cyan-50 px-2 py-0.5 rounded-md">
-                    <span class="material-symbols-outlined text-[13px]">ac_unit</span>
-                    Wajib Suhu Dingin (Cold-Chain)
+                  <div class="inline-flex items-center gap-1 mt-1 text-xs font-extrabold text-cyan-800 bg-cyan-50 px-2 py-0.5 rounded">
+                    <span class="material-symbols-outlined text-sm">ac_unit</span>
+                    Cold-Chain
                   </div>
                 ` : ''}
               </div>
@@ -76,38 +76,38 @@ function renderCartView() {
               <button 
                 onclick="promptDeleteCartItem(${item.cartIndex})" 
                 title="Hapus Produk" 
-                class="text-slate-400 hover:text-rose-600 p-1.5 rounded-lg hover:bg-rose-50 transition-colors"
+                class="text-slate-400 hover:text-rose-600 p-1.5 rounded-lg hover:bg-rose-50 transition-colors shrink-0"
               >
-                <span class="material-symbols-outlined text-xl">delete</span>
+                <span class="material-symbols-outlined text-xl sm:text-2xl">delete</span>
               </button>
             </div>
 
             <!-- Catatan Pesanan Khusus -->
-            <div class="mt-3">
-              <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-slate-400 text-base">edit_note</span>
+            <div class="mt-2.5 sm:mt-3">
+              <div class="flex items-center gap-1.5 sm:gap-2">
+                <span class="material-symbols-outlined text-slate-500 text-base sm:text-lg shrink-0">edit_note</span>
                 <input 
                   type="text" 
-                  placeholder="Tulis catatan (misal: 'Lampirkan CoA', 'Packing ekstra')..."
+                  placeholder="Catatan pesanan (CoA, packing ekstra)..."
                   value="${item.notes || ''}"
                   onchange="updateCartItemNotes(${item.cartIndex}, this.value)"
-                  class="text-xs text-slate-700 border-b border-slate-200 focus:border-teal-500 focus:outline-none bg-transparent w-full py-1 placeholder:text-slate-400"
+                  class="text-xs sm:text-sm text-slate-800 font-medium border-b border-slate-200 focus:border-teal-500 focus:outline-none bg-transparent w-full py-1 placeholder:text-slate-400"
                 />
               </div>
             </div>
 
             <!-- Baris Bawah: Harga Satuan, Kuantitas, Subtotal -->
-            <div class="mt-4 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+            <div class="mt-3 sm:mt-4 pt-2.5 sm:pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2">
               <div>
-                <span class="text-xs text-slate-400 block sm:inline">Harga Satuan: </span>
-                <span class="text-sm font-bold text-slate-700">${formatRupiah(item.unitPrice)}</span>
+                <span class="text-xs sm:text-sm text-slate-500 font-medium block sm:inline">Harga Satuan: </span>
+                <span class="text-xs sm:text-sm font-extrabold text-slate-800 font-mono-code">${formatRupiah(item.unitPrice)}</span>
               </div>
 
-              <div class="flex items-center gap-4">
-                <div class="flex items-center border border-slate-300 rounded-xl overflow-hidden bg-white shadow-sm">
+              <div class="flex items-center gap-2.5 sm:gap-4">
+                <div class="flex items-center border border-slate-300 rounded-lg sm:rounded-xl overflow-hidden bg-white shadow-2xs">
                   <button 
                     onclick="updateCartItemQty(${item.cartIndex}, ${item.quantity - 1}); renderCartView();" 
-                    class="w-8 h-8 flex items-center justify-center text-slate-600 hover:bg-slate-100 transition-colors"
+                    class="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-slate-700 hover:bg-slate-100 transition-colors font-bold text-sm"
                   >
                     -
                   </button>
@@ -116,19 +116,19 @@ function renderCartView() {
                     min="1" 
                     value="${item.quantity}" 
                     onchange="handleManualQtyChange(${item.cartIndex}, this.value)"
-                    class="w-12 text-center text-xs font-bold text-slate-800 border-x border-slate-200 py-1 focus:outline-none"
+                    class="w-10 sm:w-12 text-center text-xs sm:text-sm font-extrabold text-slate-900 border-x border-slate-200 py-1 focus:outline-none"
                   />
                   <button 
                     onclick="updateCartItemQty(${item.cartIndex}, ${item.quantity + 1}); renderCartView();" 
-                    class="w-8 h-8 flex items-center justify-center text-slate-600 hover:bg-slate-100 transition-colors"
+                    class="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-slate-700 hover:bg-slate-100 transition-colors font-bold text-sm"
                   >
                     +
                   </button>
                 </div>
 
-                <div class="text-right min-w-[100px]">
-                  <span class="text-[11px] text-slate-400 block">Total</span>
-                  <span class="text-sm sm:text-base font-extrabold text-teal-700">${formatRupiah(item.subtotal)}</span>
+                <div class="text-right shrink-0">
+                  <span class="text-xs text-slate-400 font-medium block">Total</span>
+                  <span class="text-sm sm:text-lg font-black text-teal-700 font-mono-code">${formatRupiah(item.subtotal)}</span>
                 </div>
               </div>
             </div>

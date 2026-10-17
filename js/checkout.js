@@ -74,21 +74,21 @@ function renderCheckoutItems(totals) {
           <img src="${p.images[0]}" alt="${p.name}" onerror="this.onerror=null; this.src='images/microscope.jpg';" class="w-full h-full object-cover" />
         </div>
         <div class="flex-1 min-w-0">
-          <h4 class="text-xs font-bold text-slate-800 truncate">${p.name}</h4>
-          <div class="flex items-center gap-2 text-[11px] text-slate-500 mt-0.5">
-            <span>${item.quantity}x</span>
+          <h4 class="text-xs sm:text-sm font-extrabold text-slate-900 truncate">${p.name}</h4>
+          <div class="flex items-center gap-2 text-xs text-slate-600 font-medium mt-0.5">
+            <span class="font-bold text-slate-800">${item.quantity}x</span>
             <span class="text-slate-300">|</span>
             <span>Varian: ${v ? v.name : 'Standar'}</span>
           </div>
           ${item.notes ? `
-            <div class="text-[10px] text-teal-700 italic truncate mt-0.5">
+            <div class="text-xs text-teal-800 font-medium italic truncate mt-0.5">
               Catatan: "${item.notes}"
             </div>
           ` : ''}
         </div>
         <div class="text-right shrink-0">
-          <div class="text-xs font-bold text-slate-800">${formatRupiah(item.subtotal)}</div>
-          <div class="text-[10px] text-slate-400">${formatWeight(item.weight)}</div>
+          <div class="text-xs sm:text-sm font-black text-slate-900 font-mono-code">${formatRupiah(item.subtotal)}</div>
+          <div class="text-xs text-slate-500 font-semibold">${formatWeight(item.weight)}</div>
         </div>
       </div>
     `;
@@ -127,19 +127,19 @@ function renderCourierOptions(totals) {
         <div class="flex-1">
           <div class="flex items-center justify-between gap-2">
             <div class="flex items-center gap-2">
-              <span class="material-symbols-outlined text-teal-700 text-lg">${courier.icon}</span>
-              <span class="text-xs sm:text-sm font-bold text-slate-800">${courier.name}</span>
+              <span class="material-symbols-outlined text-teal-700 text-xl">${courier.icon}</span>
+              <span class="text-xs sm:text-base font-extrabold text-slate-900">${courier.name}</span>
             </div>
-            <span class="text-xs sm:text-sm font-extrabold text-teal-800">${formatRupiah(cost)}</span>
+            <span class="text-xs sm:text-base font-black text-teal-800 font-mono-code">${formatRupiah(cost)}</span>
           </div>
-          <div class="flex items-center gap-2 text-xs text-slate-500 mt-1">
-            <span class="text-teal-600 font-semibold">Estimasi: ${courier.etd}</span>
+          <div class="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-slate-600 mt-1 font-medium">
+            <span class="text-teal-700 font-bold">Estimasi: ${courier.etd}</span>
             <span class="text-slate-300">•</span>
-            <span class="text-[11px]">${courier.description}</span>
+            <span>${courier.description}</span>
           </div>
           ${courier.isColdChain ? `
-            <div class="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded bg-cyan-100 text-cyan-800 text-[10px] font-bold">
-              <span class="material-symbols-outlined text-[12px]">ac_unit</span>
+            <div class="inline-flex items-center gap-1 mt-1.5 px-2.5 py-1 rounded-md bg-cyan-100 text-cyan-900 text-xs font-bold border border-cyan-200">
+              <span class="material-symbols-outlined text-sm">ac_unit</span>
               Insulasi Styrofoam + Ice Gel Reusable
             </div>
           ` : ''}

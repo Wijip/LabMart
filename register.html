@@ -42,38 +42,38 @@
       }
     };
   </script>
-  <link rel="stylesheet" href="css/custom.css" />
+  <link rel="stylesheet" href="css/custom.css?v=2" />
 </head>
 
 <body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
 
   <!-- Header Minimal -->
-  <header class="py-4 px-6 sm:px-8 border-b border-slate-200 bg-white shadow-sm">
+  <header class="py-3 sm:py-4 px-3 sm:px-8 border-b border-slate-200 bg-white shadow-sm">
     <div class="container mx-auto flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-2">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-teal-700 to-teal-500 text-white flex items-center justify-center shadow-sm">
-          <span class="material-symbols-outlined text-xl">science</span>
+      <a href="index.html" class="flex items-center gap-1.5 sm:gap-2">
+        <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-teal-700 to-teal-500 text-white flex items-center justify-center shadow-sm">
+          <span class="material-symbols-outlined text-lg sm:text-xl">science</span>
         </div>
-        <span class="text-xl font-black tracking-tight text-slate-900">Lab<span class="text-teal-600">Mart</span><span class="text-xs text-amber-500 ml-0.5">.id</span></span>
+        <span class="text-lg sm:text-xl font-black tracking-tight text-slate-900">Lab<span class="text-teal-600">Mart</span><span class="text-xs text-amber-500 ml-0.5">.id</span></span>
       </a>
 
-      <div class="text-xs text-slate-500">
-        Sudah memiliki akun? <a href="login.html" class="text-teal-700 font-bold hover:underline ml-1">Masuk Saja</a>
+      <div class="text-xs sm:text-sm text-slate-600 text-right font-medium">
+        <span class="hidden sm:inline">Sudah memiliki akun? </span><a href="login.html" class="text-teal-700 font-extrabold hover:underline ml-1">Masuk Saja</a>
       </div>
     </div>
   </header>
 
   <!-- Register Card Container -->
-  <main class="flex-1 flex items-center justify-center p-4 sm:p-6 my-6">
-    <div class="w-full max-w-xl bg-white rounded-3xl border border-slate-200/90 shadow-xl p-6 sm:p-8 space-y-6">
+  <main class="flex-1 flex items-center justify-center p-3 sm:p-6 my-4 sm:my-6">
+    <div class="w-full max-w-xl bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 shadow-xl p-5 sm:p-8 space-y-5 sm:space-y-6">
       
       <!-- Heading -->
-      <div class="text-center space-y-1">
-        <div id="reg-header-icon" class="w-12 h-12 rounded-2xl bg-teal-50 text-teal-700 border border-teal-200 flex items-center justify-center mx-auto mb-2">
+      <div class="text-center space-y-1.5">
+        <div id="reg-header-icon" class="w-12 h-12 rounded-2xl bg-teal-50 text-teal-700 border border-teal-200 flex items-center justify-center mx-auto mb-2 shadow-xs">
           <span class="material-symbols-outlined text-2xl">domain_add</span>
         </div>
-        <h1 id="reg-header-title" class="text-2xl font-black text-slate-900 tracking-tight">Registrasi Akun Institusi Lab</h1>
-        <p id="reg-header-desc" class="text-xs text-slate-500">Dapatkan akses pengadaan resmi, faktur pajak institusi, dan surat penawaran harga (RFQ)</p>
+        <h1 id="reg-header-title" class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Registrasi Akun Institusi Lab</h1>
+        <p id="reg-header-desc" class="text-xs sm:text-sm text-slate-600 font-medium">Dapatkan akses pengadaan resmi, faktur pajak institusi, dan surat penawaran harga (RFQ)</p>
       </div>
 
       <!-- Pilihan Peran Pendaftaran (Buyer vs Seller) -->
@@ -82,18 +82,18 @@
           type="button" 
           id="role-tab-buyer"
           onclick="selectRegisterRole('buyer')" 
-          class="py-2.5 px-3 rounded-xl text-xs font-extrabold transition-all bg-white text-teal-800 shadow-sm flex items-center justify-center gap-1.5"
+          class="py-3 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition-all bg-white text-teal-800 shadow-sm flex items-center justify-center gap-2"
         >
-          <span class="material-symbols-outlined text-base">science</span>
+          <span class="material-symbols-outlined text-base sm:text-lg">science</span>
           <span>Peneliti / Pembeli</span>
         </button>
         <button 
           type="button" 
           id="role-tab-seller"
           onclick="selectRegisterRole('seller')" 
-          class="py-2.5 px-3 rounded-xl text-xs font-extrabold transition-all text-slate-600 hover:text-slate-900 flex items-center justify-center gap-1.5"
+          class="py-3 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition-all text-slate-600 hover:text-slate-900 flex items-center justify-center gap-2"
         >
-          <span class="material-symbols-outlined text-base">storefront</span>
+          <span class="material-symbols-outlined text-base sm:text-lg">storefront</span>
           <span>Mitra Penjual (Seller)</span>
         </button>
       </div>
@@ -103,46 +103,46 @@
         <input type="hidden" id="reg-is-seller" value="false" />
         
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div class="space-y-1">
-            <label class="text-xs font-bold text-slate-700 block">Nama Lengkap & Gelar *</label>
+          <div class="space-y-1.5">
+            <label class="text-xs sm:text-sm font-extrabold text-slate-800 block">Nama Lengkap & Gelar *</label>
             <input 
               id="reg-name" 
               type="text" 
               required
               placeholder="Contoh: Dr. Budi Santoso, M.Si" 
-              class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+              class="w-full px-3.5 py-2.5 sm:py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500 font-medium"
             />
           </div>
 
-          <div class="space-y-1">
-            <label class="text-xs font-bold text-slate-700 block">Email Institusi / Resmi *</label>
+          <div class="space-y-1.5">
+            <label class="text-xs sm:text-sm font-extrabold text-slate-800 block">Email Institusi / Resmi *</label>
             <input 
               id="reg-email" 
               type="email" 
               required
               placeholder="budi@kampus.ac.id" 
-              class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+              class="w-full px-3.5 py-2.5 sm:py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500 font-medium"
             />
           </div>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div class="space-y-1">
-            <label class="text-xs font-bold text-slate-700 block">Nama Universitas / Perusahaan *</label>
+          <div class="space-y-1.5">
+            <label class="text-xs sm:text-sm font-extrabold text-slate-800 block">Nama Universitas / Perusahaan *</label>
             <input 
               id="reg-institution" 
               type="text" 
               required
               placeholder="Contoh: Universitas Indonesia" 
-              class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+              class="w-full px-3.5 py-2.5 sm:py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500 font-medium"
             />
           </div>
 
-          <div class="space-y-1">
-            <label class="text-xs font-bold text-slate-700 block">Tipe Laboratorium *</label>
+          <div class="space-y-1.5">
+            <label class="text-xs sm:text-sm font-extrabold text-slate-800 block">Tipe Laboratorium *</label>
             <select 
               id="reg-labtype"
-              class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500 font-medium"
+              class="w-full px-3.5 py-2.5 sm:py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500 font-semibold text-slate-700"
             >
               <option value="Universitas / Pendidikan">Universitas / Pendidikan Tinggi</option>
               <option value="Industri / Farmasi / Pangan">Industri / Farmasi / QA Pangan</option>
@@ -153,87 +153,87 @@
           </div>
         </div>
 
-        <div class="space-y-1">
-          <label class="text-xs font-bold text-slate-700 block">Nama Laboratorium Spesifik</label>
+        <div class="space-y-1.5">
+          <label class="text-xs sm:text-sm font-extrabold text-slate-800 block">Nama Laboratorium Spesifik</label>
           <input 
             id="reg-labname" 
             type="text" 
             placeholder="Contoh: Lab Kimia Organik & Bioteknologi Terpadu" 
-            class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+            class="w-full px-3.5 py-2.5 sm:py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500 font-medium"
           />
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div class="space-y-1">
-            <label class="text-xs font-bold text-slate-700 block">No. WhatsApp / Telepon *</label>
+          <div class="space-y-1.5">
+            <label class="text-xs sm:text-sm font-extrabold text-slate-800 block">No. WhatsApp / Telepon *</label>
             <input 
               id="reg-phone" 
               type="text" 
               required
               placeholder="08xxxxxxxxxx" 
-              class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500 font-mono-code"
+              class="w-full px-3.5 py-2.5 sm:py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500 font-mono-code font-bold text-slate-800"
             />
           </div>
 
-          <div class="space-y-1">
-            <label class="text-xs font-bold text-slate-700 block">Kota / Wilayah Lab</label>
+          <div class="space-y-1.5">
+            <label class="text-xs sm:text-sm font-extrabold text-slate-800 block">Kota / Wilayah Lab</label>
             <input 
               id="reg-city" 
               type="text" 
               placeholder="Contoh: Kota Depok / Jakarta" 
-              class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+              class="w-full px-3.5 py-2.5 sm:py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500 font-medium"
             />
           </div>
         </div>
 
-        <div class="space-y-1">
-          <label class="text-xs font-bold text-slate-700 block">Alamat Pengiriman Laboratorium</label>
+        <div class="space-y-1.5">
+          <label class="text-xs sm:text-sm font-extrabold text-slate-800 block">Alamat Pengiriman Laboratorium</label>
           <textarea 
             id="reg-address" 
             rows="2"
             placeholder="Nama gedung, lantai, ruangan lab..."
-            class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500 font-medium leading-relaxed"
           ></textarea>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div class="space-y-1">
-            <label class="text-xs font-bold text-slate-700 block">Kata Sandi *</label>
+          <div class="space-y-1.5">
+            <label class="text-xs sm:text-sm font-extrabold text-slate-800 block">Kata Sandi *</label>
             <input 
               id="reg-password" 
               type="password" 
               required
               placeholder="Minimal 6 karakter" 
-              class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+              class="w-full px-3.5 py-2.5 sm:py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500 font-medium"
             />
           </div>
 
-          <div class="space-y-1">
-            <label class="text-xs font-bold text-slate-700 block">Konfirmasi Kata Sandi *</label>
+          <div class="space-y-1.5">
+            <label class="text-xs sm:text-sm font-extrabold text-slate-800 block">Konfirmasi Kata Sandi *</label>
             <input 
               id="reg-confirm-password" 
               type="password" 
               required
               placeholder="Ulangi kata sandi" 
-              class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+              class="w-full px-3.5 py-2.5 sm:py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500 font-medium"
             />
           </div>
         </div>
 
         <div class="pt-2">
-          <label class="flex items-start gap-2 cursor-pointer text-[11px] text-slate-500 leading-snug">
+          <label class="flex items-start gap-2.5 cursor-pointer text-xs sm:text-sm text-slate-600 leading-snug">
             <input type="checkbox" required class="mt-0.5 w-4 h-4 rounded text-teal-600 focus:ring-teal-500 border-slate-300" />
-            <span>Saya menyetujui <a href="#" class="text-teal-700 underline font-semibold">Syarat & Ketentuan Pengadaan Bahan Kimia & Alat Lab</a> serta menyatakan data instansi di atas adalah benar.</span>
+            <span>Saya menyetujui <a href="#" class="text-teal-700 underline font-bold">Syarat & Ketentuan Pengadaan Bahan Kimia & Alat Lab</a> serta menyatakan data instansi di atas adalah benar.</span>
           </label>
         </div>
 
         <button 
           id="btn-register-submit"
           type="submit" 
-          class="w-full py-3.5 px-4 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-teal-600/25 active:scale-[0.98] transition-all"
+          class="w-full py-3.5 px-4 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-black text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg shadow-teal-600/25 active:scale-[0.98] transition-all"
         >
           <span>Daftar Akun Laboratorium Baru</span>
-          <span class="material-symbols-outlined text-lg">how_to_reg</span>
+          <span class="material-symbols-outlined text-xl">how_to_reg</span>
         </button>
 
       </form>
@@ -242,7 +242,7 @@
   </main>
 
   <!-- Footer -->
-  <footer class="py-4 text-center text-slate-400 text-xs border-t border-slate-200 bg-white">
+  <footer class="py-4 text-center text-slate-500 text-xs sm:text-sm border-t border-slate-200 bg-white">
     &copy; 2026 LabMart Indonesia. Terdaftar di Kemenkes RI AKD. Seluruh hak cipta dilindungi.
   </footer>
 
@@ -261,8 +261,8 @@
       const submitBtn = document.getElementById('btn-register-submit');
 
       if (isSeller) {
-        tabBuyer.className = "py-2.5 px-3 rounded-xl text-xs font-extrabold transition-all text-slate-600 hover:text-slate-900 flex items-center justify-center gap-1.5";
-        tabSeller.className = "py-2.5 px-3 rounded-xl text-xs font-extrabold transition-all bg-amber-500 text-white shadow-sm flex items-center justify-center gap-1.5";
+        tabBuyer.className = "py-3 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition-all text-slate-600 hover:text-slate-900 flex items-center justify-center gap-2";
+        tabSeller.className = "py-3 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition-all bg-amber-500 text-white shadow-sm flex items-center justify-center gap-2";
         
         icon.className = "w-12 h-12 rounded-2xl bg-amber-50 text-amber-700 border border-amber-300 flex items-center justify-center mx-auto mb-2";
         icon.innerHTML = `<span class="material-symbols-outlined text-2xl">storefront</span>`;
@@ -270,12 +270,12 @@
         desc.textContent = "Daftarkan badan usaha distributor resmi atau toko alat lab Anda untuk mulai berjualan";
         
         if (submitBtn) {
-          submitBtn.className = "w-full py-3 rounded-2xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-black text-sm shadow-md shadow-amber-500/20 active:scale-95 transition-all flex items-center justify-center gap-2";
-          submitBtn.innerHTML = `<span>Daftar & Buka Toko Mitra Lab</span><span class="material-symbols-outlined text-lg">storefront</span>`;
+          submitBtn.className = "w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-black text-sm sm:text-base shadow-md shadow-amber-500/20 active:scale-95 transition-all flex items-center justify-center gap-2";
+          submitBtn.innerHTML = `<span>Daftar & Buka Toko Mitra Lab</span><span class="material-symbols-outlined text-xl">storefront</span>`;
         }
       } else {
-        tabBuyer.className = "py-2.5 px-3 rounded-xl text-xs font-extrabold transition-all bg-white text-teal-800 shadow-sm flex items-center justify-center gap-1.5";
-        tabSeller.className = "py-2.5 px-3 rounded-xl text-xs font-extrabold transition-all text-slate-600 hover:text-slate-900 flex items-center justify-center gap-1.5";
+        tabBuyer.className = "py-3 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition-all bg-white text-teal-800 shadow-sm flex items-center justify-center gap-2";
+        tabSeller.className = "py-3 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition-all text-slate-600 hover:text-slate-900 flex items-center justify-center gap-2";
         
         icon.className = "w-12 h-12 rounded-2xl bg-teal-50 text-teal-700 border border-teal-200 flex items-center justify-center mx-auto mb-2";
         icon.innerHTML = `<span class="material-symbols-outlined text-2xl">domain_add</span>`;
@@ -283,8 +283,8 @@
         desc.textContent = "Dapatkan akses pengadaan resmi, faktur pajak institusi, dan surat penawaran harga (RFQ)";
         
         if (submitBtn) {
-          submitBtn.className = "w-full py-3 rounded-2xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-sm shadow-md shadow-teal-600/20 active:scale-95 transition-all flex items-center justify-center gap-2";
-          submitBtn.innerHTML = `<span>Daftar Akun Laboratorium Baru</span><span class="material-symbols-outlined text-lg">how_to_reg</span>`;
+          submitBtn.className = "w-full py-3.5 px-4 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-black text-sm sm:text-base shadow-md shadow-teal-600/20 active:scale-95 transition-all flex items-center justify-center gap-2";
+          submitBtn.innerHTML = `<span>Daftar Akun Laboratorium Baru</span><span class="material-symbols-outlined text-xl">how_to_reg</span>`;
         }
       }
     }

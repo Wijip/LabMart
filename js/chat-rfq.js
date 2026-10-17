@@ -9,53 +9,54 @@ document.addEventListener('DOMContentLoaded', () => {
 function injectFloatingChatWidget() {
   if (document.getElementById('lab-floating-chat-root')) return;
 
+  const isProductDetailPage = window.location.pathname.includes('product-detail.html') || document.getElementById('related-products-grid') !== null;
   const chatContainer = document.createElement('div');
   chatContainer.id = 'lab-floating-chat-root';
-  chatContainer.className = 'fixed bottom-20 sm:bottom-5 right-4 sm:right-5 z-40 flex flex-col items-end no-print font-sans';
+  chatContainer.className = `fixed bottom-20 sm:bottom-6 right-3 sm:right-6 z-40 flex flex-col items-end no-print font-sans ${isProductDetailPage ? 'hide-on-mobile hidden sm:flex' : 'flex'}`;
 
   chatContainer.innerHTML = `
     <!-- Chat Window Popup (Hidden by default) -->
-    <div id="lab-chat-window" class="hidden mb-3 w-[calc(100vw-32px)] max-w-sm sm:w-96 bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col transition-all duration-300">
+    <div id="lab-chat-window" class="hidden mb-3 w-[calc(100vw-24px)] max-w-sm sm:w-96 bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col transition-all duration-300 max-h-[75vh]">
       
       <!-- Chat Header -->
-      <div class="bg-gradient-to-r from-teal-800 to-teal-700 p-4 text-white flex items-center justify-between">
-        <div class="flex items-center gap-3">
+      <div class="bg-gradient-to-r from-teal-800 to-teal-700 p-3.5 sm:p-4 text-white flex items-center justify-between">
+        <div class="flex items-center gap-2.5 sm:gap-3">
           <div class="relative">
             <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center font-bold text-sm">
               <span class="material-symbols-outlined text-xl">biotech</span>
             </div>
-            <span class="w-3 h-3 rounded-full bg-emerald-400 border-2 border-teal-800 absolute -bottom-0.5 -right-0.5"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-teal-800 absolute -bottom-0.5 -right-0.5"></span>
           </div>
           <div>
-            <div class="text-xs font-black">Dr. Alisa & Tim Ahli Kimia</div>
-            <div class="text-[10px] text-teal-200">Konsultasi Teknis & Spesifikasi MSDS</div>
+            <div class="text-sm font-black">Dr. Alisa & Tim Ahli Kimia</div>
+            <div class="text-xs text-teal-100 font-medium">Konsultasi Teknis & Spesifikasi MSDS</div>
           </div>
         </div>
 
         <button onclick="toggleLabChat()" class="text-white/80 hover:text-white p-1">
-          <span class="material-symbols-outlined text-lg">close</span>
+          <span class="material-symbols-outlined text-xl">close</span>
         </button>
       </div>
 
       <!-- Chat Body -->
-      <div id="lab-chat-messages" class="p-4 h-72 overflow-y-auto space-y-3 bg-slate-50 text-xs">
-        <div class="flex items-start gap-2">
-          <div class="w-6 h-6 rounded-full bg-teal-600 text-white flex items-center justify-center text-[10px] shrink-0 font-bold">CS</div>
-          <div class="p-3 bg-white rounded-2xl rounded-tl-none border border-slate-200 text-slate-700 shadow-2xs leading-relaxed">
+      <div id="lab-chat-messages" class="p-3.5 sm:p-4 h-64 sm:h-72 overflow-y-auto space-y-3 bg-slate-50 text-xs sm:text-sm">
+        <div class="flex items-start gap-2.5">
+          <div class="w-7 h-7 rounded-full bg-teal-600 text-white flex items-center justify-center text-xs shrink-0 font-extrabold">CS</div>
+          <div class="p-3 bg-white rounded-2xl rounded-tl-none border border-slate-200 text-slate-800 shadow-2xs leading-relaxed text-xs sm:text-sm font-medium">
             Halo! Ada yang bisa kami bantu terkait pengadaan instrumen, reagen Pro Analisis (PA), sertifikat CoA, atau pengiriman bahan kimia B3?
           </div>
         </div>
 
         <!-- Quick Questions Chips -->
         <div class="space-y-1.5 pt-1">
-          <div class="text-[10px] text-slate-400 font-bold uppercase">Pertanyaan Cepat:</div>
-          <button onclick="sendQuickChatMessage('Apakah produk bahan kimia disertai sertifikat CoA dan MSDS?')" class="w-full text-left p-2 rounded-xl bg-teal-50 hover:bg-teal-100 border border-teal-200 text-teal-800 text-[11px] font-semibold transition-colors">
+          <div class="text-xs text-slate-500 font-bold uppercase tracking-wider">Pertanyaan Cepat:</div>
+          <button onclick="sendQuickChatMessage('Apakah produk bahan kimia disertai sertifikat CoA dan MSDS?')" class="w-full text-left p-2.5 rounded-xl bg-teal-50 hover:bg-teal-100 border border-teal-200 text-teal-900 text-xs sm:text-sm font-bold transition-colors">
             📄 Apakah produk disertai CoA & MSDS resmi?
           </button>
-          <button onclick="sendQuickChatMessage('Bagaimana prosedur pengiriman berpendingin (Cold-Chain)?')" class="w-full text-left p-2 rounded-xl bg-teal-50 hover:bg-teal-100 border border-teal-200 text-teal-800 text-[11px] font-semibold transition-colors">
+          <button onclick="sendQuickChatMessage('Bagaimana prosedur pengiriman berpendingin (Cold-Chain)?')" class="w-full text-left p-2.5 rounded-xl bg-teal-50 hover:bg-teal-100 border border-teal-200 text-teal-900 text-xs sm:text-sm font-bold transition-colors">
             ❄️ Bagaimana prosedur pengiriman Cold-Chain?
           </button>
-          <button onclick="sendQuickChatMessage('Bisa menerbitkan Faktur Pajak e-Faktur untuk kampus?')" class="w-full text-left p-2 rounded-xl bg-teal-50 hover:bg-teal-100 border border-teal-200 text-teal-800 text-[11px] font-semibold transition-colors">
+          <button onclick="sendQuickChatMessage('Bisa menerbitkan Faktur Pajak e-Faktur untuk kampus?')" class="w-full text-left p-2.5 rounded-xl bg-teal-50 hover:bg-teal-100 border border-teal-200 text-teal-900 text-xs sm:text-sm font-bold transition-colors">
             🏛️ Apakah bisa menerbitkan Faktur Pajak institusi?
           </button>
         </div>
@@ -68,13 +69,13 @@ function injectFloatingChatWidget() {
           type="text" 
           placeholder="Ketik pertanyaan teknis lab..."
           onkeydown="if(event.key==='Enter') sendChatMessage()"
-          class="flex-1 text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500"
+          class="flex-1 text-xs sm:text-sm p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 font-medium"
         />
         <button 
           onclick="sendChatMessage()"
-          class="w-9 h-9 rounded-xl bg-teal-600 hover:bg-teal-700 text-white flex items-center justify-center transition-colors shadow-sm"
+          class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-teal-600 hover:bg-teal-700 text-white flex items-center justify-center transition-colors shadow-sm shrink-0"
         >
-          <span class="material-symbols-outlined text-base">send</span>
+          <span class="material-symbols-outlined text-base sm:text-lg">send</span>
         </button>
       </div>
 
@@ -84,10 +85,10 @@ function injectFloatingChatWidget() {
     <button 
       id="lab-chat-toggle-btn"
       onclick="toggleLabChat()"
-      class="p-3.5 sm:px-4 sm:py-3 rounded-full sm:rounded-2xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-xs shadow-xl shadow-teal-600/30 flex items-center justify-center gap-2 transition-transform active:scale-95 border-2 border-white"
+      class="p-3 sm:px-4 sm:py-3.5 rounded-full sm:rounded-2xl bg-teal-600 hover:bg-teal-700 text-white font-black text-xs sm:text-sm shadow-lg shadow-teal-600/30 flex items-center justify-center gap-2 transition-transform active:scale-95 border-2 border-white"
       title="Tanya Spesialis Lab & CS"
     >
-      <span class="material-symbols-outlined text-xl sm:text-lg">support_agent</span>
+      <span class="material-symbols-outlined text-xl">support_agent</span>
       <span class="hidden sm:inline">Tanya Spesialis Lab & CS</span>
       <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
     </button>
@@ -125,7 +126,7 @@ function sendChatMessage() {
   const userMsg = document.createElement('div');
   userMsg.className = 'flex justify-end';
   userMsg.innerHTML = `
-    <div class="p-3 bg-teal-600 text-white rounded-2xl rounded-tr-none text-xs leading-relaxed max-w-[85%] shadow-2xs">
+    <div class="p-3 bg-teal-600 text-white rounded-2xl rounded-tr-none text-xs sm:text-sm font-medium leading-relaxed max-w-[85%] shadow-2xs">
       ${text}
     </div>
   `;
@@ -147,10 +148,10 @@ function sendChatMessage() {
     }
 
     const replyMsg = document.createElement('div');
-    replyMsg.className = 'flex items-start gap-2';
+    replyMsg.className = 'flex items-start gap-2.5';
     replyMsg.innerHTML = `
-      <div class="w-6 h-6 rounded-full bg-teal-600 text-white flex items-center justify-center text-[10px] shrink-0 font-bold">CS</div>
-      <div class="p-3 bg-white rounded-2xl rounded-tl-none border border-slate-200 text-slate-700 text-xs shadow-2xs leading-relaxed max-w-[85%]">
+      <div class="w-7 h-7 rounded-full bg-teal-600 text-white flex items-center justify-center text-xs shrink-0 font-extrabold">CS</div>
+      <div class="p-3 bg-white rounded-2xl rounded-tl-none border border-slate-200 text-slate-800 text-xs sm:text-sm font-medium shadow-2xs leading-relaxed max-w-[85%]">
         ${reply}
       </div>
     `;
@@ -180,37 +181,37 @@ function injectRfqModal() {
           <span class="material-symbols-outlined text-2xl">picture_as_pdf</span>
         </div>
         <div>
-          <h3 class="text-lg font-black text-slate-900">Surat Penawaran Resmi (RFQ Quotation)</h3>
-          <p class="text-xs text-slate-500">Dokumen penawaran harga formal untuk pengajuan anggaran institusi</p>
+          <h3 class="text-xl font-black text-slate-900">Surat Penawaran Resmi (RFQ Quotation)</h3>
+          <p class="text-xs sm:text-sm text-slate-600 mt-0.5 font-medium">Dokumen penawaran harga formal untuk pengajuan anggaran institusi</p>
         </div>
       </div>
 
       <!-- Formal Quotation Content -->
-      <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-4 text-xs text-slate-700">
+      <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-4 text-xs sm:text-sm text-slate-700">
         <div class="flex justify-between items-start border-b border-slate-200 pb-3">
           <div>
-            <div class="font-bold text-slate-900">PT SARANA LABORATORIUM NUSANTARA</div>
-            <div class="text-[11px] text-slate-500">Izin Kemenkes RI: FK.01.02/VI/892-e/2024 • NPWP: 01.382.910.2-021.000</div>
+            <div class="font-bold text-slate-900 text-sm">PT SARANA LABORATORIUM NUSANTARA</div>
+            <div class="text-xs text-slate-600 font-medium mt-0.5">Izin Kemenkes RI: FK.01.02/VI/892-e/2024 • NPWP: 01.382.910.2-021.000</div>
           </div>
           <div class="text-right">
-            <div class="font-mono-code font-bold text-teal-800">SPH/LAB/2026/0892</div>
-            <div class="text-[11px] text-slate-500">Berlaku s/d: 14 Hari Kerja</div>
+            <div class="font-mono-code font-black text-teal-800 text-sm sm:text-base">SPH/LAB/2026/0892</div>
+            <div class="text-xs text-slate-600 font-medium mt-0.5">Berlaku s/d: 14 Hari Kerja</div>
           </div>
         </div>
 
         <div class="space-y-1">
-          <span class="font-bold text-slate-800 block text-[11px] uppercase">DITUJUKAN KEPADA:</span>
-          <div id="rfq-dest-name" class="font-bold text-slate-900">Dr. Rian Pratama (FMIPA UGM)</div>
-          <div class="text-slate-500">Perihal: Penawaran Harga Pengadaan Alat & Reagen Laboratorium 2026</div>
+          <span class="font-extrabold text-slate-600 block text-xs uppercase tracking-wider">DITUJUKAN KEPADA:</span>
+          <div id="rfq-dest-name" class="font-black text-slate-900 text-sm sm:text-base">Dr. Rian Pratama (FMIPA UGM)</div>
+          <div class="text-slate-600 font-medium text-xs sm:text-sm">Perihal: Penawaran Harga Pengadaan Alat & Reagen Laboratorium 2026</div>
         </div>
 
         <div class="rounded-xl border border-slate-200 overflow-hidden bg-white">
-          <table class="w-full text-left text-xs">
-            <thead class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
+          <table class="w-full text-left text-xs sm:text-sm">
+            <thead class="bg-slate-100 text-slate-800 font-extrabold border-b border-slate-200">
               <tr>
-                <th class="p-2.5">Item Barang</th>
-                <th class="p-2.5 text-center">Qty</th>
-                <th class="p-2.5 text-right">Harga Resmi</th>
+                <th class="p-3">Item Barang</th>
+                <th class="p-3 text-center">Qty</th>
+                <th class="p-3 text-right">Harga Resmi</th>
               </tr>
             </thead>
             <tbody id="rfq-items-preview">
@@ -219,20 +220,20 @@ function injectRfqModal() {
           </table>
         </div>
 
-        <div class="p-3 bg-teal-50 rounded-xl border border-teal-200 text-teal-900 text-[11px] space-y-1">
-          <div class="font-bold">Ketentuan Penawaran:</div>
-          <div>1. Harga sudah termasuk PPN 11% dan penerbitan faktur pajak elektronik.</div>
-          <div>2. Garansi resmi kalibrasi KAN dan jaminan originalitas pabrikan 100%.</div>
+        <div class="p-3.5 bg-teal-50 rounded-xl border border-teal-200 text-teal-950 text-xs sm:text-sm space-y-1">
+          <div class="font-black">Ketentuan Penawaran:</div>
+          <div class="font-medium">1. Harga sudah termasuk PPN 11% dan penerbitan faktur pajak elektronik.</div>
+          <div class="font-medium">2. Garansi resmi kalibrasi KAN dan jaminan originalitas pabrikan 100%.</div>
         </div>
       </div>
 
       <!-- Action Buttons -->
       <div class="flex flex-col sm:flex-row gap-3 pt-2">
-        <button onclick="window.print()" class="flex-1 py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs flex items-center justify-center gap-2">
+        <button onclick="window.print()" class="flex-1 py-3.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all">
           <span class="material-symbols-outlined text-base">print</span>
           Cetak Dokumen Quotation (PDF)
         </button>
-        <button onclick="closeRfqModal(); showToast('Permintaan quotation telah dikirimkan ke email lab Anda!', 'success')" class="flex-1 py-3 px-4 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs flex items-center justify-center gap-2">
+        <button onclick="closeRfqModal(); showToast('Permintaan quotation telah dikirimkan ke email lab Anda!', 'success')" class="flex-1 py-3.5 px-4 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all">
           <span class="material-symbols-outlined text-base">mail</span>
           Kirim ke Email Instansi
         </button>

@@ -45,27 +45,27 @@
   </script>
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="css/custom.css" />
+  <link rel="stylesheet" href="css/custom.css?v=2" />
 </head>
 
 <body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
 
   <!-- Header Checkout Minimalist -->
   <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-20">
+    <div class="container mx-auto px-3 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
         
         <!-- Logo & Back to Cart -->
-        <div class="flex items-center gap-2 sm:gap-4">
-          <a href="cart.html" class="p-2 rounded-xl text-slate-600 hover:text-teal-700 hover:bg-slate-100 transition-colors flex items-center gap-1.5 text-xs font-bold">
-            <span class="material-symbols-outlined text-xl">arrow_back</span>
+        <div class="flex items-center gap-2 sm:gap-4 shrink-0">
+          <a href="cart.html" class="p-1.5 sm:p-2 rounded-xl text-slate-600 hover:text-teal-700 hover:bg-slate-100 transition-colors flex items-center gap-1 text-xs font-bold">
+            <span class="material-symbols-outlined text-lg sm:text-xl">arrow_back</span>
             <span class="hidden sm:inline">Kembali ke Keranjang</span>
             <span class="sm:hidden">Keranjang</span>
           </a>
 
-          <div class="h-6 w-px bg-slate-200"></div>
+          <div class="h-5 sm:h-6 w-px bg-slate-200"></div>
 
-          <a href="index.html" class="flex items-center gap-2">
+          <a href="index.html" class="flex items-center gap-1.5 sm:gap-2">
             <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-teal-700 to-teal-500 text-white flex items-center justify-center shadow-sm">
               <span class="material-symbols-outlined text-lg sm:text-xl">science</span>
             </div>
@@ -76,26 +76,26 @@
         </div>
 
         <!-- Checkout Steps Indicator -->
-        <div class="hidden md:flex items-center gap-3 text-xs">
-          <div class="flex items-center gap-1.5 text-teal-700 font-semibold">
-            <span class="w-5 h-5 rounded-full bg-teal-100 flex items-center justify-center text-[10px] font-bold">1</span>
+        <div class="hidden md:flex items-center gap-3 text-xs sm:text-sm">
+          <div class="flex items-center gap-1.5 text-teal-700 font-bold">
+            <span class="w-6 h-6 rounded-full bg-teal-100 flex items-center justify-center text-xs font-bold">1</span>
             <span>Keranjang</span>
           </div>
           <span class="text-slate-300">──</span>
-          <div class="flex items-center gap-1.5 text-teal-700 font-extrabold bg-teal-50 px-2.5 py-1 rounded-full border border-teal-200">
-            <span class="w-5 h-5 rounded-full bg-teal-600 text-white flex items-center justify-center text-[10px] font-bold">2</span>
+          <div class="flex items-center gap-1.5 text-teal-700 font-extrabold bg-teal-50 px-3 py-1 rounded-full border border-teal-200">
+            <span class="w-6 h-6 rounded-full bg-teal-600 text-white flex items-center justify-center text-xs font-bold">2</span>
             <span>Pengiriman & Pembayaran</span>
           </div>
           <span class="text-slate-300">──</span>
-          <div class="flex items-center gap-1.5 text-slate-400 font-medium">
-            <span class="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-[10px] font-bold">3</span>
+          <div class="flex items-center gap-1.5 text-slate-500 font-semibold">
+            <span class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold">3</span>
             <span>Pesanan Selesai</span>
           </div>
         </div>
 
         <!-- Security Badge -->
-        <div class="flex items-center gap-1 text-[11px] sm:text-xs text-emerald-700 font-bold bg-emerald-50 border border-emerald-200 px-2.5 sm:px-3 py-1 rounded-full">
-          <span class="material-symbols-outlined text-sm">lock</span>
+        <div class="flex items-center gap-1.5 text-xs sm:text-sm text-emerald-800 font-extrabold bg-emerald-50 border border-emerald-300 px-3 py-1.5 rounded-full shrink-0">
+          <span class="material-symbols-outlined text-base">lock</span>
           <span class="hidden sm:inline">SSL 256-bit Encrypted</span>
           <span class="sm:hidden">SSL Aman</span>
         </div>
@@ -105,172 +105,170 @@
   </header>
 
   <!-- Checkout Container -->
-  <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1">
+  <main class="container mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 flex-1">
     
     <div class="max-w-6xl mx-auto">
       
-      <div class="pb-6">
+      <div class="pb-4 sm:pb-6">
         <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Pengiriman & Pembayaran</h1>
-        <p class="text-xs sm:text-sm text-slate-500 mt-1">Lengkapi alamat laboratorium dan pilih opsi kurir serta metode pembayaran Anda</p>
+        <p class="text-xs sm:text-base text-slate-600 mt-1 font-medium">Lengkapi alamat laboratorium dan pilih opsi kurir serta metode pembayaran Anda</p>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
         
         <!-- Left: Form Address, Couriers, Protection, Payment Methods (7 cols) -->
-        <div class="lg:col-span-7 space-y-6">
+        <div class="lg:col-span-7 space-y-4 sm:space-y-6">
           
           <!-- 1. Alamat Pengiriman Laboratorium -->
-          <section class="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-4">
+          <section class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200 p-4 sm:p-6 shadow-sm space-y-4">
             <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-              <div class="flex items-center gap-2">
-                <span class="w-8 h-8 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center font-bold text-sm">1</span>
-                <h3 class="font-bold text-slate-900 text-base">Alamat Laboratorium / Tujuan Pengiriman</h3>
+              <div class="flex items-center gap-2.5">
+                <span class="w-8 h-8 rounded-xl bg-teal-50 text-teal-800 flex items-center justify-center font-extrabold text-xs sm:text-sm">1</span>
+                <h3 class="font-extrabold text-slate-900 text-sm sm:text-lg">Alamat Laboratorium / Tujuan</h3>
               </div>
-              <span class="text-[11px] font-semibold text-teal-700 bg-teal-50 px-2.5 py-0.5 rounded-full">Instansi Terverifikasi</span>
+              <span class="text-xs font-bold text-teal-800 bg-teal-50 border border-teal-200 px-2.5 py-1 rounded-full">Instansi Terverifikasi</span>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-              <div class="space-y-1">
-                <label class="font-bold text-slate-700">Nama Penerima / Analis Lab *</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+              <div class="space-y-1.5">
+                <label class="font-bold text-slate-800 text-xs sm:text-sm">Nama Penerima / Analis Lab *</label>
                 <input 
                   id="checkout-recipient-name"
                   type="text" 
                   value="Dr. Rian Pratama, S.Si., M.Biotech" 
-                  class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500" 
+                  class="w-full p-2.5 sm:p-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 font-medium text-xs sm:text-sm text-slate-900" 
                   placeholder="Nama Peneliti atau Penanggung Jawab Lab"
                 />
               </div>
 
-              <div class="space-y-1">
-                <label class="font-bold text-slate-700">Nomor WhatsApp / Telp Lab *</label>
+              <div class="space-y-1.5">
+                <label class="font-bold text-slate-800 text-xs sm:text-sm">Nomor WhatsApp / Telp Lab *</label>
                 <input 
                   id="checkout-recipient-phone"
                   type="text" 
                   value="0812-8877-6655" 
-                  class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 font-mono-code" 
+                  class="w-full p-2.5 sm:p-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 font-mono-code font-semibold text-xs sm:text-sm text-slate-900" 
                   placeholder="08xxxxxxxxxx"
                 />
               </div>
 
-              <div class="sm:col-span-2 space-y-1">
-                <label class="font-bold text-slate-700">Nama Laboratorium & Institusi</label>
+              <div class="sm:col-span-2 space-y-1.5">
+                <label class="font-bold text-slate-800 text-xs sm:text-sm">Nama Laboratorium & Institusi</label>
                 <input 
                   id="checkout-recipient-lab"
                   type="text" 
                   value="Laboratorium Riset Terpadu & Kimia Analitik - Gedung FMIPA Lt. 3" 
-                  class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500" 
+                  class="w-full p-2.5 sm:p-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 font-medium text-xs sm:text-sm text-slate-900" 
                   placeholder="Contoh: Lab Biokimia Universitas..."
                 />
               </div>
 
-              <div class="sm:col-span-2 space-y-1">
-                <label class="font-bold text-slate-700">Alamat Lengkap Pengiriman *</label>
+              <div class="sm:col-span-2 space-y-1.5">
+                <label class="font-bold text-slate-800 text-xs sm:text-sm">Alamat Lengkap Pengiriman *</label>
                 <textarea 
                   id="checkout-recipient-address"
                   rows="2"
-                  class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500" 
+                  class="w-full p-2.5 sm:p-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 font-medium text-xs sm:text-sm text-slate-900 leading-relaxed" 
                   placeholder="Nama Jalan, Nomor Gedung, Lantai, Ruang Lab..."
                 >Jl. Kaliurang KM 4.5, Sekip Utara, Sinduadi, Kec. Mlati, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55284</textarea>
               </div>
 
-              <div class="sm:col-span-2 space-y-1">
-                <label class="font-bold text-slate-700">Kota / Kode Pos</label>
+              <div class="sm:col-span-2 space-y-1.5">
+                <label class="font-bold text-slate-800 text-xs sm:text-sm">Kota / Kode Pos</label>
                 <input 
                   id="checkout-recipient-city"
                   type="text" 
                   value="Kabupaten Sleman, D.I. Yogyakarta 55284" 
-                  class="w-full p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500" 
+                  class="w-full p-2.5 sm:p-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 font-medium text-xs sm:text-sm text-slate-900" 
                 />
               </div>
             </div>
           </section>
 
           <!-- 2. Pilihan Ekspedisi Pengiriman -->
-          <section class="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-4">
+          <section class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200 p-4 sm:p-6 shadow-sm space-y-4">
             <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-              <div class="flex items-center gap-2">
-                <span class="w-8 h-8 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center font-bold text-sm">2</span>
-                <h3 class="font-bold text-slate-900 text-base">Pilih Ekspedisi Pengiriman</h3>
+              <div class="flex items-center gap-2.5">
+                <span class="w-8 h-8 rounded-xl bg-teal-50 text-teal-800 flex items-center justify-center font-extrabold text-xs sm:text-sm">2</span>
+                <h3 class="font-extrabold text-slate-900 text-sm sm:text-lg">Pilih Ekspedisi Pengiriman</h3>
               </div>
-              <span class="text-[11px] text-slate-500">Ongkir dihitung otomatis sesuai berat pesanan</span>
+              <span class="text-xs text-slate-600 font-medium">Hitung otomatis</span>
             </div>
 
             <!-- Courier Options (Generated Dynamically) -->
             <div id="couriers-list" class="space-y-3">
               <!-- Rendered by js/checkout.js -->
             </div>
-          </section>
-
-          <!-- 3. Proteksi Tambahan Lab -->
-          <section class="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-4">
+          </se          <!-- 3. Proteksi Tambahan Lab -->
+          <section class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200 p-4 sm:p-6 shadow-sm space-y-4">
             <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-              <div class="flex items-center gap-2">
-                <span class="w-8 h-8 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center font-bold text-sm">3</span>
-                <h3 class="font-bold text-slate-900 text-base">Proteksi & Pengemasan Khusus Lab</h3>
+              <div class="flex items-center gap-2.5">
+                <span class="w-8 h-8 rounded-xl bg-teal-50 text-teal-800 flex items-center justify-center font-extrabold text-xs sm:text-sm">3</span>
+                <h3 class="font-extrabold text-slate-900 text-sm sm:text-lg">Proteksi & Pengemasan Khusus Lab</h3>
               </div>
-              <span class="text-[11px] text-teal-700 font-semibold">Direkomendasikan</span>
+              <span class="text-xs font-bold text-teal-800 bg-teal-50 border border-teal-200 px-2.5 py-1 rounded-full">Direkomendasikan</span>
             </div>
 
             <div class="space-y-3">
               <!-- Asuransi Pecah Belah -->
-              <label class="flex items-start gap-3 p-3.5 rounded-2xl border border-slate-200 hover:border-slate-300 cursor-pointer transition-all bg-slate-50/50">
+              <label class="flex items-start gap-3 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border border-slate-200 hover:border-slate-300 cursor-pointer transition-all bg-slate-50/50">
                 <input 
                   id="protect-insurance"
                   type="checkbox" 
                   class="mt-1 w-4 h-4 rounded text-teal-600 focus:ring-teal-500 border-slate-300 cursor-pointer"
                 />
-                <div class="flex-1">
-                  <div class="flex items-center justify-between">
-                    <span class="text-xs sm:text-sm font-bold text-slate-800">Asuransi Kerusakan Glassware & Alat Lab</span>
-                    <span class="text-xs font-bold text-teal-700">+Rp 15.000</span>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="text-xs sm:text-base font-extrabold text-slate-900">Asuransi Kerusakan Glassware</span>
+                    <span class="text-xs sm:text-sm font-black text-teal-800 font-mono-code shrink-0">+Rp 15.000</span>
                   </div>
-                  <p class="text-[11px] text-slate-500 mt-0.5">Penggantian 100% barang baru tanpa birokrasi rumit jika terjadi pecah dalam perjalanan kurir.</p>
+                  <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">Penggantian 100% barang baru tanpa birokrasi rumit jika terjadi pecah dalam perjalanan kurir.</p>
                 </div>
               </label>
 
               <!-- Packing Kayu -->
-              <label class="flex items-start gap-3 p-3.5 rounded-2xl border border-slate-200 hover:border-slate-300 cursor-pointer transition-all bg-slate-50/50">
+              <label class="flex items-start gap-3 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border border-slate-200 hover:border-slate-300 cursor-pointer transition-all bg-slate-50/50">
                 <input 
                   id="protect-wood"
                   type="checkbox" 
                   class="mt-1 w-4 h-4 rounded text-teal-600 focus:ring-teal-500 border-slate-300 cursor-pointer"
                 />
-                <div class="flex-1">
-                  <div class="flex items-center justify-between">
-                    <span class="text-xs sm:text-sm font-bold text-slate-800">Peti Kayu Ekstra (Wooden Crate Bersertifikasi)</span>
-                    <span class="text-xs font-bold text-teal-700">+Rp 25.000</span>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="text-xs sm:text-base font-extrabold text-slate-900">Peti Kayu Ekstra (Wooden Crate)</span>
+                    <span class="text-xs sm:text-sm font-black text-teal-800 font-mono-code shrink-0">+Rp 25.000</span>
                   </div>
-                  <p class="text-[11px] text-slate-500 mt-0.5">Kerangka kayu padat tahan benturan untuk glassware borosilikat presisi, labu ukur, atau jerigen pelarut lab.</p>
+                  <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">Kerangka kayu padat tahan benturan untuk glassware borosilikat presisi, labu ukur, atau jerigen pelarut lab.</p>
                 </div>
               </label>
 
               <!-- Cold Pack Tambahan -->
-              <label class="flex items-start gap-3 p-3.5 rounded-2xl border border-slate-200 hover:border-slate-300 cursor-pointer transition-all bg-slate-50/50">
+              <label class="flex items-start gap-3 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border border-slate-200 hover:border-slate-300 cursor-pointer transition-all bg-slate-50/50">
                 <input 
                   id="protect-cold"
                   type="checkbox" 
                   class="mt-1 w-4 h-4 rounded text-teal-600 focus:ring-teal-500 border-slate-300 cursor-pointer"
                 />
-                <div class="flex-1">
-                  <div class="flex items-center justify-between">
-                    <span class="text-xs sm:text-sm font-bold text-slate-800">Extra Gel Ice Pack Reusable & Insulasi Termal</span>
-                    <span class="text-xs font-bold text-teal-700">+Rp 35.000</span>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="text-xs sm:text-base font-extrabold text-slate-900">Extra Gel Ice Pack & Insulasi</span>
+                    <span class="text-xs sm:text-sm font-black text-teal-800 font-mono-code shrink-0">+Rp 35.000</span>
                   </div>
-                  <p class="text-[11px] text-slate-500 mt-0.5">Menjaga temperatur reagen & enzim tetap stabil di bawah 4°C selama hingga 72 jam perjalanan ekspedisi.</p>
+                  <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">Menjaga temperatur reagen & enzim tetap stabil di bawah 4°C selama hingga 72 jam perjalanan ekspedisi.</p>
                 </div>
               </label>
             </div>
           </section>
 
           <!-- 4. Metode Pembayaran Lengkap (Termasuk QRIS Interaktif) -->
-          <section class="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-5">
+          <section class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200 p-4 sm:p-6 shadow-sm space-y-4 sm:space-y-5">
             <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-              <div class="flex items-center gap-2">
-                <span class="w-8 h-8 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center font-bold text-sm">4</span>
-                <h3 class="font-bold text-slate-900 text-base">Pilih Metode Pembayaran</h3>
+              <div class="flex items-center gap-2.5">
+                <span class="w-8 h-8 rounded-xl bg-teal-50 text-teal-800 flex items-center justify-center font-extrabold text-xs sm:text-sm">4</span>
+                <h3 class="font-extrabold text-slate-900 text-sm sm:text-lg">Pilih Metode Pembayaran</h3>
               </div>
-              <span class="text-[11px] text-emerald-700 font-bold flex items-center gap-1">
-                <span class="material-symbols-outlined text-sm">check_circle</span> Verifikasi Otomatis
+              <span class="text-xs sm:text-sm text-emerald-800 font-extrabold flex items-center gap-1 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                <span class="material-symbols-outlined text-base">check_circle</span> Otomatis
               </span>
             </div>
 
@@ -281,56 +279,56 @@
               <label class="payment-method-tile border border-slate-200 hover:border-teal-500 rounded-2xl p-3 flex flex-col items-center text-center cursor-pointer transition-all bg-teal-50/40 border-teal-600 ring-2 ring-teal-600/20">
                 <input type="radio" name="payment_method" value="qris" checked class="sr-only" />
                 <span class="material-symbols-outlined text-teal-700 text-2xl mb-1">qr_code_scanner</span>
-                <span class="text-xs font-extrabold text-slate-800">QRIS</span>
-                <span class="text-[10px] text-teal-600 font-bold">Instan / Bebas Biaya</span>
+                <span class="text-xs sm:text-sm font-extrabold text-slate-900">QRIS</span>
+                <span class="text-xs text-teal-700 font-bold">Bebas Biaya</span>
               </label>
 
               <!-- Virtual Account Option -->
               <label class="payment-method-tile border border-slate-200 hover:border-teal-500 rounded-2xl p-3 flex flex-col items-center text-center cursor-pointer transition-all bg-white">
                 <input type="radio" name="payment_method" value="va" class="sr-only" />
                 <span class="material-symbols-outlined text-slate-700 text-2xl mb-1">account_balance</span>
-                <span class="text-xs font-bold text-slate-800">Virtual Account</span>
-                <span class="text-[10px] text-slate-400">BCA, Mandiri, BRI</span>
+                <span class="text-xs sm:text-sm font-extrabold text-slate-900">Virtual Account</span>
+                <span class="text-xs text-slate-500 font-medium">BCA, Mandiri</span>
               </label>
 
               <!-- E-Wallet Option -->
               <label class="payment-method-tile border border-slate-200 hover:border-teal-500 rounded-2xl p-3 flex flex-col items-center text-center cursor-pointer transition-all bg-white">
                 <input type="radio" name="payment_method" value="ewallet" class="sr-only" />
                 <span class="material-symbols-outlined text-slate-700 text-2xl mb-1">account_balance_wallet</span>
-                <span class="text-xs font-bold text-slate-800">E-Wallet</span>
-                <span class="text-[10px] text-slate-400">GoPay, OVO, DANA</span>
+                <span class="text-xs sm:text-sm font-extrabold text-slate-900">E-Wallet</span>
+                <span class="text-xs text-slate-500 font-medium">GoPay, DANA</span>
               </label>
 
               <!-- Kartu Kredit Option -->
               <label class="payment-method-tile border border-slate-200 hover:border-teal-500 rounded-2xl p-3 flex flex-col items-center text-center cursor-pointer transition-all bg-white">
                 <input type="radio" name="payment_method" value="credit" class="sr-only" />
                 <span class="material-symbols-outlined text-slate-700 text-2xl mb-1">credit_card</span>
-                <span class="text-xs font-bold text-slate-800">Kartu Kredit</span>
-                <span class="text-[10px] text-slate-400">Visa, Mastercard</span>
+                <span class="text-xs sm:text-sm font-extrabold text-slate-900">Kartu Kredit</span>
+                <span class="text-xs text-slate-500 font-medium">Visa, Master</span>
               </label>
 
               <!-- PO Institusi Option -->
               <label class="payment-method-tile border border-slate-200 hover:border-teal-500 rounded-2xl p-3 flex flex-col items-center text-center cursor-pointer transition-all bg-white col-span-2 sm:col-span-1">
                 <input type="radio" name="payment_method" value="invoice" class="sr-only" />
                 <span class="material-symbols-outlined text-slate-700 text-2xl mb-1">receipt</span>
-                <span class="text-xs font-bold text-slate-800">Invoice PO</span>
-                <span class="text-[10px] text-slate-400">Term 30 Hari</span>
+                <span class="text-xs sm:text-sm font-extrabold text-slate-900">Invoice PO</span>
+                <span class="text-xs text-slate-500 font-medium">TOP 30 Hari</span>
               </label>
 
             </div>
 
-            <!-- PANEL 1: QRIS INTERAKTIF (Paling Diunggulkan Sesuai Permintaan) -->
+            <!-- PANEL 1: QRIS INTERAKTIF -->
             <div id="pay-panel-qris" class="p-5 rounded-2xl bg-gradient-to-b from-slate-900 to-slate-800 text-white space-y-4 shadow-xl">
               <div class="flex items-center justify-between pb-3 border-b border-slate-700">
                 <div class="flex items-center gap-2">
-                  <div class="px-2 py-1 rounded bg-white text-slate-900 font-extrabold text-xs tracking-wider">
+                  <div class="px-2.5 py-1 rounded bg-white text-slate-900 font-black text-xs sm:text-sm tracking-wider">
                     QRIS
                   </div>
-                  <span class="text-xs font-bold text-slate-200">STANDAR PEMBAYARAN NASIONAL</span>
+                  <span class="text-xs sm:text-sm font-extrabold text-slate-200">STANDAR PEMBAYARAN NASIONAL</span>
                 </div>
                 <!-- Countdown -->
-                <div class="flex items-center gap-1.5 text-xs text-amber-400 font-mono-code font-bold">
-                  <span class="material-symbols-outlined text-sm">timer</span>
+                <div class="flex items-center gap-1.5 text-xs sm:text-sm text-amber-400 font-mono-code font-bold">
+                  <span class="material-symbols-outlined text-base">timer</span>
                   <span id="qris-timer-text">14:59</span>
                 </div>
               </div>
@@ -385,16 +383,16 @@
                     <rect x="140" y="170" width="16" height="8"/>
                     <rect x="165" y="170" width="16" height="8"/>
                   </svg>
-                  <div class="text-[10px] text-center text-slate-500 font-mono-code font-bold mt-1">NMID: ID1020268899120</div>
+                  <div class="text-xs text-center text-slate-600 font-mono-code font-bold mt-1">NMID: ID1020268899120</div>
                 </div>
 
                 <!-- Info & Simulator Button -->
                 <div class="space-y-3 text-center sm:text-left flex-1">
                   <div>
-                    <span class="text-xs text-slate-400 block">Total Tagihan QRIS:</span>
-                    <span id="qris-display-amount" class="text-2xl font-extrabold text-teal-400 font-mono-code">Rp 0</span>
+                    <span class="text-xs sm:text-sm text-slate-300 font-semibold block">Total Tagihan QRIS:</span>
+                    <span id="qris-display-amount" class="text-2xl sm:text-3xl font-black text-teal-300 font-mono-code">Rp 0</span>
                   </div>
-                  <p class="text-xs text-slate-300 leading-relaxed">
+                  <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
                     Buka aplikasi m-Banking (BCA, Mandiri Livin, BRImo, BNI) atau E-Wallet (GoPay, OVO, DANA, ShopeePay) lalu arahkan kamera ke kode QR di samping.
                   </p>
                   
@@ -402,12 +400,12 @@
                     <button 
                       type="button"
                       onclick="processPaymentOrder(true)"
-                      class="w-full sm:w-auto px-5 py-3 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-extrabold text-xs flex items-center justify-center gap-2 shadow-lg shadow-teal-500/30 transition-all active:scale-95"
+                      class="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-teal-400 hover:bg-teal-300 text-slate-950 font-black text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-teal-500/30 transition-all active:scale-95"
                     >
-                      <span class="material-symbols-outlined text-base">check_circle</span>
+                      <span class="material-symbols-outlined text-lg">check_circle</span>
                       Simulasikan Scan & Bayar QRIS Sukses
                     </button>
-                    <div class="text-[11px] text-teal-300/80 mt-1.5 italic">
+                    <div class="text-xs text-teal-300/90 mt-1.5 italic">
                       *Klik tombol di atas untuk mensimulasikan pembayaran QRIS berhasil secara instan
                     </div>
                   </div>
@@ -417,72 +415,72 @@
 
             <!-- PANEL 2: VIRTUAL ACCOUNT -->
             <div id="pay-panel-va" class="hidden p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
-              <h4 class="font-bold text-xs uppercase tracking-wider text-slate-700">Pilih Bank Virtual Account:</h4>
-              <div class="space-y-2 text-xs">
-                <div class="p-3 bg-white rounded-xl border border-teal-500 flex items-center justify-between">
+              <h4 class="font-extrabold text-xs sm:text-sm uppercase tracking-wider text-slate-800">Pilih Bank Virtual Account:</h4>
+              <div class="space-y-2 text-xs sm:text-sm">
+                <div class="p-3.5 bg-white rounded-xl border border-teal-500 flex items-center justify-between">
                   <div class="flex items-center gap-3">
-                    <span class="font-extrabold text-teal-800">BCA Virtual Account</span>
-                    <span class="font-mono-code font-bold text-slate-800 text-sm">8801 2938 1029 4819</span>
+                    <span class="font-black text-teal-900 text-sm sm:text-base">BCA Virtual Account</span>
+                    <span class="font-mono-code font-bold text-slate-900 text-sm sm:text-base">8801 2938 1029 4819</span>
                   </div>
-                  <button type="button" onclick="copyVirtualAccount('8801293810294819')" class="px-3 py-1 bg-teal-50 hover:bg-teal-100 text-teal-700 font-bold rounded-lg border border-teal-200">
+                  <button type="button" onclick="copyVirtualAccount('8801293810294819')" class="px-3.5 py-1.5 bg-teal-50 hover:bg-teal-100 text-teal-800 font-bold rounded-lg border border-teal-200 text-xs sm:text-sm">
                     Salin No. VA
                   </button>
                 </div>
-                <div class="p-3 bg-white rounded-xl border border-slate-200 flex items-center justify-between">
+                <div class="p-3.5 bg-white rounded-xl border border-slate-200 flex items-center justify-between">
                   <div class="flex items-center gap-3">
-                    <span class="font-bold text-slate-800">Mandiri Virtual Account</span>
-                    <span class="font-mono-code text-slate-600">8910 4429 8812 0031</span>
+                    <span class="font-bold text-slate-900 text-sm sm:text-base">Mandiri Virtual Account</span>
+                    <span class="font-mono-code text-slate-700 text-sm sm:text-base">8910 4429 8812 0031</span>
                   </div>
-                  <button type="button" onclick="copyVirtualAccount('8910442988120031')" class="px-3 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-lg">
+                  <button type="button" onclick="copyVirtualAccount('8910442988120031')" class="px-3.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold rounded-lg text-xs sm:text-sm">
                     Salin
                   </button>
                 </div>
               </div>
-              <p class="text-[11px] text-slate-500">Nomor Virtual Account aktif selama 24 jam. Verifikasi pembayaran otomatis dalam 1-2 menit.</p>
+              <p class="text-xs text-slate-600 font-medium">Nomor Virtual Account aktif selama 24 jam. Verifikasi pembayaran otomatis dalam 1-2 menit.</p>
             </div>
 
             <!-- PANEL 3: E-WALLET -->
             <div id="pay-panel-ewallet" class="hidden p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
-              <div class="text-xs text-slate-600">Pilih aplikasi dompet digital Anda:</div>
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-bold text-center">
-                <div class="p-3 bg-white rounded-xl border border-slate-200 hover:border-teal-500 cursor-pointer">GoPay</div>
-                <div class="p-3 bg-white rounded-xl border border-slate-200 hover:border-teal-500 cursor-pointer">OVO</div>
-                <div class="p-3 bg-white rounded-xl border border-slate-200 hover:border-teal-500 cursor-pointer">DANA</div>
-                <div class="p-3 bg-white rounded-xl border border-slate-200 hover:border-teal-500 cursor-pointer">ShopeePay</div>
+              <div class="text-xs sm:text-sm font-bold text-slate-700">Pilih aplikasi dompet digital Anda:</div>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs sm:text-sm font-extrabold text-center">
+                <div class="p-3.5 bg-white rounded-xl border border-slate-200 hover:border-teal-500 cursor-pointer text-slate-900">GoPay</div>
+                <div class="p-3.5 bg-white rounded-xl border border-slate-200 hover:border-teal-500 cursor-pointer text-slate-900">OVO</div>
+                <div class="p-3.5 bg-white rounded-xl border border-slate-200 hover:border-teal-500 cursor-pointer text-slate-900">DANA</div>
+                <div class="p-3.5 bg-white rounded-xl border border-slate-200 hover:border-teal-500 cursor-pointer text-slate-900">ShopeePay</div>
               </div>
-              <input type="text" placeholder="Masukkan nomor handphone akun e-wallet..." class="w-full text-xs p-2.5 rounded-xl border border-slate-200" />
+              <input type="text" placeholder="Masukkan nomor handphone akun e-wallet..." class="w-full text-xs sm:text-sm p-3 rounded-xl border border-slate-200 font-medium" />
             </div>
 
             <!-- PANEL 4: KARTU KREDIT -->
-            <div id="pay-panel-credit" class="hidden p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 text-xs">
+            <div id="pay-panel-credit" class="hidden p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 text-xs sm:text-sm">
               <div>
-                <label class="font-bold text-slate-700 block mb-1">Nomor Kartu Kredit / Debit</label>
-                <input type="text" placeholder="4000 1234 5678 9010" class="w-full p-2.5 rounded-xl border border-slate-200 font-mono-code" />
+                <label class="font-bold text-slate-800 block mb-1">Nomor Kartu Kredit / Debit</label>
+                <input type="text" placeholder="4000 1234 5678 9010" class="w-full p-3 rounded-xl border border-slate-200 font-mono-code font-bold text-slate-900" />
               </div>
               <div class="grid grid-cols-2 gap-3">
                 <div>
-                  <label class="font-bold text-slate-700 block mb-1">Masa Berlaku (MM/YY)</label>
-                  <input type="text" placeholder="12/28" class="w-full p-2.5 rounded-xl border border-slate-200 font-mono-code" />
+                  <label class="font-bold text-slate-800 block mb-1">Masa Berlaku (MM/YY)</label>
+                  <input type="text" placeholder="12/28" class="w-full p-3 rounded-xl border border-slate-200 font-mono-code font-bold text-slate-900" />
                 </div>
                 <div>
-                  <label class="font-bold text-slate-700 block mb-1">CVV / CVC</label>
-                  <input type="password" maxlength="3" placeholder="123" class="w-full p-2.5 rounded-xl border border-slate-200 font-mono-code" />
+                  <label class="font-bold text-slate-800 block mb-1">CVV / CVC</label>
+                  <input type="password" maxlength="3" placeholder="123" class="w-full p-3 rounded-xl border border-slate-200 font-mono-code font-bold text-slate-900" />
                 </div>
               </div>
             </div>
 
             <!-- PANEL 5: PO INSTITUSI -->
-            <div id="pay-panel-invoice" class="hidden p-5 rounded-2xl bg-amber-50 border border-amber-200 space-y-3 text-xs text-amber-900">
-              <div class="font-bold flex items-center gap-1.5">
-                <span class="material-symbols-outlined text-base text-amber-700">description</span>
+            <div id="pay-panel-invoice" class="hidden p-5 rounded-2xl bg-amber-50 border border-amber-200 space-y-3 text-xs sm:text-sm text-amber-950">
+              <div class="font-black flex items-center gap-2 text-sm sm:text-base text-amber-900">
+                <span class="material-symbols-outlined text-lg text-amber-700">description</span>
                 Term of Payment (TOP 30 Hari) untuk Instansi Pendidikan & Perusahaan
               </div>
-              <p class="leading-relaxed">
+              <p class="leading-relaxed text-xs sm:text-sm text-amber-900">
                 Nomor Surat Pesanan (PO) resmi dan Surat Izin Penelitian akan divalidasi oleh tim keuangan LabMart sebelum pengiriman alat/bahan kimia berbahaya dilepaskan.
               </p>
               <div>
                 <label class="font-bold text-slate-800 block mb-1">Nomor Dokumen PO / SPK Instansi:</label>
-                <input type="text" placeholder="Contoh: PO/UGM/FMIPA/2026/0491" class="w-full p-2.5 rounded-xl border border-amber-300 bg-white" />
+                <input type="text" placeholder="Contoh: PO/UGM/FMIPA/2026/0491" class="w-full p-3 rounded-xl border border-amber-300 bg-white font-mono-code font-bold text-slate-900" />
               </div>
             </div>
 
@@ -495,52 +493,52 @@
           
           <div class="bg-white rounded-3xl border border-slate-200 p-6 shadow-xl shadow-slate-200/50 space-y-5">
             
-            <h3 class="font-extrabold text-slate-900 text-base pb-3 border-b border-slate-100 flex items-center justify-between">
+            <h3 class="font-black text-slate-900 text-base sm:text-lg pb-3 border-b border-slate-100 flex items-center justify-between">
               <span>Ringkasan Pesanan Lab</span>
-              <span class="text-xs font-semibold text-slate-400">Rincian Akhir</span>
+              <span class="text-xs sm:text-sm font-bold text-slate-500">Rincian Akhir</span>
             </h3>
 
             <!-- Selected Items Mini List -->
-            <div id="checkout-items-preview" class="max-h-60 overflow-y-auto space-y-2 pr-1 scrollbar-none">
+            <div id="checkout-items-preview" class="max-h-64 overflow-y-auto space-y-2 pr-1 scrollbar-none">
               <!-- Rendered by js/checkout.js -->
             </div>
 
             <!-- Dynamic Pricing Breakdown -->
-            <div class="pt-3 border-t border-slate-100 space-y-2.5 text-xs text-slate-600">
-              <div class="flex justify-between">
+            <div class="pt-3 border-t border-slate-100 space-y-2.5 text-xs sm:text-sm text-slate-600">
+              <div class="flex justify-between items-center">
                 <span>Subtotal Harga Barang:</span>
-                <span id="calc-subtotal" class="font-bold text-slate-800">Rp 0</span>
+                <span id="calc-subtotal" class="font-black text-slate-900 font-mono-code text-xs sm:text-sm">Rp 0</span>
               </div>
-              <div class="flex justify-between">
+              <div class="flex justify-between items-center">
                 <span>Total Biaya Ongkos Kirim:</span>
-                <span id="calc-shipping" class="font-bold text-teal-700">Rp 0</span>
+                <span id="calc-shipping" class="font-black text-teal-800 font-mono-code text-xs sm:text-sm">Rp 0</span>
               </div>
-              <div id="calc-protection-row" class="flex justify-between hidden">
+              <div id="calc-protection-row" class="flex justify-between items-center hidden">
                 <span>Proteksi & Pengemasan Lab:</span>
-                <span id="calc-protection" class="font-bold text-slate-800">Rp 0</span>
+                <span id="calc-protection" class="font-black text-slate-900 font-mono-code text-xs sm:text-sm">Rp 0</span>
               </div>
-              <div id="calc-discount-row" class="flex justify-between text-rose-600 font-bold hidden">
+              <div id="calc-discount-row" class="flex justify-between items-center text-rose-600 font-bold hidden">
                 <span>Potongan Voucher Promo:</span>
-                <span id="calc-discount">-Rp 0</span>
+                <span id="calc-discount" class="font-mono-code font-black">-Rp 0</span>
               </div>
-              <div class="flex justify-between text-slate-500">
+              <div class="flex justify-between items-center text-slate-600">
                 <span>Biaya Layanan Sistem:</span>
-                <span class="font-bold text-slate-700">Rp 1.000</span>
+                <span class="font-bold text-slate-800 font-mono-code">Rp 1.000</span>
               </div>
             </div>
 
             <!-- Grand Total Container -->
             <div class="pt-4 border-t-2 border-slate-200 flex items-baseline justify-between">
               <div>
-                <span class="text-xs text-slate-500 font-bold block">TOTAL AKHIR PEMBAYARAN:</span>
-                <span class="text-[10px] text-teal-700 font-medium">(Sudah termasuk barang + ongkir)</span>
+                <span class="text-xs sm:text-sm text-slate-700 font-black block">TOTAL AKHIR PEMBAYARAN:</span>
+                <span class="text-xs text-teal-700 font-semibold">(Sudah termasuk barang + ongkir)</span>
               </div>
-              <span id="calc-grand-total" class="text-2xl font-black text-teal-800 font-mono-code">Rp 0</span>
+              <span id="calc-grand-total" class="text-2xl sm:text-3xl font-black text-teal-800 font-mono-code">Rp 0</span>
             </div>
 
             <!-- Final Action Buttons -->
             <button 
-              type="button"
+              type="button" 
               onclick="processPaymentOrder(false, 'payment')"
               class="w-full py-4 px-4 rounded-2xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-sm sm:text-base flex items-center justify-center gap-2 shadow-xl shadow-teal-600/30 active:scale-[0.98] transition-all"
             >
@@ -549,19 +547,19 @@
             </button>
 
             <button 
-              type="button"
+              type="button" 
               onclick="processPaymentOrder(false, 'status')"
-              class="w-full py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors border border-slate-300"
+              class="w-full py-3 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-colors border border-slate-300"
             >
-              <span class="material-symbols-outlined text-base">bolt</span>
+              <span class="material-symbols-outlined text-lg">bolt</span>
               Bayar Instan Sesuai Pilihan di Atas
             </button>
 
             <!-- Guarantee text -->
-            <div class="text-center text-[11px] text-slate-400 space-y-1">
-              <p>Dengan mengklik bayar, Anda menyetujui <a href="#" class="underline hover:text-teal-700">Syarat & Kebijakan Distribusi B3</a>.</p>
-              <p class="text-emerald-700 font-semibold flex items-center justify-center gap-1">
-                <span class="material-symbols-outlined text-xs">verified</span>
+            <div class="text-center text-xs text-slate-500 space-y-1 font-medium">
+              <p>Dengan mengklik bayar, Anda menyetujui <a href="#" class="underline hover:text-teal-700 font-semibold">Syarat & Kebijakan Distribusi B3</a>.</p>
+              <p class="text-emerald-800 font-bold flex items-center justify-center gap-1">
+                <span class="material-symbols-outlined text-sm">verified</span>
                 Faktur Pajak Elektronik diterbitkan otomatis
               </p>
             </div>
@@ -569,6 +567,10 @@
           </div>
 
         </div>
+
+      </div>
+
+    </div>   </div>
 
       </div>
 

@@ -559,6 +559,50 @@
             <!-- Preset Gambar Cepat 8 Opsi -->
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="preset-images-container">
               
+              <label class="relative border-2 border-slate-200 bg-white hover:border-slate-300 rounded-2xl p-2.5 cursor-pointer transition-all flex flex-col items-center text-center group preset-img-label">
+                <input type="radio" name="product-preset-img" value="images/pipet_tetes.jpg" class="hidden" onchange="handlePresetImgChange('images/pipet_tetes.jpg', this)" />
+                <div class="aspect-square w-full rounded-xl overflow-hidden bg-slate-100 mb-2">
+                  <img src="images/pipet_tetes.jpg" alt="Pipet Tetes Kaca" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                </div>
+                <span class="text-xs sm:text-sm font-bold text-slate-800">Pipet Tetes Kaca</span>
+                <span class="selected-badge text-xs text-teal-700 font-black hidden flex items-center gap-0.5 mt-1">
+                  <span class="material-symbols-outlined text-sm">check_circle</span> Terpilih
+                </span>
+              </label>
+
+              <label class="relative border-2 border-slate-200 bg-white hover:border-slate-300 rounded-2xl p-2.5 cursor-pointer transition-all flex flex-col items-center text-center group preset-img-label">
+                <input type="radio" name="product-preset-img" value="images/aquades_5l.jpg" class="hidden" onchange="handlePresetImgChange('images/aquades_5l.jpg', this)" />
+                <div class="aspect-square w-full rounded-xl overflow-hidden bg-slate-100 mb-2">
+                  <img src="images/aquades_5l.jpg" alt="Aquades 5L" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                </div>
+                <span class="text-xs sm:text-sm font-bold text-slate-800">Aquades 5L Jerigen</span>
+                <span class="selected-badge text-xs text-teal-700 font-black hidden flex items-center gap-0.5 mt-1">
+                  <span class="material-symbols-outlined text-sm">check_circle</span> Terpilih
+                </span>
+              </label>
+
+              <label class="relative border-2 border-slate-200 bg-white hover:border-slate-300 rounded-2xl p-2.5 cursor-pointer transition-all flex flex-col items-center text-center group preset-img-label">
+                <input type="radio" name="product-preset-img" value="images/isopropyl_500ml.jpg" class="hidden" onchange="handlePresetImgChange('images/isopropyl_500ml.jpg', this)" />
+                <div class="aspect-square w-full rounded-xl overflow-hidden bg-slate-100 mb-2">
+                  <img src="images/isopropyl_500ml.jpg" alt="IPA 500 mL" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                </div>
+                <span class="text-xs sm:text-sm font-bold text-slate-800">IPA 500 mL Botol Lab</span>
+                <span class="selected-badge text-xs text-teal-700 font-black hidden flex items-center gap-0.5 mt-1">
+                  <span class="material-symbols-outlined text-sm">check_circle</span> Terpilih
+                </span>
+              </label>
+
+              <label class="relative border-2 border-slate-200 bg-white hover:border-slate-300 rounded-2xl p-2.5 cursor-pointer transition-all flex flex-col items-center text-center group preset-img-label">
+                <input type="radio" name="product-preset-img" value="images/isopropyl_1l.jpg" class="hidden" onchange="handlePresetImgChange('images/isopropyl_1l.jpg', this)" />
+                <div class="aspect-square w-full rounded-xl overflow-hidden bg-slate-100 mb-2">
+                  <img src="images/isopropyl_1l.jpg" alt="IPA 1L" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                </div>
+                <span class="text-xs sm:text-sm font-bold text-slate-800">IPA 1L Jerigen Lab</span>
+                <span class="selected-badge text-xs text-teal-700 font-black hidden flex items-center gap-0.5 mt-1">
+                  <span class="material-symbols-outlined text-sm">check_circle</span> Terpilih
+                </span>
+              </label>
+
               <label class="relative border-2 border-teal-600 bg-teal-50/50 rounded-2xl p-2.5 cursor-pointer transition-all flex flex-col items-center text-center group preset-img-label">
                 <input type="radio" name="product-preset-img" value="images/microscope.jpg" checked class="hidden" onchange="handlePresetImgChange('images/microscope.jpg', this)" />
                 <div class="aspect-square w-full rounded-xl overflow-hidden bg-slate-100 mb-2">
@@ -571,9 +615,9 @@
               </label>
 
               <label class="relative border-2 border-slate-200 bg-white hover:border-slate-300 rounded-2xl p-2.5 cursor-pointer transition-all flex flex-col items-center text-center group preset-img-label">
-                <input type="radio" name="product-preset-img" value="images/ethanol.jpg" class="hidden" onchange="handlePresetImgChange('images/ethanol.jpg', this)" />
+                <input type="radio" name="product-preset-img" value="images/ethanol_merck_emsure.jpg" class="hidden" onchange="handlePresetImgChange('images/ethanol_merck_emsure.jpg', this)" />
                 <div class="aspect-square w-full rounded-xl overflow-hidden bg-slate-100 mb-2">
-                  <img src="images/ethanol.jpg" alt="Reagen Kimia" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                  <img src="images/ethanol_merck_emsure.jpg" alt="Reagen Kimia" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
                 </div>
                 <span class="text-xs sm:text-sm font-bold text-slate-800">Reagen Botol Kaca PA</span>
                 <span class="selected-badge text-xs text-teal-700 font-black hidden flex items-center gap-0.5 mt-1">
@@ -582,9 +626,9 @@
               </label>
 
               <label class="relative border-2 border-slate-200 bg-white hover:border-slate-300 rounded-2xl p-2.5 cursor-pointer transition-all flex flex-col items-center text-center group preset-img-label">
-                <input type="radio" name="product-preset-img" value="images/erlenmeyer.jpg" class="hidden" onchange="handlePresetImgChange('images/erlenmeyer.jpg', this)" />
+                <input type="radio" name="product-preset-img" value="images/erlenmeyer_boro33.jpg" class="hidden" onchange="handlePresetImgChange('images/erlenmeyer_boro33.jpg', this)" />
                 <div class="aspect-square w-full rounded-xl overflow-hidden bg-slate-100 mb-2">
-                  <img src="images/erlenmeyer.jpg" alt="Glassware" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                  <img src="images/erlenmeyer_boro33.jpg" alt="Glassware" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
                 </div>
                 <span class="text-xs sm:text-sm font-bold text-slate-800">Glassware Erlenmeyer</span>
                 <span class="selected-badge text-xs text-teal-700 font-black hidden flex items-center gap-0.5 mt-1">
@@ -642,6 +686,61 @@
                   <img src="images/nitrile_gloves.jpg" alt="Sarung Tangan" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
                 </div>
                 <span class="text-xs sm:text-sm font-bold text-slate-800">Sarung Tangan Nitril</span>
+                <span class="selected-badge text-xs text-teal-700 font-black hidden flex items-center gap-0.5 mt-1">
+                  <span class="material-symbols-outlined text-sm">check_circle</span> Terpilih
+                </span>
+              </label>
+
+              <label class="relative border-2 border-slate-200 bg-white hover:border-slate-300 rounded-2xl p-2.5 cursor-pointer transition-all flex flex-col items-center text-center group preset-img-label">
+                <input type="radio" name="product-preset-img" value="images/measuring_cylinder_100ml.jpg" class="hidden" onchange="handlePresetImgChange('images/measuring_cylinder_100ml.jpg', this)" />
+                <div class="aspect-square w-full rounded-xl overflow-hidden bg-slate-100 mb-2">
+                  <img src="images/measuring_cylinder_100ml.jpg" alt="Gelas Ukur Kaca" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                </div>
+                <span class="text-xs sm:text-sm font-bold text-slate-800">Gelas Ukur Kaca</span>
+                <span class="selected-badge text-xs text-teal-700 font-black hidden flex items-center gap-0.5 mt-1">
+                  <span class="material-symbols-outlined text-sm">check_circle</span> Terpilih
+                </span>
+              </label>
+
+              <label class="relative border-2 border-slate-200 bg-white hover:border-slate-300 rounded-2xl p-2.5 cursor-pointer transition-all flex flex-col items-center text-center group preset-img-label">
+                <input type="radio" name="product-preset-img" value="images/volumetric_flask_50ml.jpg" class="hidden" onchange="handlePresetImgChange('images/volumetric_flask_50ml.jpg', this)" />
+                <div class="aspect-square w-full rounded-xl overflow-hidden bg-slate-100 mb-2">
+                  <img src="images/volumetric_flask_50ml.jpg" alt="Labu Ukur Kaca" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                </div>
+                <span class="text-xs sm:text-sm font-bold text-slate-800">Labu Ukur Volumetrik</span>
+                <span class="selected-badge text-xs text-teal-700 font-black hidden flex items-center gap-0.5 mt-1">
+                  <span class="material-symbols-outlined text-sm">check_circle</span> Terpilih
+                </span>
+              </label>
+
+              <label class="relative border-2 border-slate-200 bg-white hover:border-slate-300 rounded-2xl p-2.5 cursor-pointer transition-all flex flex-col items-center text-center group preset-img-label">
+                <input type="radio" name="product-preset-img" value="images/beaker_150ml.jpg" class="hidden" onchange="handlePresetImgChange('images/beaker_150ml.jpg', this)" />
+                <div class="aspect-square w-full rounded-xl overflow-hidden bg-slate-100 mb-2">
+                  <img src="images/beaker_150ml.jpg" alt="Beaker Glass" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                </div>
+                <span class="text-xs sm:text-sm font-bold text-slate-800">Beaker Glass Piala</span>
+                <span class="selected-badge text-xs text-teal-700 font-black hidden flex items-center gap-0.5 mt-1">
+                  <span class="material-symbols-outlined text-sm">check_circle</span> Terpilih
+                </span>
+              </label>
+
+              <label class="relative border-2 border-slate-200 bg-white hover:border-slate-300 rounded-2xl p-2.5 cursor-pointer transition-all flex flex-col items-center text-center group preset-img-label">
+                <input type="radio" name="product-preset-img" value="images/naoh_1kg.jpg" class="hidden" onchange="handlePresetImgChange('images/naoh_1kg.jpg', this)" />
+                <div class="aspect-square w-full rounded-xl overflow-hidden bg-slate-100 mb-2">
+                  <img src="images/naoh_1kg.jpg" alt="Bahan Kimia Padat / NaOH" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                </div>
+                <span class="text-xs sm:text-sm font-bold text-slate-800">Reagen Padat / NaOH</span>
+                <span class="selected-badge text-xs text-teal-700 font-black hidden flex items-center gap-0.5 mt-1">
+                  <span class="material-symbols-outlined text-sm">check_circle</span> Terpilih
+                </span>
+              </label>
+
+              <label class="relative border-2 border-slate-200 bg-white hover:border-slate-300 rounded-2xl p-2.5 cursor-pointer transition-all flex flex-col items-center text-center group preset-img-label">
+                <input type="radio" name="product-preset-img" value="images/nutrient_agar_merck.jpg" class="hidden" onchange="handlePresetImgChange('images/nutrient_agar_merck.jpg', this)" />
+                <div class="aspect-square w-full rounded-xl overflow-hidden bg-slate-100 mb-2">
+                  <img src="images/nutrient_agar_merck.jpg" alt="Media Mikrobiologi / NA" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                </div>
+                <span class="text-xs sm:text-sm font-bold text-slate-800">Nutrient Agar Merck</span>
                 <span class="selected-badge text-xs text-teal-700 font-black hidden flex items-center gap-0.5 mt-1">
                   <span class="material-symbols-outlined text-sm">check_circle</span> Terpilih
                 </span>
@@ -865,9 +964,9 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="js/products.js"></script>
-  <script src="js/store.js"></script>
-  <script src="js/users.js"></script>
+  <script src="js/products.js?v=20261017"></script>
+  <script src="js/store.js?v=20261017"></script>
+  <script src="js/users.js?v=20261017"></script>
 
   <script>
     let activeSellerTab = 'catalog';

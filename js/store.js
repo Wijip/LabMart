@@ -6,7 +6,7 @@ const STORAGE_KEYS = {
   ACTIVE_ORDER: 'labmart_active_order_v1',
   ORDERS_HISTORY: 'labmart_orders_history_v1',
   APPLIED_COUPON: 'labmart_coupon_v1',
-  SELLER_PRODUCTS: 'labmart_seller_products_v1'
+  SELLER_PRODUCTS: 'labmart_seller_products_v2'
 };
 
 // Format currency into Indonesian Rupiah (Rp)
@@ -55,7 +55,8 @@ function getSellerProducts() {
           storeCity: "Tangerang / Jabodetabek",
           storeRating: 4.9,
           images: [
-            "images/erlenmeyer.jpg"
+            "images/pipet_tetes.jpg",
+            "images/pipet_tetes.jpg"
           ],
           variants: [
             { name: "Pack 10 Pcs Pipet Tetes Kaca", extraPrice: 0, stock: 60 },
@@ -80,6 +81,17 @@ function getSellerProducts() {
       if (list.length === 0) {
         localStorage.removeItem(STORAGE_KEYS.SELLER_PRODUCTS);
         return getSellerProducts();
+      }
+      let migrated = false;
+      list = list.map(p => {
+        if (p.id === 'LAB-SEL-101' && (!p.images || p.images[0] === 'images/erlenmeyer.jpg' || !p.images[0].includes('pipet_tetes'))) {
+          migrated = true;
+          return { ...p, images: ['images/pipet_tetes.jpg', 'images/pipet_tetes.jpg'] };
+        }
+        return p;
+      });
+      if (migrated) {
+        localStorage.setItem(STORAGE_KEYS.SELLER_PRODUCTS, JSON.stringify(list));
       }
       return list;
     }
@@ -122,12 +134,25 @@ function deleteSellerProduct(productId) {
 // Get All Products (Default Catalog + Seller Added Products)
 function getAllProducts() {
   const sellerProducts = getSellerProducts();
-  return [...sellerProducts, ...LAB_PRODUCTS];
+  const sellerIds = new Set(sellerProducts.map(p => p.id));
+  const uniqueLabProducts = LAB_PRODUCTS.filter(p => !sellerIds.has(p.id));
+  return [...sellerProducts, ...uniqueLabProducts];
 }
 
-// Get Product by ID (Searches in combined products)
+// Get Product by ID (Searches in combined products with smart alias support)
 function getProductById(id) {
-  return getAllProducts().find(p => p.id === id) || null;
+  if (!id) return null;
+  const all = getAllProducts();
+  const direct = all.find(p => p.id === id);
+  if (direct) return direct;
+
+  // Numeric index aliases for convenient demo links (e.g. ?id=1, ?id=2)
+  if (id === '1') return all.find(p => p.id === 'LAB-SEL-101') || all[0];
+  if (id === '2') return all.find(p => p.id === 'LAB-001') || all[1];
+  if (id === '3') return all.find(p => p.id === 'LAB-002') || all[2];
+  if (id === '4') return all.find(p => p.id === 'LAB-003') || all[3];
+
+  return all.find(p => p.id.toLowerCase() === id.toLowerCase()) || null;
 }
 
 // Cart Storage Functions

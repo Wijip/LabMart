@@ -87,7 +87,7 @@ Seluruh produk instrumen jutaan rupiah dari versi awal telah dieleminasi. Sistem
 | `LAB-004` | **Alkohol 70% 1L** | Etanol Antiseptik & Desinfektan Lab LAF | Botol HDPE Bersegel 1 Liter | **Rp 48.000** |
 | `LAB-005` | **White Oil 1L** | Minyak Mineral Parafin Cair Murni Tanpa Bau | Botol Lab Kedap 1 Liter | **Rp 50.000** |
 | `LAB-006` | **Sodium Sulfite 1 kg** | Natrium Sulfit (Na2SO3) Murni Anhidrat | Kantong Kedap 1.000 g | **Rp 30.000** |
-| `LAB-007` | **Polivinyl Alcohol Polimer 100 gram** | PVA Polimer Sintetis Hidrolisis Tinggi | Botol Segel Lab 100 g | **Rp 30.000** |
+| `LAB-007` | **Polivinyl Alcohol Polimer 100 gram** | PVA Polimer Sintetis Hidrolisis Tinggi | Resealable Pouch 100 g (3.52 oz) | **Rp 30.000** |
 | `LAB-008` | **Polivinyl Alcohol Polimer 500 gram** | PVA Serbuk Larut Air Panas Kemasan Praktikum | Toples Kedap Udara 500 g | **Rp 50.000** |
 | `LAB-009` | **NaOH 1kg** | Natrium Hidroksida Flakes Murni 98% (Basa Kuat) | Kantong Segel Ganda 1 kg | **Rp 30.000** |
 | `LAB-010` | **Cobalt Silicate 100 gram** | Kobalt Silikat (Co2SiO4) Sintesis Anorganik | Botol Spesimen 100 g | **Rp 72.000** |

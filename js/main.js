@@ -143,7 +143,6 @@ function renderProducts() {
             src="${product.images[0]}" 
             alt="${product.name}" 
             class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-500"
-            loading="lazy"
             onerror="this.onerror=null; this.src='images/microscope.jpg';"
           />
           <div class="absolute inset-0 bg-black/0 group-hover/img:bg-black/10 transition-colors"></div>

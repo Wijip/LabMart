@@ -2,6 +2,44 @@
 // Seluruh produk jutaan telah dieliminasi, mempertahankan produk < 1jt dan 20 item bahan & alat lab baru.
 
 const LAB_PRODUCTS = [
+  {
+    id: "LAB-SEL-101",
+    name: "Pipet Tetes Kaca Panjang 15 cm dengan Karet Merah (Pack 10 Pcs)",
+    category: "glassware",
+    categoryLabel: "Alat Kaca & Plastik",
+    brand: "SmartLab Scientific",
+    price: 25000,
+    originalPrice: 32000,
+    discount: 22,
+    rating: 4.9,
+    reviewsCount: 45,
+    soldCount: "380+ terjual",
+    stock: 60,
+    weight: 150,
+    requiresColdChain: false,
+    requiresWoodenCrate: false,
+    grade: "Kaca Borosilikat Tahan Reagen Kimia",
+    casNumber: "-",
+    badge: "Produk Mitra Resmi",
+    isSellerProduct: true,
+    sellerEmail: "seller@smartlab.co.id",
+    storeName: "SmartLab Official Store",
+    storeCity: "Tangerang / Jabodetabek",
+    storeRating: 4.9,
+    images: ["images/pipet_tetes.jpg", "images/pipet_tetes.jpg"],
+    variants: [
+      { name: "Pack 10 Pcs Pipet Tetes Kaca", extraPrice: 0, stock: 60 },
+      { name: "Pack 25 Pcs Pipet Tetes Kaca (Hemat)", extraPrice: 28000, stock: 35 }
+    ],
+    shortDescription: "Pipet tetes kaca tebal dengan ujung presisi dan karet hisap merah lentur untuk penambahan larutan tetes demi tetes secara teliti.",
+    description: `Pipet Tetes Kaca 15 cm SmartLab dirancang untuk memindahkan cairan dalam volume kecil secara akurat saat titrasi atau pengujian kualitatif. Kaca berkualitas tahan terhadap asam encer maupun pekat.`,
+    specifications: {
+      "Panjang Batang": "150 mm (15 cm)",
+      "Material": "Kaca Netral Tahan Reagen + Karet Kualitas Tinggi",
+      "Isi Kemasan": "10 Pcs Pipet + Karet Hisap Terpasang"
+    },
+    safetyNotice: "Lepas karet hisap dan cuci kaca setelah digunakan dengan larutan asam atau basa kuat."
+  },
   // ==========================================
   // --- DAFTAR BAHAN - BAHAN LAB (13 ITEM) ---
   // ==========================================
@@ -27,7 +65,7 @@ const LAB_PRODUCTS = [
     storeName: "SmartLab Official Store",
     storeCity: "Tangerang / Jabodetabek",
     storeRating: 4.9,
-    images: ["images/ethanol.jpg", "images/ethanol.jpg"],
+    images: ["images/aquades_5l.jpg", "images/aquades_5l.jpg"],
     variants: [
       { name: "Jerigen Segel 5 Liter", extraPrice: 0, stock: 150 }
     ],
@@ -67,7 +105,7 @@ Sangat ideal digunakan sebagai pelarut utama dalam pembuatan larutan standar kim
     storeName: "SmartLab Official Store",
     storeCity: "Tangerang / Jabodetabek",
     storeRating: 4.9,
-    images: ["images/ethanol.jpg", "images/ethanol.jpg"],
+    images: ["images/isopropyl_500ml.jpg", "images/isopropyl_500ml.jpg"],
     variants: [
       { name: "Botol Lab 500 mL", extraPrice: 0, stock: 85 }
     ],
@@ -104,7 +142,7 @@ Sangat ideal digunakan sebagai pelarut utama dalam pembuatan larutan standar kim
     storeName: "SmartLab Official Store",
     storeCity: "Tangerang / Jabodetabek",
     storeRating: 4.9,
-    images: ["images/ethanol.jpg", "images/ethanol.jpg"],
+    images: ["images/isopropyl_1l.jpg", "images/isopropyl_1l.jpg"],
     variants: [
       { name: "Botol Segel 1 Liter", extraPrice: 0, stock: 120 }
     ],
@@ -140,7 +178,7 @@ Sangat ideal digunakan sebagai pelarut utama dalam pembuatan larutan standar kim
     storeName: "SmartLab Official Store",
     storeCity: "Tangerang / Jabodetabek",
     storeRating: 4.9,
-    images: ["images/ethanol.jpg", "images/ethanol.jpg"],
+    images: ["images/alkohol_70.jpg", "images/alkohol_70.jpg"],
     variants: [
       { name: "Botol 1 Liter Segel", extraPrice: 0, stock: 200 }
     ],
@@ -176,7 +214,7 @@ Sangat ideal digunakan sebagai pelarut utama dalam pembuatan larutan standar kim
     storeName: "SmartLab Official Store",
     storeCity: "Tangerang / Jabodetabek",
     storeRating: 4.9,
-    images: ["images/ethanol.jpg", "images/ethanol.jpg"],
+    images: ["images/white_oil.jpg", "images/white_oil.jpg"],
     variants: [
       { name: "Botol Lab 1 Liter", extraPrice: 0, stock: 90 }
     ],
@@ -212,7 +250,7 @@ Sangat ideal digunakan sebagai pelarut utama dalam pembuatan larutan standar kim
     storeName: "SmartLab Official Store",
     storeCity: "Tangerang / Jabodetabek",
     storeRating: 4.9,
-    images: ["images/nutrient_agar.jpg", "images/nutrient_agar.jpg"],
+    images: ["images/sodium_sulfite.jpg", "images/sodium_sulfite.jpg"],
     variants: [
       { name: "Pack Segel 1 Kilogram", extraPrice: 0, stock: 110 }
     ],
@@ -232,7 +270,7 @@ Sangat ideal digunakan sebagai pelarut utama dalam pembuatan larutan standar kim
     name: "Polivinyl Alcohol Polimer 100 gram",
     category: "chemicals",
     categoryLabel: "Bahan Kimia & Reagen",
-    brand: "PolySci Synthesis",
+    brand: "MYOC / PolySci Polymer",
     price: 30000,
     originalPrice: 38000,
     discount: 21,
@@ -243,23 +281,24 @@ Sangat ideal digunakan sebagai pelarut utama dalam pembuatan larutan standar kim
     weight: 120,
     requiresColdChain: false,
     requiresWoodenCrate: false,
-    grade: "PVA Hidrolisis Tinggi (Mw ~89.000)",
+    grade: "PVA Hidrolisis Tinggi (Cosmetic & Lab Grade)",
     casNumber: "CAS 9002-89-5",
     badge: "Polimer Sintetik Serbaguna",
     storeName: "SmartLab Official Store",
     storeCity: "Tangerang / Jabodetabek",
     storeRating: 4.9,
-    images: ["images/nutrient_agar.jpg", "images/nutrient_agar.jpg"],
+    images: ["images/pva_100g_pouch.jpg", "images/pva_100g_pouch.jpg"],
     variants: [
-      { name: "Kemasan Botol Lab 100 Gram", extraPrice: 0, stock: 80 }
+      { name: "Kemasan Standing Pouch 100 Gram (3.52 oz)", extraPrice: 0, stock: 80 }
     ],
-    shortDescription: "Polimer PVA serbuk putih larut air panas untuk pembuatan membran hidrogel, perekat analitik, dan penelitian biomaterial.",
-    description: `Polivinyl Alcohol (PVA) 100 gram merupakan polimer sintetis biokompatibel yang memiliki daya rekat kuat dan kemampuan pembentukan film fleksibel transparan. Sering digunakan dalam praktikum sintesis slime hidrogel, elektrospinning nanofiber, dan enkapsulasi obat.`,
+    shortDescription: "Polimer PVA serbuk putih larut air panas kemasan standing pouch 100g (3.52 oz) untuk sintesis hidrogel, kosmetik, film fleksibel, dan riset polimer.",
+    description: `Polivinyl Alcohol (PVA) 100 gram (Net Wt. 3.52 oz / 100g) adalah polimer sintetis berkualitas tinggi biokompatibel dengan derajat hidrolisis optimal. Sangat ideal untuk aplikasi pembuatan membran hidrogel, perekat presisi, formulasi kosmetik (peel-off mask), dan elektrospinning nanofiber. Dikemas dalam standing pouch kedap udara untuk menjaga stabilitas dan higroskopisitas serbuk.`,
     specifications: {
       "Derajat Hidrolisis": "87.0 - 89.0 mol %",
       "Viskositas Larutan 4%": "20.5 - 24.5 mPa.s",
       "Kadar Abu": "≤ 0.5 %",
       "Kadar Air": "≤ 5.0 %",
+      "Kemasan": "Resealable Standing Pouch 100g (3.52 oz)",
       "No. CAS": "9002-89-5"
     },
     safetyNotice: "Larutkan dalam aquades hangat bersuhu 80-90°C dengan pengadukan konstan magnetic stirrer."
@@ -286,7 +325,7 @@ Sangat ideal digunakan sebagai pelarut utama dalam pembuatan larutan standar kim
     storeName: "SmartLab Official Store",
     storeCity: "Tangerang / Jabodetabek",
     storeRating: 4.9,
-    images: ["images/nutrient_agar.jpg", "images/nutrient_agar.jpg"],
+    images: ["images/polyvinyl_alcohol_500g.jpg", "images/polyvinyl_alcohol_500g.jpg"],
     variants: [
       { name: "Toples Segel 500 Gram", extraPrice: 0, stock: 75 }
     ],
@@ -322,7 +361,7 @@ Sangat ideal digunakan sebagai pelarut utama dalam pembuatan larutan standar kim
     storeName: "SmartLab Official Store",
     storeCity: "Tangerang / Jabodetabek",
     storeRating: 4.9,
-    images: ["images/nutrient_agar.jpg", "images/nutrient_agar.jpg"],
+    images: ["images/naoh_1kg.jpg", "images/naoh_1kg.jpg"],
     variants: [
       { name: "Kemasan Kantong Tebal 1 Kg", extraPrice: 0, stock: 250 }
     ],
@@ -359,7 +398,7 @@ Sangat ideal digunakan sebagai pelarut utama dalam pembuatan larutan standar kim
     storeName: "SmartLab Official Store",
     storeCity: "Tangerang / Jabodetabek",
     storeRating: 4.9,
-    images: ["images/nutrient_agar.jpg", "images/nutrient_agar.jpg"],
+    images: ["images/cobalt_silicate.jpg", "images/cobalt_silicate.jpg"],
     variants: [
       { name: "Kemasan Botol Kedap 100 Gram", extraPrice: 0, stock: 50 }
     ],
@@ -395,7 +434,7 @@ Sangat ideal digunakan sebagai pelarut utama dalam pembuatan larutan standar kim
     storeName: "SmartLab Official Store",
     storeCity: "Tangerang / Jabodetabek",
     storeRating: 4.9,
-    images: ["images/nutrient_agar.jpg", "images/nutrient_agar.jpg"],
+    images: ["images/sodium_benzoate.jpg", "images/sodium_benzoate.jpg"],
     variants: [
       { name: "Pack Segel 1 Kilogram", extraPrice: 0, stock: 130 }
     ],
@@ -431,7 +470,7 @@ Sangat ideal digunakan sebagai pelarut utama dalam pembuatan larutan standar kim
     storeName: "SmartLab Official Store",
     storeCity: "Tangerang / Jabodetabek",
     storeRating: 4.9,
-    images: ["images/nutrient_agar.jpg", "images/nutrient_agar.jpg"],
+    images: ["images/sodium_sulfate.jpg", "images/sodium_sulfate.jpg"],
     variants: [
       { name: "Pack 1 Kilogram", extraPrice: 0, stock: 180 }
     ],
@@ -467,7 +506,7 @@ Sangat ideal digunakan sebagai pelarut utama dalam pembuatan larutan standar kim
     storeName: "SmartLab Official Store",
     storeCity: "Tangerang / Jabodetabek",
     storeRating: 4.9,
-    images: ["images/nutrient_agar.jpg", "images/nutrient_agar.jpg"],
+    images: ["images/calcium_carbonate.jpg", "images/calcium_carbonate.jpg"],
     variants: [
       { name: "Pack 1 Kilogram", extraPrice: 0, stock: 300 }
     ],
@@ -508,7 +547,7 @@ Sangat ideal digunakan sebagai pelarut utama dalam pembuatan larutan standar kim
     storeName: "SmartLab Official Store",
     storeCity: "Tangerang / Jabodetabek",
     storeRating: 4.9,
-    images: ["images/nitrile_gloves.jpg", "images/nitrile_gloves.jpg"],
+    images: ["images/heat_gloves.jpg", "images/heat_gloves.jpg"],
     variants: [
       { name: "Sepasang (Ukuran All Size)", extraPrice: 0, stock: 200 }
     ],
@@ -544,7 +583,7 @@ Sangat ideal digunakan sebagai pelarut utama dalam pembuatan larutan standar kim
     storeName: "Iwaki Scientific Glass Official",
     storeCity: "Kota Surabaya",
     storeRating: 4.9,
-    images: ["images/erlenmeyer.jpg", "images/erlenmeyer.jpg"],
+    images: ["images/measuring_cylinder_25ml.jpg", "images/measuring_cylinder_25ml.jpg"],
     variants: [
       { name: "Kapasitas 25 mL Dasar Heksagonal", extraPrice: 0, stock: 110 }
     ],
@@ -580,7 +619,7 @@ Sangat ideal digunakan sebagai pelarut utama dalam pembuatan larutan standar kim
     storeName: "Iwaki Scientific Glass Official",
     storeCity: "Kota Surabaya",
     storeRating: 4.9,
-    images: ["images/erlenmeyer.jpg", "images/erlenmeyer.jpg"],
+    images: ["images/measuring_cylinder_50ml.jpg", "images/measuring_cylinder_50ml.jpg"],
     variants: [
       { name: "Kapasitas 50 mL Dasar Heksagonal", extraPrice: 0, stock: 95 }
     ],
@@ -616,7 +655,7 @@ Sangat ideal digunakan sebagai pelarut utama dalam pembuatan larutan standar kim
     storeName: "Iwaki Scientific Glass Official",
     storeCity: "Kota Surabaya",
     storeRating: 4.9,
-    images: ["images/erlenmeyer.jpg", "images/erlenmeyer.jpg"],
+    images: ["images/measuring_cylinder_100ml.jpg", "images/measuring_cylinder_100ml.jpg"],
     variants: [
       { name: "Kapasitas 100 mL Standar", extraPrice: 0, stock: 80 }
     ],
@@ -652,7 +691,7 @@ Sangat ideal digunakan sebagai pelarut utama dalam pembuatan larutan standar kim
     storeName: "PlastiLab Sarana Mitra",
     storeCity: "Kota Bandung",
     storeRating: 4.8,
-    images: ["images/ethanol.jpg", "images/ethanol.jpg"],
+    images: ["images/waste_container_1l.jpg", "images/waste_container_1l.jpg"],
     variants: [
       { name: "Jerigen 1 Liter + Tutup Segel", extraPrice: 0, stock: 150 }
     ],
@@ -688,7 +727,7 @@ Sangat ideal digunakan sebagai pelarut utama dalam pembuatan larutan standar kim
     storeName: "Iwaki Scientific Glass Official",
     storeCity: "Kota Surabaya",
     storeRating: 4.9,
-    images: ["images/erlenmeyer.jpg", "images/erlenmeyer.jpg"],
+    images: ["images/volumetric_flask_50ml.jpg", "images/volumetric_flask_50ml.jpg"],
     variants: [
       { name: "Labu Ukur 50 mL + Stopper Plastik PE", extraPrice: 0, stock: 70 }
     ],
@@ -724,7 +763,7 @@ Sangat ideal digunakan sebagai pelarut utama dalam pembuatan larutan standar kim
     storeName: "Iwaki Scientific Glass Official",
     storeCity: "Kota Surabaya",
     storeRating: 4.9,
-    images: ["images/erlenmeyer.jpg", "images/erlenmeyer.jpg"],
+    images: ["images/beaker_150ml.jpg", "images/beaker_150ml.jpg"],
     variants: [
       { name: "Beaker Glass 150 mL (Bentuk Rendah)", extraPrice: 0, stock: 130 }
     ],
@@ -747,7 +786,7 @@ Sangat ideal digunakan sebagai pelarut utama dalam pembuatan larutan standar kim
     name: "Etanol (Ethyl Alcohol) 96% Pro Analisis (PA) Grade 1 Liter",
     category: "chemicals",
     categoryLabel: "Bahan Kimia & Reagen",
-    brand: "Merck KGaA / SmartLab",
+    brand: "Merck KGaA / EMSURE®",
     price: 345000,
     originalPrice: 390000,
     discount: 11,
@@ -764,20 +803,21 @@ Sangat ideal digunakan sebagai pelarut utama dalam pembuatan larutan standar kim
     storeName: "Merck Reagents Authorized Distributor",
     storeCity: "Kota Bandung",
     storeRating: 5.0,
-    images: ["images/ethanol.jpg", "images/ethanol.jpg"],
+    images: ["images/ethanol_merck_emsure.jpg", "images/ethanol_merck_emsure.jpg"],
     variants: [
-      { name: "Botol Kaca Cokelat 1 Liter", extraPrice: 0, stock: 50 },
+      { name: "Botol Kaca Cokelat 1 Liter (Segel Plastik Pabrik)", extraPrice: 0, stock: 50 },
       { name: "Jerigen HDPE 2.5 Liter (Hemat)", extraPrice: 420000, stock: 30 }
     ],
-    shortDescription: "Pelarut kimia etanol murni grade Pro Analisis (PA) kemurnian minimum 96.0% untuk keperluan ekstraksi, kromatografi, dan analisis spektroskopi.",
-    description: `Etanol 96% Grade Pro Analisis (PA) merupakan bahan kimia pelarut berstandar internasional yang diproduksi untuk memenuhi kebutuhan analisis laboratorium pengujian, kimia analitik, riset biologi molekuler, dan farmasi.
+    shortDescription: "Etanol murni 96% EMSURE® Grade Pro Analisis (PA) botol kaca cokelat bersegel plastik resmi untuk analisis laboratorium berstandar ISO/ACS.",
+    description: `Etanol 96% EMSURE® Merck KGaA Grade Pro Analisis (PA) merupakan pelarut kemurnian tinggi berstandar ACS dan ISO 6353/2. Didesain khusus untuk keperluan analisis kimia kuantitatif, kromatografi cairan/gas, spektroskopi UV-Vis, dan ekstraksi laboratorium farmasi.
     
-Dikemas dalam botol kaca gelap (amber glass) anti-sinar UV atau jerigen bersegel asli pabrik untuk mencegah kontaminasi dan penguapan. Setiap pembelian disertai dokumen Certificate of Analysis (CoA) resmi dan lembar Safety Data Sheet (SDS/MSDS).`,
+Dikemas dalam botol kaca gelap (amber glass) 1 Liter asli bersegel plastik pelindung tamper-evident untuk mencegah penguapan, fotodegradasi, dan kontaminasi. Setiap pembelian disertai dokumen Certificate of Analysis (CoA) resmi dan Safety Data Sheet (SDS/MSDS).`,
     specifications: {
       "Rumus Kimia": "C2H5OH (Massa molar: 46.07 g/mol)",
       "Kemurnian (Assay)": "≥ 96.0 % (v/v)",
       "Bentuk & Penampilan": "Cairan bening, tidak berwarna, aroma khas",
       "Densitas (20°C)": "0.805 - 0.812 g/cm³",
+      "Kemasan": "Botol Kaca Cokelat 1L Bersegel Plastik Pelindung",
       "No. CAS": "64-17-5",
       "Standar": "ACS Reagent, ISO 6353/2"
     },
@@ -788,7 +828,7 @@ Dikemas dalam botol kaca gelap (amber glass) anti-sinar UV atau jerigen bersegel
     name: "Labu Erlenmeyer Kaca Borosilikat 3.3 Tahan Panas 250ml & 500ml",
     category: "glassware",
     categoryLabel: "Alat Kaca & Plastik",
-    brand: "IWAKI Glass",
+    brand: "Boro 3.3 Labware",
     price: 68000,
     originalPrice: 85000,
     discount: 20,
@@ -805,16 +845,17 @@ Dikemas dalam botol kaca gelap (amber glass) anti-sinar UV atau jerigen bersegel
     storeName: "Iwaki Scientific Glass Official",
     storeCity: "Kota Surabaya",
     storeRating: 4.9,
-    images: ["images/erlenmeyer.jpg", "images/erlenmeyer.jpg"],
+    images: ["images/erlenmeyer_boro33.jpg", "images/erlenmeyer_boro33.jpg"],
     variants: [
-      { name: "Kapasitas 250 mL (Mulut Sempit)", extraPrice: 0, stock: 70 },
-      { name: "Kapasitas 500 mL (Mulut Sempit)", extraPrice: 28000, stock: 50 }
+      { name: "Kapasitas 250 mL (Boro 3.3 Mulut Sempit)", extraPrice: 0, stock: 70 },
+      { name: "Kapasitas 500 mL (Boro 3.3 Mulut Sempit)", extraPrice: 28000, stock: 50 }
     ],
-    shortDescription: "Labu Erlenmeyer borosilikat kualitas tinggi dengan dinding tebal tahan thermal shock untuk titrasi, pemanasan, dan pencampuran larutan kimia.",
-    description: `Labu Erlenmeyer IWAKI Glass dibuat dari bahan kaca borosilikat 3.3 berkualitas industri yang memiliki ketahanan luar biasa terhadap perubahan temperatur drastis (thermal shock) dan zat kimia korosif seperti asam dan basa kuat. Dilengkapi dengan skala takar putih permanen tahan gores.`,
+    shortDescription: "Gelas Erlenmeyer laboratorium kaca borosilikat 3.3 tahan thermal shock dan pemanasan tinggi untuk titrasi, reaksi kimia, dan pemanasan sampel.",
+    description: `Gelas labu konis Erlenmeyer dibuat dari material kaca borosilikat 3.3 (Boro 3.3) berkualitas tinggi sesuai standar DIN EN ISO 1773. Memiliki ketahanan termal tinggi terhadap pemanasan langsung hingga 500°C dan ketahanan luar biasa terhadap asam maupun basa kuat. Dilengkapi dengan gradasi takar putih permanen dan area penandaan pensil yang lebar.`,
     specifications: {
-      "Material": "Kaca Borosilikat 3.3",
-      "Ketahanan Suhu": "Maksimum 500°C (Toleransi kejut suhu hingga 120°C)",
+      "Material": "Kaca Borosilikat 3.3 (Boro 3.3)",
+      "Ketahanan Suhu": "Maksimum 500°C (Toleransi kejut suhu thermal shock 120°C)",
+      "Tipe Mulut": "Mulut Sempit Rim Rata (Narrow Neck Heavy Duty)",
       "Standar": "DIN EN ISO 1773"
     },
     safetyNotice: "Kemasan pengiriman dilengkapi bubble wrap tebal berlapis dan segel fragile."
@@ -937,7 +978,7 @@ Dikemas dalam botol kaca gelap (amber glass) anti-sinar UV atau jerigen bersegel
     name: "Media Nutrien Agar (Nutrient Agar - NA) Mikrobiologi 500 Gram",
     category: "chemicals",
     categoryLabel: "Bahan Kimia & Reagen",
-    brand: "Himedia Laboratories / Oxoid",
+    brand: "Merck KGaA / GranuCult",
     price: 520000,
     originalPrice: 590000,
     discount: 11,
@@ -948,24 +989,26 @@ Dikemas dalam botol kaca gelap (amber glass) anti-sinar UV atau jerigen bersegel
     weight: 600,
     requiresColdChain: false,
     requiresWoodenCrate: false,
-    grade: "Microbiology Culture Media Standard",
+    grade: "GranuCult® ISO 11133 / BAM Standards",
     casNumber: "-",
-    badge: "Formulasi ISO 11133",
+    badge: "Grade Analitik Merck KGaA",
     storeName: "BioLife Reagensia Indonesia",
     storeCity: "Kota Surabaya",
     storeRating: 4.9,
-    images: ["images/nutrient_agar.jpg", "images/nutrient_agar.jpg"],
+    images: ["images/nutrient_agar_merck.jpg", "images/nutrient_agar_merck.jpg"],
     variants: [
       { name: "Kemasan Botol Segel 500 Gram", extraPrice: 0, stock: 35 },
       { name: "Kemasan Ekonomis 1 Kg (2 x 500g)", extraPrice: 480000, stock: 10 }
     ],
-    shortDescription: "Media kultur padat umum untuk isolasi, enumerasi, dan pemeliharaan kultur bakteri non-fastidious dalam praktikum mikrobiologi.",
-    description: `Nutrient Agar merupakan salah satu media pertumbuhan bakteri paling mendasar dan esensial di laboratorium mikrobiologi, pangan, farmasi, dan bioteknologi. Terdiri dari pepton, ekstrak daging sapi, dan agar murni yang menyediakan sumber nitrogen, vitamin, dan mineral organik bagi pertumbuhan mikroba.`,
+    shortDescription: "Media kultur padat umum (GranuCult dehydrated culture media) untuk isolasi, enumerasi, dan pemeliharaan kultur mikroba dalam praktikum mikrobiologi.",
+    description: `Nutrient Agar Merck GranuCult® (Art. 1.05450.0500) merupakan media pertumbuhan bakteri paling terpercaya di laboratorium mikrobiologi, pangan, farmasi, dan bioteknologi. Diproduksi dengan butiran tergranulasi bebas debu, menjamin kelarutan cepat serta nutrisi optimal dari pepton dan ekstrak daging sapi kualitas tinggi.`,
     specifications: {
-      "Dosis Pelarutan": "28.0 gram dalam 1000 mL akuades murni",
+      "Katalog Produk": "Merck 1.05450.0500",
+      "Dosis Pelarutan": "20.0 gram dalam 1000 mL akuades murni",
+      "Bentuk": "Granulat padat kekuningan (Dust-free GranuCult)",
       "pH Akhir (pada 25°C)": "6.8 ± 0.2",
       "Kondisi Autoklaf": "121°C selama 15 menit",
-      "Standar": "ISO 11133"
+      "Standar Mutu": "ISO 11133 / EN ISO 6579"
     },
     safetyNotice: "Produk bersifat higroskopis. Pastikan tutup botol tertutup rapat segera setelah pengambilan sampel."
   },

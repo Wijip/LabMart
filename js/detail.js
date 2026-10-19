@@ -225,6 +225,16 @@ function handleDetailAddToCart() {
 function handleDetailBuyNow() {
   const notes = document.getElementById('side-order-notes')?.value || '';
   addToCart(currentProduct.id, selectedVariantIndex, currentQty, notes);
+
+  // Wajib masuk ke akun laboratorium terlebih dahulu sebelum membeli langsung
+  if (typeof isLoggedIn === 'function' && !isLoggedIn()) {
+    showToast('Silakan masuk ke akun laboratorium terlebih dahulu untuk melanjutkan pembelian langsung.', 'warning');
+    setTimeout(() => {
+      window.location.href = 'login.html?redirect=checkout.html';
+    }, 800);
+    return;
+  }
+
   window.location.href = 'checkout.html';
 }
 

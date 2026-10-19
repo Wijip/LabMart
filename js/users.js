@@ -80,11 +80,26 @@ function initializeUsersStorage() {
     if (!raw) {
       localStorage.setItem(USER_STORAGE_KEYS.USERS_LIST, JSON.stringify(DEFAULT_DEMO_USERS));
     } else {
-      const existing = JSON.parse(raw);
-      // Ensure seller demo user is always present
-      if (!existing.some(u => u.id === 'USR-SELLER-01')) {
-        existing.push(DEFAULT_DEMO_USERS.find(u => u.id === 'USR-SELLER-01'));
-        localStorage.setItem(USER_STORAGE_KEYS.USERS_LIST, JSON.stringify(existing));
+      let existing = [];
+      try {
+        existing = JSON.parse(raw);
+        if (!Array.isArray(existing)) existing = [];
+      } catch (err) {
+        existing = [];
+      }
+
+      let updated = false;
+      // Pastikan semua DEFAULT_DEMO_USERS tersedia tanpa menghapus user yang baru didaftarkan
+      DEFAULT_DEMO_USERS.forEach(demoUser => {
+        if (!existing.some(u => u.email.toLowerCase() === demoUser.email.toLowerCase() || u.id === demoUser.id)) {
+          existing.push(demoUser);
+          updated = true;
+        }
+      });
+
+      if (updated || existing.length === 0) {
+        const merged = existing.length > 0 ? existing : DEFAULT_DEMO_USERS;
+        localStorage.setItem(USER_STORAGE_KEYS.USERS_LIST, JSON.stringify(merged));
       }
     }
     // CATATAN: Pengguna baru yang pertama kali membuka web tidak otomatis login.
@@ -99,7 +114,9 @@ function initializeUsersStorage() {
 function getAllUsers() {
   try {
     const raw = localStorage.getItem(USER_STORAGE_KEYS.USERS_LIST);
-    return raw ? JSON.parse(raw) : DEFAULT_DEMO_USERS;
+    if (!raw) return DEFAULT_DEMO_USERS;
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) && parsed.length > 0 ? parsed : DEFAULT_DEMO_USERS;
   } catch (e) {
     return DEFAULT_DEMO_USERS;
   }
@@ -120,6 +137,20 @@ function isLoggedIn() {
   return getCurrentUser() !== null;
 }
 
+// Helper untuk validasi autentikasi sebelum melakukan aksi penting (seperti beli/checkout)
+function requireAuth(redirectUrl = 'checkout.html') {
+  if (!isLoggedIn()) {
+    if (typeof showToast === 'function') {
+      showToast('Silakan masuk ke akun laboratorium Anda terlebih dahulu untuk melanjutkan.', 'warning');
+    }
+    setTimeout(() => {
+      window.location.href = `login.html?redirect=${encodeURIComponent(redirectUrl)}`;
+    }, 800);
+    return false;
+  }
+  return true;
+}
+
 // Login function
 function loginUser(email, password) {
   const users = getAllUsers();
@@ -133,8 +164,8 @@ function loginUser(email, password) {
   return { success: false, message: 'Email atau kata sandi tidak cocok. Silakan coba lagi.' };
 }
 
-// Register function
-function registerUser(userData) {
+// Register function (menyimpan akun baru ke LocalStorage)
+function registerUser(userData, autoLogin = false) {
   const users = getAllUsers();
   const cleanEmail = userData.email.trim().toLowerCase();
 
@@ -166,10 +197,14 @@ function registerUser(userData) {
     registeredAt: new Date().toISOString()
   };
 
+  // Simpan ke daftar pengguna di LocalStorage
   users.push(newUser);
   localStorage.setItem(USER_STORAGE_KEYS.USERS_LIST, JSON.stringify(users));
-  // Auto-login after register
-  localStorage.setItem(USER_STORAGE_KEYS.CURRENT_USER, JSON.stringify(newUser));
+
+  // Hanya set current user jika autoLogin diminta secara eksplisit
+  if (autoLogin) {
+    localStorage.setItem(USER_STORAGE_KEYS.CURRENT_USER, JSON.stringify(newUser));
+  }
 
   return { success: true, user: newUser };
 }

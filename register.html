@@ -330,20 +330,17 @@
           address,
           isSeller: isSeller,
           storeName: isSeller ? institution : ''
-        });
+        }, false); // Tidak auto-login agar user dapat login secara manual di login.html
 
         if (res.success) {
-          if (isSeller) {
-            showToast(`Toko Mitra "${institution}" berhasil didaftarkan! Mengalihkan ke Pusat Seller...`, 'success');
-            setTimeout(() => {
-              window.location.href = 'seller.html';
-            }, 1000);
-          } else {
-            showToast(`Akun laboratorium "${institution}" berhasil dibuat!`, 'success');
-            setTimeout(() => {
-              window.location.href = 'index.html';
-            }, 1000);
-          }
+          const urlParams = new URLSearchParams(window.location.search);
+          const redirectTarget = urlParams.get('redirect') ? `&redirect=${encodeURIComponent(urlParams.get('redirect'))}` : '';
+          
+          showToast(`Akun "${institution}" berhasil didaftarkan dan tersimpan di database! Mengalihkan ke halaman login...`, 'success');
+          
+          setTimeout(() => {
+            window.location.href = `login.html?registered=true&email=${encodeURIComponent(email)}${redirectTarget}`;
+          }, 1000);
         } else {
           showToast(res.message, 'error');
           btn.disabled = false;
@@ -355,6 +352,17 @@
         }
       }, 600);
     }
+
+    // Teruskan parameter redirect jika ada
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const redirect = urlParams.get('redirect');
+      if (redirect) {
+        document.querySelectorAll('a[href="login.html"]').forEach(link => {
+          link.href = `login.html?redirect=${encodeURIComponent(redirect)}`;
+        });
+      }
+    });
   </script>
 </body>
 </html>

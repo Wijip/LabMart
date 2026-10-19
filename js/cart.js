@@ -25,6 +25,16 @@ function renderCartView() {
   if (cartContent) cartContent.classList.remove('hidden');
   if (emptyState) emptyState.classList.add('hidden');
 
+  // Periksa status login dan tampilkan banner tamu jika belum login
+  const guestBanner = document.getElementById('cart-guest-banner');
+  if (guestBanner) {
+    if (typeof isLoggedIn === 'function' && !isLoggedIn()) {
+      guestBanner.classList.remove('hidden');
+    } else {
+      guestBanner.classList.add('hidden');
+    }
+  }
+
   // Check if all are selected
   const allSelected = cart.length > 0 && cart.every(i => i.selected);
   if (selectAllCheckbox) selectAllCheckbox.checked = allSelected;
@@ -325,5 +335,15 @@ function proceedToCheckout() {
     showToast('Pilih setidaknya satu barang untuk melanjutkan ke checkout.', 'warning');
     return;
   }
+
+  // Wajib masuk ke akun terlebih dahulu jika ingin membeli/checkout
+  if (typeof isLoggedIn === 'function' && !isLoggedIn()) {
+    showToast('Silakan masuk ke akun laboratorium Anda terlebih dahulu untuk melanjutkan pembelian.', 'warning');
+    setTimeout(() => {
+      window.location.href = 'login.html?redirect=checkout.html';
+    }, 800);
+    return;
+  }
+
   window.location.href = 'checkout.html';
 }

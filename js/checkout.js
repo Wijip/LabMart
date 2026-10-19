@@ -15,6 +15,15 @@ const PROTECTION_PRICES = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Wajib login sebelum mengakses halaman checkout
+  if (typeof isLoggedIn === 'function' && !isLoggedIn()) {
+    showToast('Akses dibatasi: Silakan masuk ke akun laboratorium terlebih dahulu untuk melakukan pembelian.', 'warning');
+    setTimeout(() => {
+      window.location.href = 'login.html?redirect=checkout.html';
+    }, 1000);
+    return;
+  }
+
   const totals = getCartTotals();
   if (totals.selectedItemsCount === 0) {
     showToast('Keranjang Anda belum memiliki produk yang dipilih untuk checkout.', 'warning');
@@ -337,6 +346,15 @@ function copyVirtualAccount(num) {
 
 // Final Order Processing
 function processPaymentOrder(simulatedPaid = false, redirectTarget = 'status') {
+  // Verifikasi status login sebelum memproses pesanan
+  if (typeof isLoggedIn === 'function' && !isLoggedIn()) {
+    showToast('Silakan masuk ke akun laboratorium Anda terlebih dahulu untuk menyelesaikan pesanan.', 'warning');
+    setTimeout(() => {
+      window.location.href = 'login.html?redirect=checkout.html';
+    }, 800);
+    return;
+  }
+
   const recipientName = document.getElementById('checkout-recipient-name')?.value.trim();
   const recipientPhone = document.getElementById('checkout-recipient-phone')?.value.trim();
   const recipientAddress = document.getElementById('checkout-recipient-address')?.value.trim();
@@ -352,6 +370,7 @@ function processPaymentOrder(simulatedPaid = false, redirectTarget = 'status') {
   const totals = getCartTotals();
   const calculations = updateCheckoutTotals();
   const courier = SHIPPING_COURIERS.find(c => c.id === selectedCourierId);
+  const currentUser = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
 
   // Generate unique Invoice ID and Tracking No
   const randomNum = Math.floor(100000 + Math.random() * 900000);
@@ -373,6 +392,8 @@ function processPaymentOrder(simulatedPaid = false, redirectTarget = 'status') {
     paymentMethod: paymentMethodName,
     recipient: {
       name: recipientName,
+      email: currentUser?.email || '',
+      userId: currentUser?.id || '',
       phone: recipientPhone,
       lab: recipientLab,
       address: recipientAddress,

@@ -78,8 +78,26 @@
         <p class="text-xs sm:text-sm text-slate-600 font-medium">Akses katalog instrumen, reagen PA, dan riwayat faktur institusi</p>
       </div>
 
+      <!-- Notifikasi Alert Jika Pengguna Mau Membeli Tapi Belum Login -->
+      <div id="login-redirect-alert" class="hidden p-3.5 sm:p-4 rounded-2xl bg-amber-50 border border-amber-300 text-amber-900 text-xs sm:text-sm flex items-start gap-3 shadow-xs">
+        <span class="material-symbols-outlined text-amber-600 text-xl shrink-0 mt-0.5">lock</span>
+        <div class="leading-relaxed">
+          <strong class="font-extrabold block text-amber-950">Wajib Masuk Terlebih Dahulu:</strong>
+          Untuk melanjutkan proses pembelian & checkout pengadaan laboratorium, silakan masuk ke akun Anda.
+        </div>
+      </div>
+
+      <!-- Notifikasi Alert Sukses Registrasi LocalStorage -->
+      <div id="login-registered-alert" class="hidden p-3.5 sm:p-4 rounded-2xl bg-emerald-50 border border-emerald-300 text-emerald-950 text-xs sm:text-sm flex items-start gap-3 shadow-xs">
+        <span class="material-symbols-outlined text-emerald-600 text-xl shrink-0 mt-0.5">check_circle</span>
+        <div class="leading-relaxed">
+          <strong class="font-extrabold block text-emerald-900">Registrasi Berhasil Disimpan di Sistem!</strong>
+          Akun institusi baru Anda telah tersimpan di <code>LocalStorage</code>. Silakan masukkan kata sandi Anda di bawah untuk masuk.
+        </div>
+      </div>
+
       <!-- Quick Demo Login Bar (Untuk Presentasi ke Klien) -->
-      <div class="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-xs text-amber-900 space-y-2.5">
+      <div class="p-4 rounded-2xl bg-amber-50/70 border border-amber-200 text-xs text-amber-900 space-y-2.5">
         <div class="font-black flex items-center justify-between text-xs sm:text-sm text-amber-900">
           <span class="flex items-center gap-1.5">
             <span class="material-symbols-outlined text-base text-amber-600">bolt</span>
@@ -172,7 +190,7 @@
       <!-- Register Link -->
       <div class="pt-4 border-t border-slate-100 text-center text-xs sm:text-sm text-slate-600">
         Belum memiliki akun instansi laboratorium? <br />
-        <a href="register.html" class="text-teal-700 font-black hover:underline mt-1.5 inline-block text-xs sm:text-sm">Daftar Akun Lab Baru Sekarang</a>
+        <a id="register-link" href="register.html" class="text-teal-700 font-black hover:underline mt-1.5 inline-block text-xs sm:text-sm">Daftar Akun Lab Baru Sekarang</a>
       </div>
 
     </div>
@@ -186,6 +204,40 @@
   <script src="js/users.js"></script>
   <script src="js/store.js"></script>
   <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectUrl = urlParams.get('redirect');
+    const isRegistered = urlParams.get('registered') === 'true';
+    const registeredEmail = urlParams.get('email');
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Jika dialihkan karena ingin checkout/membeli tapi belum login
+      if (redirectUrl) {
+        const redirectAlert = document.getElementById('login-redirect-alert');
+        if (redirectAlert) redirectAlert.classList.remove('hidden');
+
+        // Pastikan link daftar juga membawa parameter redirect
+        const regLink = document.getElementById('register-link');
+        if (regLink) regLink.href = `register.html?redirect=${encodeURIComponent(redirectUrl)}`;
+
+        showToast('Silakan masuk ke akun laboratorium Anda untuk melanjutkan pembelian.', 'warning');
+      }
+
+      // Jika dialihkan setelah berhasil registrasi
+      if (isRegistered) {
+        const regAlert = document.getElementById('login-registered-alert');
+        if (regAlert) regAlert.classList.remove('hidden');
+
+        if (registeredEmail) {
+          const emailInput = document.getElementById('login-email');
+          if (emailInput) {
+            emailInput.value = registeredEmail;
+            document.getElementById('login-password')?.focus();
+          }
+        }
+        showToast('Akun baru tersimpan di LocalStorage! Silakan masukkan kata sandi.', 'success');
+      }
+    });
+
     function fillDemoUser(email, pwd) {
       document.getElementById('login-email').value = email;
       document.getElementById('login-password').value = pwd;
@@ -218,7 +270,9 @@
         if (res.success) {
           showToast(`Selamat datang kembali, ${res.user.name.split(',')[0]}!`, 'success');
           setTimeout(() => {
-            if (res.user.isSeller) {
+            if (redirectUrl) {
+              window.location.href = redirectUrl;
+            } else if (res.user.isSeller) {
               window.location.href = 'seller.html';
             } else {
               window.location.href = 'index.html';

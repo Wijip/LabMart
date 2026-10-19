@@ -123,6 +123,20 @@
         <!-- Left: Item List (8 cols) -->
         <div class="lg:col-span-8 space-y-3 sm:space-y-4">
           
+          <!-- Guest Warning Banner (Jika belum login) -->
+          <div id="cart-guest-banner" class="hidden bg-amber-50 border border-amber-300 rounded-2xl p-3.5 sm:p-4 text-xs sm:text-sm text-amber-950 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
+            <div class="flex items-center gap-2.5">
+              <span class="material-symbols-outlined text-amber-600 text-xl shrink-0">lock</span>
+              <div class="leading-relaxed">
+                <span class="font-extrabold text-amber-950">Status Tamu (Belum Masuk Akun):</span>
+                <span class="text-amber-900"> Anda dapat memilih barang, namun wajib masuk ke akun lab untuk melanjutkan ke pengiriman & pembayaran.</span>
+              </div>
+            </div>
+            <a href="login.html?redirect=cart.html" class="px-3.5 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-black text-xs shrink-0 text-center transition-colors">
+              Masuk Akun
+            </a>
+          </div>
+
           <!-- Select All Bar -->
           <div class="bg-white rounded-2xl border border-slate-200/90 p-3.5 sm:p-4 shadow-sm flex items-center justify-between gap-2">
             <label class="flex items-center gap-2.5 sm:gap-3 cursor-pointer text-xs sm:text-sm font-bold text-slate-800 shrink-0">

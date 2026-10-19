@@ -506,6 +506,15 @@
     let selectedEwallet = 'GoPay';
 
     document.addEventListener('DOMContentLoaded', () => {
+      // Wajib masuk ke akun terlebih dahulu sebelum memproses pembayaran
+      if (typeof isLoggedIn === 'function' && !isLoggedIn()) {
+        showToast('Silakan masuk ke akun laboratorium Anda untuk memproses pembayaran.', 'warning');
+        setTimeout(() => {
+          window.location.href = 'login.html?redirect=payment.html';
+        }, 1000);
+        return;
+      }
+
       const order = getActiveOrder();
       if (order && order.pricing) {
         const grandTotalFormatted = formatRupiah(order.pricing.grandTotal);

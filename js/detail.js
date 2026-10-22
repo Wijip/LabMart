@@ -137,6 +137,7 @@ function renderProductDetails() {
   if (safetyEl) safetyEl.textContent = p.safetyNotice;
 
   updatePriceAndSubtotal();
+  updateDetailWishlistButton();
 }
 
 // Switch Image
@@ -219,6 +220,39 @@ function adjustDetailQty(delta) {
 function handleDetailAddToCart() {
   const notes = document.getElementById('side-order-notes')?.value || '';
   addToCart(currentProduct.id, selectedVariantIndex, currentQty, notes);
+}
+
+// Detail Page Wishlist Handling
+function updateDetailWishlistButton() {
+  const btn = document.getElementById('detail-wishlist-btn');
+  const icon = document.getElementById('detail-wishlist-icon');
+  const text = document.getElementById('detail-wishlist-text');
+  if (!btn || !icon || !text || !currentProduct) return;
+
+  const wished = typeof isInWishlist === 'function' ? isInWishlist(currentProduct.id) : false;
+  if (wished) {
+    btn.className = 'w-full py-2.5 sm:py-3 px-4 rounded-2xl bg-rose-50 hover:bg-rose-100 text-rose-700 font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all border border-rose-300 shadow-xs';
+    icon.className = 'material-symbols-outlined text-lg sm:text-xl fill-1 text-rose-600';
+    text.textContent = 'Tersimpan di Wishlist Favorit';
+  } else {
+    btn.className = 'w-full py-2.5 sm:py-3 px-4 rounded-2xl bg-white hover:bg-rose-50 text-slate-700 hover:text-rose-600 font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all border border-slate-200 hover:border-rose-300';
+    icon.className = 'material-symbols-outlined text-lg sm:text-xl text-slate-400';
+    text.textContent = 'Tambah ke Wishlist Favorit';
+  }
+}
+
+function handleDetailWishlistToggle() {
+  if (typeof isLoggedIn === 'function' && !isLoggedIn()) {
+    showToast('Silakan masuk ke akun laboratorium Anda terlebih dahulu untuk menambahkan produk ke wishlist.', 'warning');
+    setTimeout(() => {
+      const redirectUrl = `product-detail.html?id=${currentProduct.id}`;
+      window.location.href = `login.html?redirect=${encodeURIComponent(redirectUrl)}&reason=wishlist`;
+    }, 800);
+    return;
+  }
+  if (!currentProduct) return;
+  toggleWishlist(currentProduct.id);
+  updateDetailWishlistButton();
 }
 
 // Buy Now (Direct to Checkout)

@@ -89,6 +89,15 @@
 
         <!-- Right actions -->
         <div class="flex items-center gap-1.5 sm:gap-3 shrink-0">
+          <!-- Wishlist Link -->
+          <a href="wishlist.html" class="flex items-center gap-1 sm:gap-2 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl bg-slate-100 hover:bg-rose-50 hover:text-rose-600 text-slate-800 transition-all relative border border-slate-200" title="Daftar Wishlist Favorit">
+            <div class="relative">
+              <span class="material-symbols-outlined text-xl text-slate-700">favorite</span>
+              <span class="wishlist-badge absolute -top-2 -right-2 bg-rose-500 text-white text-[9px] sm:text-[10px] font-extrabold rounded-full px-1 min-w-[16px] sm:min-w-[18px] h-4 leading-4 text-center shadow-sm hidden">0</span>
+            </div>
+            <span class="text-xs font-bold hidden sm:inline">Wishlist</span>
+          </a>
+
           <!-- Cart Link -->
           <a href="cart.html" class="flex items-center gap-1 sm:gap-2 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl bg-slate-100 hover:bg-teal-50 hover:text-teal-700 text-slate-800 transition-all relative border border-slate-200">
             <div class="relative">
@@ -304,6 +313,17 @@
             >
               <span class="material-symbols-outlined text-lg sm:text-xl">bolt</span>
               Beli Langsung Sekarang
+            </button>
+
+            <!-- Tombol Tambah ke Wishlist Favorit -->
+            <button 
+              id="detail-wishlist-btn"
+              type="button"
+              onclick="handleDetailWishlistToggle()"
+              class="w-full py-2.5 sm:py-3 px-4 rounded-2xl bg-white hover:bg-rose-50 text-slate-700 hover:text-rose-600 font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all border border-slate-200 hover:border-rose-300"
+            >
+              <span id="detail-wishlist-icon" class="material-symbols-outlined text-lg sm:text-xl text-slate-400">favorite</span>
+              <span id="detail-wishlist-text">Tambah ke Wishlist Favorit</span>
             </button>
 
             <!-- Tombol Pengadaan Institusi / RFQ Resmi -->

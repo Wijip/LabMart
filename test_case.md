@@ -31,7 +31,8 @@ Seluruh alur fitur pengguna telah diuji secara komprehensif mulai dari registras
 | **12. Responsivitas Layar & Ergonomi Mobile (Tokopedia/Shopee Style)** | 6 | 6 | 0 | **100%** |
 | **13. Pusat Mitra Seller & Multi-Vendor Toko Lab** | 4 | 4 | 0 | **100%** |
 | **14. Validasi Spesifik 20 Bahan & Alat Lab Ekonomis** | 3 | 3 | 0 | **100%** |
-| **TOTAL KESELURUHAN** | **60** | **60** | **0** | **100% (SEMPURNA)** |
+| **15. Modul Wishlist & Proteksi Autentikasi Pengadaan** | 4 | 4 | 0 | **100%** |
+| **TOTAL KESELURUHAN** | **64** | **64** | **0** | **100% (SEMPURNA)** |
 
 ---
 
@@ -195,6 +196,17 @@ Seluruh alur fitur pengguna telah diuji secara komprehensif mulai dari registras
 
 ---
 
+### MODUL 15: Modul Wishlist & Proteksi Autentikasi Pengadaan (`wishlist.html`, `store.js`, `main.js`, `detail.js`, `profile.html`)
+
+| ID Test Case | Skenario Pengujian | Langkah Pengujian | Hasil yang Diharapkan | Hasil Aktual | Status |
+|:---|:---|:---|:---|:---|:---:|
+| **TC-WISH-01** | Proteksi Akses Tamu & Cegah Tambah Wishlist Tanpa Login | 1. Masuk ke `index.html` dalam kondisi belum login (Guest state)<br>2. Klik tombol hati pada kartu produk manapun | Sistem mencegah penambahan item, menampilkan toast peringatan "Silakan masuk ke akun laboratorium Anda terlebih dahulu...", dan mengalihkan pengguna ke `login.html?redirect=index.html&reason=wishlist`. Alert khusus wishlist tampil di halaman login. | Aksi diblokir tepat, notifikasi peringatan muncul, dan browser diarahkan ke login dengan pesan konteks wishlist. Produk tidak bertambah ke storage tamu. | **BERHASIL** |
+| **TC-WISH-02** | Penambahan & Sinkronisasi Badge Wishlist Akun Pengguna | 1. Login dengan akun institusi (misal Dosen UGM)<br>2. Klik tombol hati pada 2 produk di beranda atau tombol 'Tambah ke Wishlist Favorit' di detail produk | Produk tersimpan ke daftar favorit akun yang bersangkutan, ikon hati aktif berwarna rose, dan counter badge wishlist di navbar langsung terupdate dinamis (`2`). | Item tercatat persisten ke `labmart_wishlist_{userId}`, ikon hati menyala merah, dan badge navbar sinkron. | **BERHASIL** |
+| **TC-WISH-03** | Navigasi & Pengelolaan Halaman Khusus `wishlist.html` | 1. Klik ikon Wishlist di header atau menu akun<br>2. Buka `wishlist.html`<br>3. Uji filter kategori reagen/glassware dan pencarian item<br>4. Klik '+ Keranjang' atau 'Hapus' | Halaman menampilkan ringkasan metrik (Total Item & Estimasi Nilai RAB), filter kategori responsif, pencarian live cepat, dan aksi langsung ke keranjang. | Seluruh komponen `wishlist.html` ter-render rapi; filter dan aksi keranjang bekerja presisi. | **BERHASIL** |
+| **TC-WISH-04** | Tab Wishlist Terintegrasi pada Profil Lab & Pemindahan Massal ke Keranjang | 1. Buka `profile.html`<br>2. Klik tab 'Wishlist Favorit' di sidebar profil<br>3. Uji tombol '+ Semua ke Keranjang' di `wishlist.html` | Produk favorit tampil di panel dashboard profil lab lengkap dengan tombol aksi, dan pemindahan massal langsung memasukkan seluruh item ke cart secara instan. | Tab profil terintegrasi sempurna dengan LocalStorage wishlist, dan fitur bulk add-to-cart berhasil memindahkan seluruh item. | **BERHASIL** |
+
+---
+
 ## 3. Evaluasi Kebutuhan Non-Fungsional & Kesiapan GitHub Pages
 
 | Parameter | Kriteria Evaluasi | Hasil Evaluasi | Status |
@@ -209,10 +221,11 @@ Seluruh alur fitur pengguna telah diuji secara komprehensif mulai dari registras
 ## 4. Kesimpulan Akhir & Rekomendasi
 
 ### Status Kelayakan
-Berdasarkan 60 skenario pengujian fungsional dan non-fungsional yang telah dijalankan, sistem prototipe **LabMart Indonesia** dinyatakan **100% LULUS PENGUJIAN (ALL TESTS PASSED)** tanpa ada cacat kritis (zero critical bugs). 
+Berdasarkan 64 skenario pengujian fungsional dan non-fungsional yang telah dijalankan, sistem prototipe **LabMart Indonesia** dinyatakan **100% LULUS PENGUJIAN (ALL TESTS PASSED)** tanpa ada cacat kritis (zero critical bugs). 
 
 ### Catatan untuk Presentasi ke Klien (Client Pitching Highlights):
-1. **Daftar Bahan & Alat Lab Realistis & Terjangkau:** Seluruh 20 item bahan dan glassware praktikum (Rp 6.000 - Rp 72.000) terpasang sempurna menggantikan instrumen jutaan, sangat pas dengan profil mahasiswa, asisten lab, dan praktikum kampus.
-2. **Daya Tarik Khas Pasar Indonesia:** Fitur pilihan pembayaran minimarket (Indomaret & Alfamart) dengan kode bayar kasir dan barcode scannable kasir serta QRIS dinamis Bank Indonesia sangat efektif membuktikan sistem dirancang untuk kenyamanan pengguna di Indonesia.
-3. **Kesesuaian Karakteristik Pengadaan Laboratorium:** Fitur proteksi peti kayu, asuransi cairan kimia, ekspedisi reguler/kargo, serta unduh CoA/MSDS langsung menumbuhkan kepercayaan tinggi bagi institusi riset dan universitas.
-4. **Kesiapan Demo 1-Klik:** Penguji dapat langsung mendemokan flow tanpa perlu mengetik manual dengan memanfaatkan tombol *Demo Login Dosen UGM* di halaman login dan tombol *Simulasi Pembayaran Berhasil* di halaman pembayaran.
+1. **Proteksi & Manajemen Wishlist Terpadu:** Pengguna tidak dapat memfavoritkan produk sebelum login; alur login diarahkan secara mulus, dan tersedianya halaman khusus `wishlist.html` serta tab profil mempermudah penyusunan Rencana Anggaran Biaya (RAB) pengadaan lab.
+2. **Daftar Bahan & Alat Lab Realistis & Terjangkau:** Seluruh 20 item bahan dan glassware praktikum (Rp 6.000 - Rp 72.000) terpasang sempurna menggantikan instrumen jutaan, sangat pas dengan profil mahasiswa, asisten lab, dan praktikum kampus.
+3. **Daya Tarik Khas Pasar Indonesia:** Fitur pilihan pembayaran minimarket (Indomaret & Alfamart) dengan kode bayar kasir dan barcode scannable kasir serta QRIS dinamis Bank Indonesia sangat efektif membuktikan sistem dirancang untuk kenyamanan pengguna di Indonesia.
+4. **Kesesuaian Karakteristik Pengadaan Laboratorium:** Fitur proteksi peti kayu, asuransi cairan kimia, ekspedisi reguler/kargo, serta unduh CoA/MSDS langsung menumbuhkan kepercayaan tinggi bagi institusi riset dan universitas.
+5. **Kesiapan Demo 1-Klik:** Penguji dapat langsung mendemokan flow tanpa perlu mengetik manual dengan memanfaatkan tombol *Demo Login Dosen UGM* di halaman login dan tombol *Simulasi Pembayaran Berhasil* di halaman pembayaran.

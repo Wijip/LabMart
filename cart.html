@@ -76,6 +76,15 @@
         </div>
 
         <div class="flex items-center gap-1.5 sm:gap-3 shrink-0">
+          <!-- Wishlist Link -->
+          <a href="wishlist.html" class="flex items-center gap-1 sm:gap-2 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl bg-slate-100 hover:bg-rose-50 hover:text-rose-600 text-slate-800 transition-all relative border border-slate-200" title="Daftar Wishlist Favorit">
+            <div class="relative">
+              <span class="material-symbols-outlined text-xl text-slate-700">favorite</span>
+              <span class="wishlist-badge absolute -top-2 -right-2 bg-rose-500 text-white text-[9px] sm:text-[10px] font-extrabold rounded-full px-1 min-w-[16px] sm:min-w-[18px] h-4 leading-4 text-center shadow-sm hidden">0</span>
+            </div>
+            <span class="text-xs font-bold hidden sm:inline">Wishlist</span>
+          </a>
+
           <div class="text-xs font-semibold text-slate-500 hidden md:flex items-center gap-1.5">
             <span class="material-symbols-outlined text-teal-600 text-base">verified_user</span>
             <span>Transaksi Resmi & Aman</span>
@@ -109,10 +118,14 @@
         <p class="text-xs sm:text-sm text-slate-500 mt-2 max-w-md mx-auto">
           Anda belum memilih alat atau bahan laboratorium. Silakan cari mikroskop, erlenmeyer, reagen PA, atau APD pelindung lab di katalog kami.
         </p>
-        <div class="mt-6">
+        <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
           <a href="index.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-xs sm:text-sm shadow-lg shadow-teal-600/20 transition-all">
             <span class="material-symbols-outlined text-base">explore</span>
             Mulai Belanja Alat Lab
+          </a>
+          <a href="wishlist.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 font-extrabold text-xs sm:text-sm transition-all">
+            <span class="material-symbols-outlined text-base text-rose-600">favorite</span>
+            Buka Wishlist Saya
           </a>
         </div>
       </div>

@@ -210,16 +210,35 @@
     const registeredEmail = urlParams.get('email');
 
     document.addEventListener('DOMContentLoaded', () => {
-      // Jika dialihkan karena ingin checkout/membeli tapi belum login
+      // Jika dialihkan karena ingin checkout/wishlist tapi belum login
       if (redirectUrl) {
         const redirectAlert = document.getElementById('login-redirect-alert');
-        if (redirectAlert) redirectAlert.classList.remove('hidden');
+        const reason = urlParams.get('reason');
+        const isWishlist = reason === 'wishlist' || redirectUrl.includes('wishlist');
+
+        if (redirectAlert) {
+          redirectAlert.classList.remove('hidden');
+          if (isWishlist) {
+            redirectAlert.innerHTML = `
+              <span class="material-symbols-outlined text-rose-600 text-xl shrink-0 mt-0.5">favorite</span>
+              <div class="leading-relaxed">
+                <strong class="font-extrabold block text-rose-950">Wajib Masuk Terlebih Dahulu:</strong>
+                Untuk menambahkan produk ke wishlist atau membuka daftar favorit lab, silakan masuk ke akun Anda.
+              </div>
+            `;
+            redirectAlert.className = 'p-3.5 sm:p-4 rounded-2xl bg-rose-50 border border-rose-300 text-rose-900 text-xs sm:text-sm flex items-start gap-3 shadow-xs';
+          }
+        }
 
         // Pastikan link daftar juga membawa parameter redirect
         const regLink = document.getElementById('register-link');
         if (regLink) regLink.href = `register.html?redirect=${encodeURIComponent(redirectUrl)}`;
 
-        showToast('Silakan masuk ke akun laboratorium Anda untuk melanjutkan pembelian.', 'warning');
+        if (isWishlist) {
+          showToast('Silakan masuk ke akun lab untuk menyimpan produk ke wishlist.', 'warning');
+        } else {
+          showToast('Silakan masuk ke akun laboratorium Anda untuk melanjutkan pembelian.', 'warning');
+        }
       }
 
       // Jika dialihkan setelah berhasil registrasi

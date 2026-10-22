@@ -134,8 +134,8 @@
         <div class="flex items-center gap-1.5 sm:gap-4 shrink-0">
           
           <!-- Wishlist / Favorit (Hidden on small mobile to maximize space) -->
-          <a href="#wishlist" onclick="alert('Daftar Favorit Lab tersimpan otomatis di perangkat Anda.')" class="hidden sm:flex w-10 h-10 rounded-xl hover:bg-slate-100 items-center justify-center text-slate-700 relative transition-colors" title="Daftar Favorit">
-            <span class="material-symbols-outlined text-2xl">favorite</span>
+          <a href="wishlist.html" class="hidden sm:flex w-10 h-10 rounded-xl hover:bg-slate-100 items-center justify-center text-slate-700 relative transition-colors" title="Daftar Wishlist Favorit">
+            <span class="material-symbols-outlined text-2xl text-slate-700 hover:text-rose-600 transition-colors">favorite</span>
             <span class="wishlist-badge absolute -top-1 -right-1 bg-rose-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
           </a>
 
@@ -472,9 +472,12 @@
       <span class="material-symbols-outlined text-2xl fill-1">home</span>
       <span class="text-xs font-extrabold mt-0.5">Beranda</span>
     </a>
-    <a href="#katalog" class="flex flex-col items-center text-slate-600 hover:text-teal-700">
-      <span class="material-symbols-outlined text-2xl">category</span>
-      <span class="text-xs font-bold mt-0.5">Katalog</span>
+    <a href="wishlist.html" class="flex flex-col items-center text-slate-600 hover:text-rose-600 relative">
+      <div class="relative">
+        <span class="material-symbols-outlined text-2xl">favorite</span>
+        <span class="wishlist-badge absolute -top-1.5 -right-2 bg-rose-500 text-white text-xs font-extrabold rounded-full px-1 min-w-[16px] h-4 leading-4 text-center hidden">0</span>
+      </div>
+      <span class="text-xs font-bold mt-0.5">Wishlist</span>
     </a>
     <a href="cart.html" class="flex flex-col items-center text-slate-600 hover:text-teal-700 relative">
       <div class="relative">

@@ -299,17 +299,61 @@ function getCartTotals() {
   };
 }
 
-// Wishlist System
+// Wishlist System (Memerlukan Akun Pengguna / Login Terlebih Dahulu)
+function getWishlistStorageKey() {
+  const user = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
+  if (user && user.id) {
+    return `${STORAGE_KEYS.WISHLIST}_${user.id}`;
+  }
+  return STORAGE_KEYS.WISHLIST;
+}
+
 function getWishlist() {
+  // Hanya pengguna yang sudah masuk yang memiliki akses wishlist aktif
+  if (typeof isLoggedIn === 'function' && !isLoggedIn()) {
+    return [];
+  }
   try {
-    const raw = localStorage.getItem(STORAGE_KEYS.WISHLIST);
+    const key = getWishlistStorageKey();
+    let raw = localStorage.getItem(key);
+    // Migrasi data lama jika ada di STORAGE_KEYS.WISHLIST umum
+    if (!raw && key !== STORAGE_KEYS.WISHLIST) {
+      const oldRaw = localStorage.getItem(STORAGE_KEYS.WISHLIST);
+      if (oldRaw) {
+        raw = oldRaw;
+        localStorage.setItem(key, raw);
+      }
+    }
     return raw ? JSON.parse(raw) : [];
   } catch (e) {
     return [];
   }
 }
 
+function saveWishlist(list) {
+  try {
+    const key = getWishlistStorageKey();
+    localStorage.setItem(key, JSON.stringify(list));
+    localStorage.setItem(STORAGE_KEYS.WISHLIST, JSON.stringify(list));
+  } catch (e) {
+    console.error('Gagal menyimpan data wishlist ke localStorage', e);
+  }
+}
+
 function toggleWishlist(productId) {
+  // Pengecekan status login: Belum login TIDAK BISA menambahkan wishlist
+  if (typeof isLoggedIn === 'function' && !isLoggedIn()) {
+    if (typeof showToast === 'function') {
+      showToast('Silakan masuk ke akun laboratorium Anda terlebih dahulu untuk menambahkan ke wishlist.', 'warning');
+    }
+    setTimeout(() => {
+      const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+      const currentQuery = window.location.search || '';
+      window.location.href = `login.html?redirect=${encodeURIComponent(currentPath + currentQuery)}&reason=wishlist`;
+    }, 800);
+    return false;
+  }
+
   let list = getWishlist();
   const exists = list.includes(productId);
   if (exists) {
@@ -319,12 +363,35 @@ function toggleWishlist(productId) {
     list.push(productId);
     showToast('Ditambahkan ke daftar favorit!', 'success');
   }
-  localStorage.setItem(STORAGE_KEYS.WISHLIST, JSON.stringify(list));
+  saveWishlist(list);
   updateHeaderBadges();
   return !exists;
 }
 
+function removeFromWishlist(productId) {
+  if (typeof isLoggedIn === 'function' && !isLoggedIn()) return;
+  let list = getWishlist();
+  list = list.filter(id => id !== productId);
+  saveWishlist(list);
+  updateHeaderBadges();
+  if (typeof showToast === 'function') {
+    showToast('Produk berhasil dihapus dari wishlist.', 'info');
+  }
+}
+
+function clearWishlist() {
+  if (typeof isLoggedIn === 'function' && !isLoggedIn()) return;
+  saveWishlist([]);
+  updateHeaderBadges();
+  if (typeof showToast === 'function') {
+    showToast('Daftar wishlist telah dikosongkan.', 'info');
+  }
+}
+
 function isInWishlist(productId) {
+  if (typeof isLoggedIn === 'function' && !isLoggedIn()) {
+    return false;
+  }
   const list = getWishlist();
   return list.includes(productId);
 }

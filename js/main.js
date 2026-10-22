@@ -234,6 +234,13 @@ function handleQuickAddToCart(event, productId) {
 function handleWishlistClick(event, productId) {
   event.stopPropagation();
   event.preventDefault();
+  if (typeof isLoggedIn === 'function' && !isLoggedIn()) {
+    showToast('Silakan masuk ke akun laboratorium Anda terlebih dahulu untuk menambahkan produk ke wishlist.', 'warning');
+    setTimeout(() => {
+      window.location.href = 'login.html?redirect=index.html&reason=wishlist';
+    }, 800);
+    return;
+  }
   toggleWishlist(productId);
   renderProducts();
 }

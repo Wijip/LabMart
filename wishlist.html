@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wishlist & Produk Favorit - LabMart Indonesia</title>
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <!-- Tailwind Custom Config -->
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            teal: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              200: '#99f6e4',
+              300: '#5eead4',
+              400: '#2dd4bf',
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+              800: '#115e59',
+              900: '#134e4a',
+            },
+            accent: '#f59e0b',
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/custom.css?v=2" />
+</head>
+
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+    <div class="container mx-auto px-3 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20 gap-2 sm:gap-4">
+        
+        <!-- Logo & Back Button -->
+        <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+          <a href="index.html" class="p-1.5 sm:p-2 rounded-xl text-slate-600 hover:text-teal-700 hover:bg-slate-100 transition-colors flex items-center gap-1 text-xs font-bold">
+            <span class="material-symbols-outlined text-lg sm:text-xl">arrow_back</span>
+            <span class="hidden sm:inline">Kembali ke Beranda</span>
+            <span class="sm:hidden">Beranda</span>
+          </a>
+
+          <div class="h-5 sm:h-6 w-px bg-slate-200 hidden sm:block"></div>
+
+          <a href="index.html" class="flex items-center gap-1.5 sm:gap-2">
+            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-teal-700 to-teal-500 text-white flex items-center justify-center shadow-sm">
+              <span class="material-symbols-outlined text-lg sm:text-xl">science</span>
+            </div>
+            <span class="text-base sm:text-lg font-extrabold tracking-tight text-slate-900 hidden sm:inline">
+              Lab<span class="text-teal-600">Mart</span><span class="text-xs text-amber-500 ml-0.5">.id</span>
+            </span>
+          </a>
+        </div>
+
+        <!-- Search Bar within Wishlist -->
+        <div class="flex-1 max-w-md hidden md:block">
+          <div class="relative flex items-center">
+            <span class="material-symbols-outlined text-slate-400 absolute left-3 text-lg">search</span>
+            <input 
+              id="wishlist-search-input"
+              type="text" 
+              placeholder="Cari dalam daftar wishlist Anda..." 
+              class="w-full pl-9 pr-4 py-2 bg-slate-100 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-rose-500"
+            />
+          </div>
+        </div>
+
+        <!-- Right Header Actions -->
+        <div class="flex items-center gap-1.5 sm:gap-3 shrink-0">
+          <!-- Active Wishlist Indicator -->
+          <div class="flex items-center gap-1 sm:gap-1.5 px-3 py-1.5 sm:py-2 rounded-xl bg-rose-50 text-rose-700 font-extrabold text-xs border border-rose-200 shadow-2xs">
+            <span class="material-symbols-outlined text-lg text-rose-600 fill-1">favorite</span>
+            <span class="hidden sm:inline">Wishlist</span>
+            <span class="wishlist-badge ml-0.5 bg-rose-500 text-white text-[10px] font-black rounded-full px-1.5 py-0.2 hidden">0</span>
+          </div>
+
+          <!-- Cart Link -->
+          <a href="cart.html" class="flex items-center gap-1 sm:gap-2 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl bg-slate-100 hover:bg-teal-50 hover:text-teal-700 text-slate-800 transition-all relative border border-slate-200" title="Keranjang Belanja">
+            <div class="relative">
+              <span class="material-symbols-outlined text-xl text-slate-700">shopping_cart</span>
+              <span class="cart-badge absolute -top-2 -right-2 bg-rose-600 text-white text-[9px] sm:text-[10px] font-extrabold rounded-full px-1 min-w-[16px] sm:min-w-[18px] h-4 leading-4 text-center shadow-sm hidden">0</span>
+            </div>
+            <span class="text-xs font-bold hidden sm:inline">Keranjang</span>
+          </a>
+
+          <div class="h-6 w-px bg-slate-200 hidden sm:block"></div>
+          <!-- User Navigation -->
+          <div id="header-user-nav" class="flex items-center gap-1.5 sm:gap-2"></div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Breadcrumbs -->
+  <nav aria-label="Breadcrumb" class="bg-white border-b border-slate-200 py-3">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <ol class="flex items-center gap-2 text-xs sm:text-sm font-medium text-slate-600 overflow-x-auto whitespace-nowrap">
+        <li><a href="index.html" class="hover:text-teal-700">Beranda</a></li>
+        <li class="material-symbols-outlined text-sm text-slate-400">chevron_right</li>
+        <li><a href="profile.html" class="hover:text-teal-700">Akun Lab</a></li>
+        <li class="material-symbols-outlined text-sm text-slate-400">chevron_right</li>
+        <li class="text-rose-600 font-extrabold">Wishlist & Produk Favorit</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Main Content Container -->
+  <main class="container mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 pb-28 sm:pb-16 flex-1">
+    <div class="max-w-6xl mx-auto space-y-6">
+
+      <!-- Header Banner / Stat Cards -->
+      <div class="bg-gradient-to-r from-slate-900 via-teal-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
+        <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-rose-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div class="space-y-2">
+            <div class="flex items-center gap-2.5">
+              <span class="w-10 h-10 rounded-2xl bg-rose-500/20 text-rose-400 border border-rose-500/30 flex items-center justify-center">
+                <span class="material-symbols-outlined text-2xl fill-1">favorite</span>
+              </span>
+              <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight">Wishlist & Favorit Laboratorium</h1>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-300 max-w-xl leading-relaxed">
+              Daftar instrumen penelitian, reagen analitik berstandar CoA, dan glassware yang Anda simpan untuk pengadaan laboratorium atau penyusunan Rencana Anggaran Biaya (RAB).
+            </p>
+          </div>
+
+          <!-- Summary Metric Pill Boxes -->
+          <div id="wishlist-summary-stats" class="grid grid-cols-2 gap-3 shrink-0">
+            <div class="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-3 sm:p-4 text-center">
+              <span class="text-xs text-slate-300 block font-medium">Total Item</span>
+              <span id="stat-total-items" class="text-xl sm:text-2xl font-black text-rose-400 font-mono-code">0</span>
+            </div>
+            <div class="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-3 sm:p-4 text-center">
+              <span class="text-xs text-slate-300 block font-medium">Est. Nilai RAB</span>
+              <span id="stat-total-estimate" class="text-sm sm:text-base font-black text-teal-300 font-mono-code truncate max-w-[140px] block">Rp 0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATE 1: GUEST / BELUM LOGIN -->
+      <div id="wishlist-guest-state" class="hidden bg-white rounded-3xl border border-slate-200 p-8 sm:p-12 text-center shadow-sm space-y-6">
+        <div class="w-20 h-20 rounded-3xl bg-rose-50 text-rose-600 border border-rose-200 flex items-center justify-center mx-auto shadow-sm">
+          <span class="material-symbols-outlined text-4xl">lock</span>
+        </div>
+        <div class="space-y-2 max-w-md mx-auto">
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">Masuk untuk Melihat Daftar Wishlist</h2>
+          <p class="text-xs sm:text-sm text-slate-500 leading-relaxed">
+            Daftar produk favorit tersimpan dengan aman di dalam akun instansi laboratorium Anda. Silakan masuk terlebih dahulu untuk mengakses reagen dan instrumen yang telah Anda simpan.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+          <a 
+            href="login.html?redirect=wishlist.html&reason=wishlist" 
+            class="px-6 py-3 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-black text-xs sm:text-sm flex items-center gap-2 shadow-lg shadow-teal-600/25 active:scale-95 transition-all"
+          >
+            <span class="material-symbols-outlined text-lg">login</span>
+            <span>Masuk ke Akun Lab</span>
+          </a>
+          <a 
+            href="register.html?redirect=wishlist.html" 
+            class="px-6 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs sm:text-sm transition-all"
+          >
+            Daftar Akun Baru
+          </a>
+        </div>
+
+        <!-- 1-Click Demo Login Box for Convenience -->
+        <div class="pt-6 border-t border-slate-100 max-w-md mx-auto space-y-2">
+          <span class="text-xs text-slate-400 font-bold uppercase tracking-wider block">Atau coba dengan Akun Demo:</span>
+          <div class="flex justify-center gap-2 text-xs font-bold">
+            <button 
+              onclick="loginDemoFromWishlist('peneliti@ugm.ac.id', 'password123')"
+              class="px-3.5 py-2 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 transition-colors flex items-center gap-1.5"
+            >
+              <span>👨‍🔬 Dosen UGM</span>
+            </button>
+            <button 
+              onclick="loginDemoFromWishlist('qc@biofarma.co.id', 'password123')"
+              class="px-3.5 py-2 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 transition-colors flex items-center gap-1.5"
+            >
+              <span>👩‍🔬 QC Bio Farma</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATE 2: EMPTY WISHLIST (SUDAH LOGIN TAPI BELUM ADA ITEM) -->
+      <div id="wishlist-empty-state" class="hidden bg-white rounded-3xl border border-slate-200 p-8 sm:p-12 text-center shadow-sm space-y-5">
+        <div class="w-20 h-20 rounded-3xl bg-rose-50 text-rose-500 border border-rose-200 flex items-center justify-center mx-auto shadow-sm">
+          <span class="material-symbols-outlined text-4xl">favorite_border</span>
+        </div>
+        <div class="space-y-2 max-w-md mx-auto">
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">Wishlist Laboratorium Masih Kosong</h2>
+          <p class="text-xs sm:text-sm text-slate-500 leading-relaxed">
+            Belum ada produk atau reagen yang Anda simpan. Mulai jelajahi katalog pengadaan kami dan klik ikon hati <span class="material-symbols-outlined text-xs text-rose-500 align-middle">favorite</span> untuk menyimpan item ke daftar ini.
+          </p>
+        </div>
+        <div class="pt-2">
+          <a 
+            href="index.html" 
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-teal-600 hover:bg-teal-700 text-white font-black text-xs sm:text-sm shadow-lg shadow-teal-600/25 active:scale-95 transition-all"
+          >
+            <span class="material-symbols-outlined text-lg">storefront</span>
+            <span>Jelajahi Katalog Pengadaan</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- STATE 3: POPULATED WISHLIST (ADA ITEM) -->
+      <div id="wishlist-populated-state" class="hidden space-y-5">
+
+        <!-- Controls Bar: Category Filters & Batch Actions -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <!-- Category Filter Pills -->
+          <div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 scrollbar-none" id="category-filter-pills">
+            <button 
+              onclick="filterWishlistCategory('all')" 
+              data-cat="all" 
+              class="px-3.5 py-1.5 rounded-xl text-xs font-black transition-all bg-teal-600 text-white shadow-2xs"
+            >
+              Semua Kategori
+            </button>
+            <button 
+              onclick="filterWishlistCategory('chemical')" 
+              data-cat="chemical" 
+              class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-700 hover:bg-slate-200"
+            >
+              Reagen Kimia
+            </button>
+            <button 
+              onclick="filterWishlistCategory('glassware')" 
+              data-cat="glassware" 
+              class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-700 hover:bg-slate-200"
+            >
+              Glassware
+            </button>
+            <button 
+              onclick="filterWishlistCategory('instruments')" 
+              data-cat="instruments" 
+              class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-700 hover:bg-slate-200"
+            >
+              Instrumen & Mesin
+            </button>
+            <button 
+              onclick="filterWishlistCategory('safety')" 
+              data-cat="safety" 
+              class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-700 hover:bg-slate-200"
+            >
+              APD & Keselamatan
+            </button>
+          </div>
+
+          <!-- Batch Action Buttons -->
+          <div class="flex items-center gap-2 shrink-0">
+            <button 
+              onclick="addAllWishlistToCart()" 
+              class="px-3.5 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-xs flex items-center gap-1.5 shadow-sm active:scale-95 transition-all"
+              title="Pindahkan semua produk di wishlist ke keranjang belanja"
+            >
+              <span class="material-symbols-outlined text-base">add_shopping_cart</span>
+              <span>+ Semua ke Keranjang</span>
+            </button>
+
+            <button 
+              onclick="confirmClearWishlist()" 
+              class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-rose-50 text-slate-600 hover:text-rose-700 font-bold text-xs flex items-center gap-1 transition-colors"
+              title="Hapus seluruh isi wishlist"
+            >
+              <span class="material-symbols-outlined text-base">delete_sweep</span>
+              <span class="hidden sm:inline">Kosongkan</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Wishlist Items Grid -->
+        <div id="wishlist-items-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+          <!-- Rendered dynamically by JavaScript -->
+        </div>
+
+      </div>
+
+      <!-- Rekomendasi Tambahan -->
+      <section class="mt-12 pt-8 border-t border-slate-200 space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-base sm:text-lg font-black text-slate-900 flex items-center gap-2">
+              <span class="material-symbols-outlined text-teal-600">recommend</span>
+              Rekomendasi Alat & Reagen Populer Lainnya
+            </h2>
+            <p class="text-xs text-slate-500 font-medium">Bahan lab terlaris dengan sertifikat mutu resmi.</p>
+          </div>
+          <a href="index.html" class="text-xs font-extrabold text-teal-700 hover:underline">Lihat Semua</a>
+        </div>
+
+        <div id="wishlist-recommendations-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+          <!-- Rendered dynamically -->
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 text-xs sm:text-sm border-t border-slate-800 mt-16 py-8">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center sm:flex sm:justify-between sm:items-center">
+      <div>&copy; 2026 LabMart Indonesia. Terdaftar di Kemenkes RI AKD. Seluruh hak cipta dilindungi.</div>
+      <div class="mt-4 sm:mt-0 flex justify-center gap-4">
+        <a href="index.html" class="hover:text-white">Beranda</a>
+        <a href="cart.html" class="hover:text-white">Keranjang</a>
+        <a href="profile.html" class="hover:text-white">Akun Lab</a>
+        <a href="order-status.html" class="hover:text-white">Faktur</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Bottom Sticky Navigation -->
+  <nav aria-label="Navigasi Bawah Mobile" class="fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-slate-200 py-2 px-3 flex items-center justify-around sm:hidden shadow-2xl no-print">
+    <a href="index.html" class="flex flex-col items-center text-slate-600 hover:text-teal-700">
+      <span class="material-symbols-outlined text-2xl">home</span>
+      <span class="text-xs font-bold mt-0.5">Beranda</span>
+    </a>
+    <a href="wishlist.html" class="flex flex-col items-center text-rose-600 font-extrabold relative">
+      <div class="relative">
+        <span class="material-symbols-outlined text-2xl fill-1">favorite</span>
+        <span class="wishlist-badge absolute -top-1.5 -right-2 bg-rose-500 text-white text-xs font-extrabold rounded-full px-1 min-w-[16px] h-4 leading-4 text-center hidden">0</span>
+      </div>
+      <span class="text-xs font-extrabold mt-0.5">Wishlist</span>
+    </a>
+    <a href="cart.html" class="flex flex-col items-center text-slate-600 hover:text-teal-700 relative">
+      <div class="relative">
+        <span class="material-symbols-outlined text-2xl">shopping_cart</span>
+        <span class="cart-badge absolute -top-1.5 -right-2 bg-rose-600 text-white text-xs font-extrabold rounded-full px-1 min-w-[16px] h-4 leading-4 text-center hidden">0</span>
+      </div>
+      <span class="text-xs font-bold mt-0.5">Keranjang</span>
+    </a>
+    <a href="order-status.html" class="flex flex-col items-center text-slate-600 hover:text-teal-700">
+      <span class="material-symbols-outlined text-2xl">receipt_long</span>
+      <span class="text-xs font-bold mt-0.5">Faktur</span>
+    </a>
+    <a href="profile.html" class="flex flex-col items-center text-slate-600 hover:text-teal-700">
+      <span class="material-symbols-outlined text-2xl">person</span>
+      <span class="text-xs font-bold mt-0.5">Akun Lab</span>
+    </a>
+  </nav>
+
+  <!-- Scripts -->
+  <script src="js/products.js?v=20261017"></script>
+  <script src="js/users.js?v=20261017"></script>
+  <script src="js/store.js?v=20261017"></script>
+
+  <script>
+    let currentCategoryFilter = 'all';
+    let searchQuery = '';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderWishlistPage();
+      renderWishlistRecommendations();
+
+      const searchInput = document.getElementById('wishlist-search-input');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          searchQuery = e.target.value.toLowerCase().trim();
+          renderWishlistPage();
+        });
+      }
+    });
+
+    function renderWishlistPage() {
+      const guestState = document.getElementById('wishlist-guest-state');
+      const emptyState = document.getElementById('wishlist-empty-state');
+      const populatedState = document.getElementById('wishlist-populated-state');
+      const summaryStats = document.getElementById('wishlist-summary-stats');
+
+      // 1. Cek Autentikasi Pengguna
+      if (typeof isLoggedIn === 'function' && !isLoggedIn()) {
+        guestState.classList.remove('hidden');
+        emptyState.classList.add('hidden');
+        populatedState.classList.add('hidden');
+        document.getElementById('stat-total-items').textContent = '0';
+        document.getElementById('stat-total-estimate').textContent = 'Rp 0';
+        return;
+      }
+
+      guestState.classList.add('hidden');
+
+      // 2. Ambil Wishlist ID
+      const wishlistIds = typeof getWishlist === 'function' ? getWishlist() : [];
+      const allProducts = typeof getAllProducts === 'function' ? getAllProducts() : (typeof LAB_PRODUCTS !== 'undefined' ? LAB_PRODUCTS : []);
+      const wishProducts = wishlistIds.map(id => allProducts.find(p => p.id === id)).filter(Boolean);
+
+      // Hitung metrik
+      const totalCount = wishProducts.length;
+      const totalEstimate = wishProducts.reduce((sum, p) => sum + (p.price || 0), 0);
+
+      document.getElementById('stat-total-items').textContent = totalCount;
+      document.getElementById('stat-total-estimate').textContent = formatRupiah(totalEstimate);
+
+      if (totalCount === 0) {
+        emptyState.classList.remove('hidden');
+        populatedState.classList.add('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      populatedState.classList.remove('hidden');
+
+      // 3. Filter berdasarkan kategori dan pencarian
+      let filtered = wishProducts;
+      if (currentCategoryFilter !== 'all') {
+        filtered = filtered.filter(p => p.category === currentCategoryFilter);
+      }
+      if (searchQuery) {
+        filtered = filtered.filter(p => 
+          p.name.toLowerCase().includes(searchQuery) ||
+          (p.brand && p.brand.toLowerCase().includes(searchQuery)) ||
+          (p.categoryLabel && p.categoryLabel.toLowerCase().includes(searchQuery))
+        );
+      }
+
+      const grid = document.getElementById('wishlist-items-grid');
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-12 text-center text-slate-400 font-medium text-xs sm:text-sm bg-white rounded-2xl border border-slate-200">
+            Tidak ada produk favorit yang cocok dengan filter atau kata kunci pencarian.
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(product => {
+        return `
+          <div class="product-card bg-white rounded-2xl border border-slate-200/90 overflow-hidden flex flex-col group relative shadow-2xs hover:border-rose-400">
+            <!-- Badges -->
+            <div class="absolute top-2.5 left-2.5 z-10 flex flex-col gap-1 items-start max-w-[calc(100%-42px)]">
+              ${product.badge ? `
+                <span class="inline-flex items-center gap-1 bg-teal-600/95 backdrop-blur-xs text-white text-[11px] font-bold px-2 py-0.5 rounded-full shadow-xs">
+                  <span class="material-symbols-outlined text-xs">verified</span>
+                  <span>${product.badge}</span>
+                </span>
+              ` : ''}
+              ${product.requiresColdChain ? `
+                <span class="inline-flex items-center gap-1 bg-cyan-600/95 backdrop-blur-xs text-white text-[11px] font-bold px-2 py-0.5 rounded-full shadow-xs">
+                  <span class="material-symbols-outlined text-xs">ac_unit</span>
+                  <span>Cold Chain</span>
+                </span>
+              ` : ''}
+            </div>
+
+            <!-- Tombol Hapus dari Wishlist -->
+            <button 
+              onclick="handleRemoveFromWishlist(event, '${product.id}')"
+              title="Hapus dari Wishlist"
+              class="absolute top-2.5 right-2.5 z-10 w-8 h-8 rounded-full bg-white/95 backdrop-blur-xs text-rose-500 hover:bg-rose-50 hover:text-rose-700 shadow-sm border border-slate-200 flex items-center justify-center transition-all active:scale-90"
+            >
+              <span class="material-symbols-outlined text-lg fill-1">favorite</span>
+            </button>
+
+            <!-- Foto Produk -->
+            <a href="product-detail.html?id=${product.id}" class="block aspect-square w-full bg-slate-50 overflow-hidden relative group/img">
+              <img 
+                src="${product.images[0]}" 
+                alt="${product.name}" 
+                class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-500"
+                onerror="this.onerror=null; this.src='images/microscope.jpg';"
+              />
+              <div class="absolute inset-0 bg-black/0 group-hover/img:bg-black/10 transition-colors"></div>
+            </a>
+
+            <!-- Info Produk -->
+            <div class="p-3.5 sm:p-4 flex flex-col flex-1 justify-between">
+              <div>
+                <div class="flex items-center justify-between text-xs text-slate-500 mb-1 gap-1">
+                  <span class="font-bold text-teal-800 bg-teal-50 px-2 py-0.5 rounded text-[11px] truncate">${product.categoryLabel}</span>
+                  <span class="truncate text-xs font-semibold text-slate-500">${product.brand}</span>
+                </div>
+
+                <a href="product-detail.html?id=${product.id}" class="font-extrabold text-slate-900 text-xs sm:text-sm hover:text-teal-600 line-clamp-2 leading-snug mt-1 group-hover:text-teal-600 transition-colors" title="${product.name}">
+                  ${product.name}
+                </a>
+
+                <div class="mt-1.5 flex items-center gap-1 text-xs text-slate-600 font-medium">
+                  <span class="material-symbols-outlined text-sm text-teal-600 shrink-0">science</span>
+                  <span class="truncate">${product.grade}</span>
+                </div>
+
+                <!-- Harga & Diskon -->
+                <div class="mt-2 pt-1 border-t border-slate-100">
+                  <div class="flex items-baseline gap-1.5">
+                    <span class="text-sm sm:text-base font-black text-teal-700 font-mono-code">${formatRupiah(product.price)}</span>
+                    ${product.discount > 0 ? `
+                      <span class="text-xs text-slate-400 line-through font-mono-code">${formatRupiah(product.originalPrice)}</span>
+                    ` : ''}
+                  </div>
+                  <div class="text-[11px] text-emerald-700 font-bold mt-0.5">
+                    Stok Ready: ${product.stock} unit
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="mt-3.5 pt-2 flex items-center gap-2">
+                <button 
+                  onclick="handleWishlistAddToCart('${product.id}')"
+                  class="flex-1 py-2 px-3 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-xs flex items-center justify-center gap-1.5 shadow-2xs active:scale-95 transition-all"
+                  title="Tambah ke Keranjang"
+                >
+                  <span class="material-symbols-outlined text-base">add_shopping_cart</span>
+                  <span>+ Keranjang</span>
+                </button>
+                <a 
+                  href="product-detail.html?id=${product.id}"
+                  class="py-2 px-2.5 rounded-xl border border-slate-300 text-xs font-bold text-slate-700 hover:bg-slate-100 transition-colors flex items-center justify-center"
+                  title="Lihat Detail Produk"
+                >
+                  <span class="material-symbols-outlined text-base">visibility</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function filterWishlistCategory(category) {
+      currentCategoryFilter = category;
+      const pills = document.querySelectorAll('#category-filter-pills button');
+      pills.forEach(btn => {
+        if (btn.getAttribute('data-cat') === category) {
+          btn.className = 'px-3.5 py-1.5 rounded-xl text-xs font-black transition-all bg-teal-600 text-white shadow-2xs';
+        } else {
+          btn.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-700 hover:bg-slate-200';
+        }
+      });
+      renderWishlistPage();
+    }
+
+    function handleRemoveFromWishlist(event, productId) {
+      if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+      removeFromWishlist(productId);
+      renderWishlistPage();
+    }
+
+    function handleWishlistAddToCart(productId) {
+      addToCart(productId, 0, 1, '');
+      showToast('Produk berhasil ditambahkan ke keranjang belanja!', 'success');
+      updateHeaderBadges();
+    }
+
+    function addAllWishlistToCart() {
+      const wishlistIds = typeof getWishlist === 'function' ? getWishlist() : [];
+      if (wishlistIds.length === 0) {
+        showToast('Wishlist Anda masih kosong.', 'info');
+        return;
+      }
+      wishlistIds.forEach(id => {
+        addToCart(id, 0, 1, '');
+      });
+      showToast(`Berhasil memindahkan ${wishlistIds.length} item wishlist ke keranjang belanja!`, 'success');
+      updateHeaderBadges();
+      setTimeout(() => {
+        window.location.href = 'cart.html';
+      }, 1000);
+    }
+
+    function confirmClearWishlist() {
+      if (confirm('Apakah Anda yakin ingin mengosongkan seluruh daftar wishlist Anda?')) {
+        clearWishlist();
+        renderWishlistPage();
+      }
+    }
+
+    function loginDemoFromWishlist(email, pwd) {
+      const res = loginUser(email, pwd);
+      if (res.success) {
+        showToast(`Berhasil masuk sebagai ${res.user.name.split(',')[0]}!`, 'success');
+        updateGlobalUserNav();
+        updateHeaderBadges();
+        setTimeout(() => {
+          renderWishlistPage();
+        }, 400);
+      }
+    }
+
+    function renderWishlistRecommendations() {
+      const recContainer = document.getElementById('wishlist-recommendations-grid');
+      if (!recContainer) return;
+      const allProducts = typeof getAllProducts === 'function' ? getAllProducts() : (typeof LAB_PRODUCTS !== 'undefined' ? LAB_PRODUCTS : []);
+      const sample = allProducts.slice(0, 4);
+
+      recContainer.innerHTML = sample.map(p => `
+        <div class="p-3 bg-white rounded-2xl border border-slate-200 flex flex-col justify-between group hover:border-teal-500 transition-all">
+          <a href="product-detail.html?id=${p.id}" class="aspect-square bg-slate-50 rounded-xl overflow-hidden block mb-2">
+            <img src="${p.images[0]}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform" onerror="this.src='images/microscope.jpg';" />
+          </a>
+          <div>
+            <span class="text-[10px] font-bold text-teal-800 bg-teal-50 px-2 py-0.5 rounded">${p.categoryLabel}</span>
+            <a href="product-detail.html?id=${p.id}" class="text-xs font-bold text-slate-900 hover:text-teal-600 line-clamp-1 block mt-1">
+              ${p.name}
+            </a>
+            <div class="text-xs font-black text-teal-800 font-mono-code mt-1">${formatRupiah(p.price)}</div>
+          </div>
+          <button 
+            onclick="addToCart('${p.id}', 0, 1, ''); showToast('Ditambahkan ke keranjang!', 'success');"
+            class="mt-2.5 w-full py-1.5 rounded-lg bg-slate-100 hover:bg-teal-600 hover:text-white text-xs font-extrabold transition-colors flex items-center justify-center gap-1"
+          >
+            <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+            <span>+ Beli</span>
+          </button>
+        </div>
+      `).join('');
+    }
+  </script>
+</body>
+</html>

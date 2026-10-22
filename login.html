@@ -105,27 +105,46 @@
           </span>
           <span class="text-xs text-amber-700 font-bold">Buyer & Seller</span>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs sm:text-sm font-bold">
+        <div class="grid grid-cols-2 gap-2 text-xs font-bold">
           <button 
             type="button" 
+            id="btn-demo-its"
+            onclick="fillDemoUser('dosen@its.ac.id', 'password123')"
+            class="px-3 py-2.5 rounded-xl bg-teal-700 hover:bg-teal-800 text-white text-left shadow-sm border border-teal-800 font-extrabold transition-all flex items-center gap-2"
+            title="Dosen & Peneliti ITS (Institut Teknologi Sepuluh Nopember)"
+          >
+            <span class="text-base">🎓</span>
+            <span class="font-extrabold">Dosen ITS</span>
+          </button>
+          <button 
+            type="button" 
+            id="btn-demo-ugm"
             onclick="fillDemoUser('peneliti@ugm.ac.id', 'password123')"
-            class="px-2.5 py-2 rounded-xl bg-white border border-amber-300 hover:bg-amber-100 text-slate-900 text-left truncate shadow-2xs transition-colors"
+            class="px-3 py-2.5 rounded-xl bg-white border border-amber-300 hover:bg-amber-100 text-slate-900 text-left shadow-2xs transition-colors flex items-center gap-2 font-bold"
+            title="Dosen & Peneliti UGM"
           >
-            👨‍🔬 Dosen UGM
+            <span class="text-base">👨‍🔬</span>
+            <span>Dosen UGM</span>
           </button>
           <button 
             type="button" 
+            id="btn-demo-biofarma"
             onclick="fillDemoUser('qc@biofarma.co.id', 'password123')"
-            class="px-2.5 py-2 rounded-xl bg-white border border-amber-300 hover:bg-amber-100 text-slate-900 text-left truncate shadow-2xs transition-colors"
+            class="px-3 py-2.5 rounded-xl bg-white border border-amber-300 hover:bg-amber-100 text-slate-900 text-left shadow-2xs transition-colors flex items-center gap-2 font-bold"
+            title="QA / QC Manager Bio Farma"
           >
-            👩‍🔬 QA Bio Farma
+            <span class="text-base">👩‍🔬</span>
+            <span>QA Bio Farma</span>
           </button>
           <button 
             type="button" 
+            id="btn-demo-seller"
             onclick="fillDemoUser('seller@smartlab.co.id', 'seller123')"
-            class="px-2.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-left truncate shadow-2xs border border-amber-600 font-black transition-colors"
+            class="px-3 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-left shadow-2xs border border-amber-600 font-black transition-colors flex items-center gap-2"
+            title="Mitra Distributor Resmi SmartLab"
           >
-            🏢 Mitra Seller
+            <span class="text-base">🏢</span>
+            <span>Mitra Seller</span>
           </button>
         </div>
       </div>
@@ -140,7 +159,7 @@
               id="login-email" 
               type="email" 
               required
-              placeholder="nama@kampus.ac.id atau nama@pt.com" 
+              placeholder="dosen@its.ac.id atau nama@kampus.ac.id" 
               class="w-full pl-10 pr-3 py-2.5 sm:py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500 font-medium"
             />
           </div>
@@ -258,9 +277,19 @@
     });
 
     function fillDemoUser(email, pwd) {
-      document.getElementById('login-email').value = email;
-      document.getElementById('login-password').value = pwd;
-      showToast('Form terisi otomatis dengan akun demo!', 'success');
+      const emailInput = document.getElementById('login-email');
+      const pwdInput = document.getElementById('login-password');
+      if (emailInput) emailInput.value = email;
+      if (pwdInput) pwdInput.value = pwd;
+
+      const label = email.includes('its') ? 'Dosen ITS (Utama)' : (email.includes('ugm') ? 'Dosen UGM' : (email.includes('smartlab') ? 'Mitra Seller' : 'QA Bio Farma'));
+      showToast(`Akun ${label} terisi otomatis! Silakan klik 'Masuk ke Akun Lab' di bawah.`, 'success');
+
+      const btn = document.getElementById('btn-login-submit');
+      if (btn) {
+        btn.classList.add('ring-4', 'ring-teal-400');
+        setTimeout(() => btn.classList.remove('ring-4', 'ring-teal-400'), 1500);
+      }
     }
 
     function togglePasswordVisibility() {

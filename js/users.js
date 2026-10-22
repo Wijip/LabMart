@@ -8,6 +8,36 @@ const USER_STORAGE_KEYS = {
 // Akun Demo Bawaan (Pre-seeded accounts)
 const DEFAULT_DEMO_USERS = [
   {
+    id: 'USR-ITS-01',
+    name: 'Prof. Dr. Ir. Wahyu Triyono, M.T.',
+    email: 'dosen@its.ac.id',
+    password: 'password123',
+    role: 'Peneliti / Dosen ITS',
+    institution: 'Institut Teknologi Sepuluh Nopember (ITS)',
+    labName: 'Laboratorium Rekayasa Material & Biomassa Gedung Riset Terpadu ITS',
+    phone: '0812-3456-7890',
+    address: 'Gedung Riset Terpadu Lt. 3, Kampus ITS Sukolilo, Jl. Raya ITS',
+    city: 'Surabaya, Jawa Timur 60111',
+    labType: 'Universitas / Pendidikan',
+    verified: true,
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80'
+  },
+  {
+    id: 'USR-ITS-02',
+    name: 'Dr. Eng. Raden Sukoco, S.T., M.T.',
+    email: 'peneliti@its.ac.id',
+    password: 'password123',
+    role: 'Kepala Lab Riset Terpadu ITS',
+    institution: 'Institut Teknologi Sepuluh Nopember (ITS)',
+    labName: 'Laboratorium Kimia Terapan & Uji Hayati ITS',
+    phone: '0813-7788-9900',
+    address: 'Departemen Teknik Kimia & Material Maju, Kampus ITS Sukolilo',
+    city: 'Surabaya, Jawa Timur 60111',
+    labType: 'Universitas / Pendidikan',
+    verified: true,
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80'
+  },
+  {
     id: 'USR-001',
     name: 'Dr. Rian Pratama, S.Si., M.Biotech',
     email: 'peneliti@ugm.ac.id',
@@ -91,9 +121,16 @@ function initializeUsersStorage() {
       let updated = false;
       // Pastikan semua DEFAULT_DEMO_USERS tersedia tanpa menghapus user yang baru didaftarkan
       DEFAULT_DEMO_USERS.forEach(demoUser => {
-        if (!existing.some(u => u.email.toLowerCase() === demoUser.email.toLowerCase() || u.id === demoUser.id)) {
+        const foundIndex = existing.findIndex(u => u.email.toLowerCase() === demoUser.email.toLowerCase() || u.id === demoUser.id);
+        if (foundIndex === -1) {
           existing.push(demoUser);
           updated = true;
+        } else {
+          // Sinkronkan data jika ada update institusi/role demo bawaan
+          if (demoUser.id.startsWith('USR-ITS') && (!existing[foundIndex].institution || existing[foundIndex].institution !== demoUser.institution)) {
+            existing[foundIndex] = { ...existing[foundIndex], ...demoUser };
+            updated = true;
+          }
         }
       });
 
@@ -154,8 +191,29 @@ function requireAuth(redirectUrl = 'checkout.html') {
 // Login function
 function loginUser(email, password) {
   const users = getAllUsers();
-  const cleanEmail = email.trim().toLowerCase();
-  const found = users.find(u => u.email.toLowerCase() === cleanEmail && u.password === password);
+  const cleanEmail = (email || '').trim().toLowerCase();
+  
+  // Verifikasi akun dari daftar pengguna terdaftar
+  let found = users.find(u => {
+    if (u.email.toLowerCase() !== cleanEmail) return false;
+    if (u.password === password) return true;
+    // Opsi fleksibel kata sandi akun demo ITS: 'password123' atau 'its123'
+    if (u.id && u.id.startsWith('USR-ITS') && (password === 'password123' || password === 'its123')) return true;
+    return false;
+  });
+
+  // Fallback cadangan ke DEFAULT_DEMO_USERS jika localStorage user belum terupdate
+  if (!found) {
+    found = DEFAULT_DEMO_USERS.find(u => {
+      if (u.email.toLowerCase() !== cleanEmail) return false;
+      if (u.password === password) return true;
+      if (u.id && u.id.startsWith('USR-ITS') && (password === 'password123' || password === 'its123')) return true;
+      return false;
+    });
+    if (found) {
+      initializeUsersStorage();
+    }
+  }
 
   if (found) {
     localStorage.setItem(USER_STORAGE_KEYS.CURRENT_USER, JSON.stringify(found));

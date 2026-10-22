@@ -244,9 +244,10 @@ j:/WEB/Prototype1/V1/
 ### 8. `login.html` & `register.html` (Autentikasi & Akun Demo)
 * Status awal website berada dalam mode tamu (guest state) tanpa auto-login paksa.
 * Dilengkapi tombol instan **1-Klik Login Akun Demo** untuk kemudahan presentasi:
-  1. *Dosen & Peneliti (Prof. Dr. Hendra - FMIPA UGM)*
-  2. *Quality Control Industri (Dr. Sarah - PT Bio Farma)*
-  3. *Mitra Seller (PT SmartLab Official Store)*
+  1. *Dosen & Peneliti ITS (Prof. Dr. Ir. Wahyu Triyono - Gedung Riset Terpadu ITS Sukolilo) - Akun Utama*
+  2. *Dosen & Peneliti UGM (Dr. Rian Pratama - FMIPA UGM)*
+  3. *Quality Control Industri (Siti Rahmawati, Apt. - PT Bio Farma)*
+  4. *Mitra Seller (PT SmartLab Official Store)*
 
 ---
 

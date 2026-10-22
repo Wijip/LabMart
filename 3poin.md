@@ -48,7 +48,7 @@ _Platform Marketplace Pengadaan Alat, Bahan Kimia & Perlengkapan Laboratorium_
 • Dilengkapi menu navigasi bawah (_fixed mobile bottom navigation_), live search instan tanpa refresh halaman, dan filter kategori berbasis tombol kapsul (_pills_).
 
 *6. Sangat Siap untuk Demo & Presentasi (Pitching-Ready)*
-• Menyediakan tombol instan 1-klik login multi-akun (Dosen/Peneliti UGM, QC Industri Bio Farma, dan Mitra Seller).
+• Menyediakan tombol instan 1-klik login multi-akun (Dosen/Peneliti ITS sebagai akun utama, Dosen UGM, QC Industri Bio Farma, dan Mitra Seller).
 • Tombol simulasi pembayaran langsung lunas untuk memperagakan alur checkout penuh dalam hitungan detik.
 • Form penerbitan produk baru di Seller Centre dengan tombol 1-klik isi demo barang lab.
 
